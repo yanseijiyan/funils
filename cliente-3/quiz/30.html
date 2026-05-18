@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/favicon-96x96.png?v=1756126673" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/favicon.svg?v=1756126673">
+<link rel="shortcut icon" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/favicon.ico?v=1756126673">
+<link rel="apple-touch-icon" sizes="180x180" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/apple-touch-icon.png?v=1756126673">
+<link rel="manifest" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/site.webmanifest?v=1756126673">
+        <meta property="og:image" content="https://quiz.getrelatio.com/images/preview.png">
+    <meta name="robots" content="follow,index">    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="prefetch" as="font" href="/fonts/Poppins/Poppins-Medium.ttf" type="woff">
+<link rel="prefetch" as="font" href="/fonts/Poppins/Poppins-SemiBold.ttf" type="woff">
+<link rel="prefetch" as="font" href="/fonts/Poppins/Poppins-Regular.ttf" type="woff">
+<link rel="prefetch" as="font" href="/fonts/Poppins/Poppins-Light.ttf" type="woff">    
+<style>.answers-widget.size-50p > div:not(.answers-widget-background){
+    width: 50%;
+}
+
+.answers-widget{
+    position: relative;
+}
+
+.answers-widget.position-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.answers-widget.with-background{
+    position: relative;
+}
+
+.answers-widget-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.answers-widget-background-wrapper{
+    position: absolute;
+}
+
+.answers-widget-background-wrapper.position-top_left{
+    top: 0;
+    left: 0;
+}
+
+.answers-widget-background-wrapper.position-top_right{
+    top: 0;
+    right: 0;
+}
+
+.answers-widget-background-wrapper.position-bottom_right{
+    bottom: 0;
+    right: 0;
+}
+
+.answers-widget-background-wrapper.size-50p{
+    width: 50%;
+}
+
+.answers-widget-position-top_left{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.answers-widget-position-top_right{
+    position: absolute;
+    top: 0;
+    right: 0;
+}</style>
+<style>.image-radio-widget{
+    width: 144px;
+    height: 184px;
+    background: #EBEBEB;
+    border-radius: 24px;
+    overflow: visible;
+    position: relative;
+}
+.image-radio-widget label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    color: #000000;
+}
+.image-radio-widget label img{
+    order: 1;
+    width: 100%;
+    border-radius: 24px;
+}
+.image-radio-widget label span{
+    order: 2;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 21px;
+    padding: 17px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+
+    min-height: 55px;
+    padding: 5px 16px;
+}
+.image-radio-widget label span:before{
+    margin: 0 12px 0 0;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    border: 2px solid #bfbfbf;
+    content:"";
+    flex-shrink: 0;
+}
+.image-radio-widget input{
+    display: none;
+}
+
+.image-radio-widget.selected label span:before{
+    opacity: 0;
+}
+.image-radio-widget .image-radio-widget-selected-background{
+    z-index: 1;
+    border-radius: inherit;
+    background: #0080FF;
+}
+.image-radio-widget .image-radio-widget-selected-background:before{
+    content:"";
+    background:inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.image-radio-widget .image-radio-widget-selected-background:after{
+    content:"";
+    background:inherit;
+    background-image: url(/images/ok.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 17px 16px;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.image-radio-widget.selected label+.image-radio-widget-selected-background:before{
+    opacity: 0.1;
+}
+.image-radio-widget.selected label+.image-radio-widget-selected-background:after{
+    opacity: 1;
+}
+.image-radio-widget.center label span,
+.image-radio-widget.hidden-radio label span,
+.image-radio-widget.hidden-label label span{
+    text-align: center;
+    justify-content: center;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.image-radio-widget.hidden-radio label span::before,
+.image-radio-widget.hidden-radio .image-radio-widget-selected-background::after {
+    display: none;
+}
+
+.image-radio-widget.selected label span{
+    color: #0080FF;
+}
+.image-radio-widget.hidden-radio.selected label span{
+    color: #0080FF;
+}
+
+.image-radio-widget.hidden-label label span::before{
+    margin: 0;
+}
+.image-radio-widget.hidden-label .image-radio-widget-selected-background::after{
+    margin-left: -12px;
+    left: 50%;
+}
+
+.image-radio-widget.center label span:before{
+    margin: 0;
+}
+
+.image-radio-widget.center .image-radio-widget-selected-background::after{
+    left: calc(50% - 27px);
+}
+
+
+.image-radio-widget{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    transition: all var(--button-animation-speed, 0.2s) ease-out;
+}
+.image-radio-widget.active{
+    transform: scale(0.95);
+}
+</style>
+<style>@keyframes waiting-spinner {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.waiting-spinner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: transparent;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.waiting-spinner-wrapper .waiting-spinner {
+    display: none;
+}
+.waiting-spinner-wrapper.active {
+    opacity: 1;
+    z-index: 1000;
+}
+.waiting-spinner-wrapper.active .waiting-spinner {
+    display: block;
+    width: 64px;
+    height: 64px;
+    animation: waiting-spinner 1.2s linear infinite;
+}
+</style>
+<link rel="stylesheet" type="text/css" media="screen" href="https://quiz.getrelatio.com/css/reset.css?v=1759484861">
+<link rel="stylesheet" type="text/css" media="screen" href="https://quiz.getrelatio.com/themes/pe-black/css/style.css?v=1763052139">
+<link rel="stylesheet" type="text/css" media="screen" href="https://quiz.getrelatio.com/thirdparty/slick/slick.css?v=1759484862">
+<link rel="stylesheet" type="text/css" media="screen" href="https://quiz.getrelatio.com/funnels/Pe3MbJp/css/pejp_overall/v2/style.css?v=1770707077">
+<style>:root{--button-animation-speed:0ms;}</style>        <script src="https://quiz.getrelatio.com/js/jquery.min.js?v=1735494199"></script>
+
+<script src="https://quiz.getrelatio.com/thirdparty/slick/slick.js?v=1759484862"></script>    
+    
+<script>
+var TrackingManager = function(params){
+    this.url = params.url;
+};
+TrackingManager.prototype = {
+    batch: [],
+    timer: null,
+    url: null,
+
+    /**
+     * Tracks a provided event by adding it to a batch for processing.
+     * If a timer exists, it clears the previous timer and sets a new timeout
+     * to ensure batched events are flushed after a delay.
+     *
+     * @param {string} provider - The name of the event provider.
+     * @param {string} eventName - The name of the event to track.
+     * @param {Object} eventData - An object containing additional event data.
+     */
+    track: function (provider, eventName, eventData) {
+        this.batch.push({
+            provider: provider,
+            eventName: eventName,
+            eventData: eventData
+        });
+
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+
+        this.timer = setTimeout(() => {
+            this.flush();
+        }, 10);
+    },
+    /**
+     * Sends the current batch of data to a specified endpoint and clears the batch.
+     *
+     * This method creates a deep copy of the current `batch`, clears the existing `batch` array,
+     * and sends the copied data using an AJAX POST request to the specified `url` property.
+     *
+     * It is used to flush the accumulated data in `batch` and ensure that any modifications
+     * to the `batch` property after the method call do not affect the data being transmitted.
+     */
+    flush: function () {
+        let batch = JSON.parse(JSON.stringify(this.batch));
+        this.batch = [];
+
+        ajax.post(this.url, {data: JSON.stringify(batch)});
+    }
+}
+var initTrackingManager = function(params){
+    return new TrackingManager(params);
+}
+
+</script>
+    <script>
+    (function () {
+        let manager = initTrackingManager({"url":"\/Pe3MbJp\/track-event\/x8lns1od-twbs-0fn3-ypsvmehuulrd"});
+        window.addEventListener('TrackingManager.track', function (e) {
+            manager.track(e.detail.provider, e.detail.event.name, e.detail.event.data);
+        });
+    })();
+</script>
+
+<script>
+    (function(){
+        let manager = initFacebookManager({"dataset":"2696245493878143","userParameters":{"external_id":"81960813","country":"id"},"sendGender":true,"frontEnable":false,"apiEnable":false,"signalsGateWay":{"enabled":false,"dataset":"","publicDomain":""}});
+        QuizEvents.setHandlers('FacebookEvent', manager.library, manager);
+
+            })();
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T49XX6J7');</script>
+<!-- End Google Tag Manager -->
+
+            
+            <script type="text/javascript">
+            amplitude.add({
+                name: 'set-referrer-for-view-page',
+                type: 'enrichment',
+                execute: async (event) => {
+                    if (window.parent === window) {
+                        return event;
+                    }
+
+                    if (event.event_type !== '[Amplitude] Page Viewed') {
+                        return event;
+                    }
+
+                    try {
+                        let referrer = window.parent.document.referrer;
+                        if (referrer.length === 0) {
+                            delete event.event_properties.referrer;
+                            delete event.event_properties.referring_domain;
+                        } else {
+                            let url = new URL(referrer);
+
+                            event.event_properties.referrer = referrer;
+                            event.event_properties.referring_domain = url.host;
+                        }
+                    } catch (e) {
+                        delete event.event_properties.referrer;
+                        delete event.event_properties.referring_domain;
+                    }
+
+                    return event;
+                }
+            });
+            amplitude.add({
+                name: 'set-referrer-for-$identify',
+                type: 'enrichment',
+                execute: async (event) => {
+                    if (window.parent === window) {
+                        return event;
+                    }
+
+                    if (event.event_type !== '$identify') {
+                        return event;
+                    }
+
+                    if (('user_properties' in event) === false) {
+                        return event;
+                    }
+                    try {
+                        let referrer = window.parent.document.referrer;
+                        if (referrer.length === 0) {
+                            if (('$set' in event.user_properties)) {
+                                for (let k in event.user_properties['$set']) {
+                                    if (k === 'referrer') {
+                                        delete event.user_properties['$set'][k];
+                                        continue;
+                                    }
+
+                                    if (k === 'referring_domain') {
+                                        delete event.user_properties['$set'][k];
+                                        continue;
+                                    }
+                                }
+                            }
+                            if (('$setOnce' in event.user_properties)) {
+                                for (let k in event.user_properties['$setOnce']) {
+                                    if (k === 'initial_referrer') {
+                                        delete event.user_properties['$setOnce'][k];
+                                        continue;
+                                    }
+
+                                    if (k === 'initial_referring_domain') {
+                                        delete event.user_properties['$setOnce'][k];
+                                        continue;
+                                    }
+                                }
+                            }
+                        } else {
+                            if (('$set' in event.user_properties)) {
+                                for (let k in event.user_properties['$set']) {
+                                    if (k === 'referrer') {
+                                        if (referrer === document.referrer) {
+                                            delete event.user_properties['$set'][k];
+                                        } else {
+                                            event.user_properties['$set'][k] = referrer;
+                                        }
+                                        continue;
+                                    }
+
+                                    if (k === 'referring_domain') {
+                                        if (referrer === document.referrer) {
+                                            delete event.user_properties['$set'][k];
+                                        } else {
+                                            let url = new URL(referrer);
+                                            event.user_properties['$set'][k] = url.host;
+                                        }
+                                        continue;
+                                    }
+                                }
+                            }
+
+                            if (('$setOnce' in event.user_properties)) {
+                                for (let k in event.user_properties['$setOnce']) {
+                                    if (k === 'initial_referrer') {
+                                        if (referrer === document.referrer) {
+                                            delete event.user_properties['$setOnce'][k];
+                                        } else {
+                                            event.user_properties['$setOnce'][k] = referrer;
+                                        }
+                                        continue;
+                                    }
+
+                                    if (k === 'initial_referring_domain') {
+                                        if (referrer === document.referrer) {
+                                            delete event.user_properties['$setOnce'][k];
+                                        } else {
+                                            let url = new URL(referrer);
+                                            event.user_properties['$setOnce'][k] = url.host;
+                                        }
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        if (('$set' in event.user_properties)) {
+                            for (let k in event.user_properties['$set']) {
+                                if (k === 'referrer') {
+                                    delete event.user_properties['$set'][k];
+                                    continue;
+                                }
+
+                                if (k === 'referring_domain') {
+                                    delete event.user_properties['$set'][k];
+                                    continue;
+                                }
+                            }
+                        }
+                        if (('$setOnce' in event.user_properties)) {
+                            for (let k in event.user_properties['$setOnce']) {
+                                if (k === 'initial_referrer') {
+                                    delete event.user_properties['$setOnce'][k];
+                                    continue;
+                                }
+
+                                if (k === 'initial_referring_domain') {
+                                    delete event.user_properties['$setOnce'][k];
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+
+
+                    return event;
+                }
+            });
+            amplitude.init('e29eb830c718d785a4166e94e03b24cf', {
+                fetchRemoteConfig: false,
+                autocapture: {
+                    pageViews: true,
+                    sessions: true,
+                    formInteractions: false,
+                    fileDownloads: false,
+                    elementInteractions: false,
+                    attribution: {
+                        excludeReferrers: []
+                    }
+                },
+                // logLevel: 'debug'
+            });
+        </script>
+                
+        
+    
+    <script>
+        QuizEvents.setListeners([{"type":"Quiz","event":"Slide","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"PageView"},"AxonEvent":{"type":"AxonEvent","event":"PageView"}}},{"type":"Quiz","event":"SetSlide","listeners":{"AxonEvent":{"type":"AxonEvent","event":"PageView"}}},{"type":"Quiz","event":"OfferPage","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"PageView"},"AxonEvent":{"type":"AxonEvent","event":"ItemView"}}},{"type":"Quiz","event":"SessionStarted","listeners":{"TiktokEvent":{"type":"TiktokEvent","event":"ViewContent"},"AxonEvent":{"type":"AxonEvent","event":"PageView"}}},{"type":"Quiz","event":"SaveEmail","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"Contact"},"TiktokEvent":{"type":"TiktokEvent","event":"CompleteRegistration"},"GoogleTagEvent":{"type":"GoogleTagEvent","event":"SendLead"},"AxonEvent":{"type":"AxonEvent","event":"SendLead"}}},{"type":"Purchase","event":"ChangeProduct","listeners":{"AxonEvent":{"type":"AxonEvent","event":"ItemView"}}},{"type":"Quiz","event":"CompleteRegistration","listeners":{"AxonEvent":{"type":"AxonEvent","event":"SignUp"}}},{"type":"Purchase","event":"AddToCart","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"AddToCart"},"TiktokEvent":{"type":"TiktokEvent","event":"AddToCart"},"GoogleTagEvent":{"type":"GoogleTagEvent","event":"AddToCart"},"AxonEvent":{"type":"AxonEvent","event":"AddToCart"}}},{"type":"Purchase","event":"InitiateCheckout","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"InitiateCheckout"},"TiktokEvent":{"type":"TiktokEvent","event":"InitiateCheckout"}}},{"type":"Purchase","event":"Success","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"Purchase"},"TiktokEvent":{"type":"TiktokEvent","event":"CompletePayment"},"GoogleTagEvent":{"type":"GoogleTagEvent","event":"Purchase"},"AxonEvent":{"type":"AxonEvent","event":"Purchase"}}}]);
+        QuizEvents.dispatch('Page.View');
+    </script>
+
+    <style type="text/css"></style><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104075908&amp;cv=11&amp;fst=1779104075908&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=gtag.config&amp;gtm=45be65d0v9222258107z89251335150za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;data=event%3Dgtag.config&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104087274&amp;cv=11&amp;fst=1779104087274&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_start&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_start&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104087285&amp;cv=11&amp;fst=1779104087285&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104089891&amp;cv=11&amp;fst=1779104089891&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104098513&amp;cv=11&amp;fst=1779104098513&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104101099&amp;cv=11&amp;fst=1779104101099&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104104405&amp;cv=11&amp;fst=1779104104405&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104123669&amp;cv=11&amp;fst=1779104123669&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104137589&amp;cv=11&amp;fst=1779104137589&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104140787&amp;cv=11&amp;fst=1779104140787&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104146660&amp;cv=11&amp;fst=1779104146660&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104152514&amp;cv=11&amp;fst=1779104152514&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104155709&amp;cv=11&amp;fst=1779104155709&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script></head>
+<body id="_wid18" class="theme-pe-black quiz-loading-process hidden-quiz-submit-block">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T49XX6J7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<main>
+    <div class="page-wrapper">
+        
+<div id="quiz-container">
+    <form method="post" action="/Pe3MbJp/x8lns1od-twbs-0fn3-ypsvmehuulrd/44" class="invalid">
+        
+<div id="slide-header" class="hidden-numbers hidden-progress hidden-back-button ">
+    <div id="slide-header-main">
+        <div id="slide-header-back-button">
+            <button type="button"></button>
+        </div>
+        <img src="/themes/pe-black/images/Relatio.png" id="slide-header-logo">        <div id="slide-header-numbers">
+            <div id="slide-header-numbers-current">25</div>
+            <span>/</span>
+            <div id="slide-header-numbers-total">27</div>
+        </div>
+    </div>
+    <div id="slide-header-progress">
+        <div id="slide-header-progress-complete" data-target-width="89" style="width: 89%;"></div>
+    </div>
+</div>
+
+        <div id="quiz-body" class="">
+            <input type="hidden" name="answers[242_MagicScreen][question]" value="242_MagicScreen" style="">
+            <div id="_wid5" class="progressbar-widget progressbar">
+    <div class="circle-progressbar">
+        <div class="box">
+            <p class="number">
+                <span class="num">35</span>
+                <span class="sub">%</span>
+            </p>
+        </div>
+        <span class="dots-top"></span>
+        <span class="dots" style="transform: rotate(129.6deg);"></span>
+        
+                    <svg class="svg">
+    <defs>
+        <linearGradient id="gradientStyle">
+            <stop offset="0%" stop-color="#EB3349"></stop>
+            <stop offset="50%" stop-color="#F45C43"></stop>
+            <stop offset="99.86%" stop-color="#EB3349"></stop>
+        </linearGradient>
+    </defs>
+    <g>
+        <circle class="circle" cx="90" cy="90" r="79" style="stroke-dashoffset: 321.92;"></circle>
+        
+    </g>
+</svg>            </div>
+            <div style="height: 60px;" class="progressbar-text-wrap">
+            <ul class="progressbar-text" style="margin-top: -28px;">
+                                    <li>回答を収集中</li>
+                                    <li>結果を分析中</li>
+                                    <li>プロフィールを処理中</li>
+                                    <li>課題の優先順位付け</li>
+                                    <li>目標を設定中</li>
+                                    <li>パーソナルプランを作成中</li>
+                            </ul>
+        </div>
+        <input type="radio" name="answers[240_Timing][answers][]" value="1" style="">
+</div>
+
+<h1 class="ms-with-dots">
+        <span class="highlight">100万人以上</span>が<br>
+        Relatioを選びました
+</h1>
+
+<div id="_wid6" class="ms slick-slider-widget">
+    <div class="slick-slider-widget-container slick-initialized slick-slider"><div class="slick-list draggable" style="padding: 0px 30px;"><div class="slick-track" style="opacity: 1; width: 3400px; transform: translate3d(-1360px, 0px, 0px); transition: transform 500ms linear;"><div class="slick-slide slick-cloned" data-slick-index="-2" id="" aria-hidden="true" tabindex="-1" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">昨日</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">ED薬に頼らず、自然な自信が戻りました</div>
+        <div class="feedback-widget-message">このトレーニングはとても手軽で、無理なく自然に続けられるのが魅力です。以前は薬に頼ることもありましたが、もうその必要は全くなくなりました。骨盤底筋のエクササイズだけで、これほど大きな変化を実感できるとは驚きです。自分の体の可能性を再発見できた気分で、本当に感謝しています。</div>
+        
+                    <div class="feedback-widget-description">50代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true" tabindex="-1" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">昨日</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">朝の自信が戻ってきました！</div>
+        <div class="feedback-widget-message">体の変化をはっきりと実感しています。トレーニングを始めてから、朝の目覚めが以前とは全く違います。10分から15分ほど、しっかりとした手応えが続くようになりました。エクササイズの効果が確実に出ている証拠だと思います。自分の体が再び目覚めたような感覚で、毎日がとても前向きになりました。</div>
+        
+                    <div class="feedback-widget-description">50代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide" data-slick-index="0" aria-hidden="true" style="width: 340px;" tabindex="-1"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="_wid1" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">7日前</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">自信を取り戻し、思う存分楽しめるようになりました</div>
+        <div class="feedback-widget-message">トレーニングを継続することで、明らかに変化を感じています。特に硬さの質が向上し、ケーゲル体操のおかげで射精のタイミングを自分でコントロールできるようになりました。今はパートナーとの時間を自分の望む通りに長く過ごせています。この変化には自分でも驚いていますし、本当に始めて良かったです。</div>
+        
+                    <div class="feedback-widget-description">40代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide" data-slick-index="1" aria-hidden="true" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="_wid2" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">2日前</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">自分の体を取り戻せた実感。感謝しかありません</div>
+        <div class="feedback-widget-message">正直なところ、一番嬉しいのは自信が戻ってきたことです。目標に向かって一歩ずつ進んでいる実感があり、それが心の支えになっています。すでに体に変化を感じており、特に呼吸法やトレーニングを通じて、自分の感覚が研ぎ澄まされるのがわかります。自分の体を自分でコントロールできているという安心感。これこそが私が求めていたものです。</div>
+        
+                    <div class="feedback-widget-description">30代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide slick-current slick-active slick-center" data-slick-index="2" aria-hidden="false" tabindex="-1" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="_wid3" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">昨日</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">ED薬に頼らず、自然な自信が戻りました</div>
+        <div class="feedback-widget-message">このトレーニングはとても手軽で、無理なく自然に続けられるのが魅力です。以前は薬に頼ることもありましたが、もうその必要は全くなくなりました。骨盤底筋のエクササイズだけで、これほど大きな変化を実感できるとは驚きです。自分の体の可能性を再発見できた気分で、本当に感謝しています。</div>
+        
+                    <div class="feedback-widget-description">50代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="_wid4" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">昨日</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">朝の自信が戻ってきました！</div>
+        <div class="feedback-widget-message">体の変化をはっきりと実感しています。トレーニングを始めてから、朝の目覚めが以前とは全く違います。10分から15分ほど、しっかりとした手応えが続くようになりました。エクササイズの効果が確実に出ている証拠だと思います。自分の体が再び目覚めたような感覚で、毎日がとても前向きになりました。</div>
+        
+                    <div class="feedback-widget-description">50代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide slick-cloned" data-slick-index="4" id="" aria-hidden="true" tabindex="-1" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">7日前</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">自信を取り戻し、思う存分楽しめるようになりました</div>
+        <div class="feedback-widget-message">トレーニングを継続することで、明らかに変化を感じています。特に硬さの質が向上し、ケーゲル体操のおかげで射精のタイミングを自分でコントロールできるようになりました。今はパートナーとの時間を自分の望む通りに長く過ごせています。この変化には自分でも驚いていますし、本当に始めて良かったです。</div>
+        
+                    <div class="feedback-widget-description">40代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide slick-cloned" data-slick-index="5" id="" aria-hidden="true" tabindex="-1" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">2日前</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">自分の体を取り戻せた実感。感謝しかありません</div>
+        <div class="feedback-widget-message">正直なところ、一番嬉しいのは自信が戻ってきたことです。目標に向かって一歩ずつ進んでいる実感があり、それが心の支えになっています。すでに体に変化を感じており、特に呼吸法やトレーニングを通じて、自分の感覚が研ぎ澄まされるのがわかります。自分の体を自分でコントロールできているという安心感。これこそが私が求めていたものです。</div>
+        
+                    <div class="feedback-widget-description">30代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide slick-cloned" data-slick-index="6" id="" aria-hidden="true" tabindex="-1" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">昨日</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">ED薬に頼らず、自然な自信が戻りました</div>
+        <div class="feedback-widget-message">このトレーニングはとても手軽で、無理なく自然に続けられるのが魅力です。以前は薬に頼ることもありましたが、もうその必要は全くなくなりました。骨盤底筋のエクササイズだけで、これほど大きな変化を実感できるとは驚きです。自分の体の可能性を再発見できた気分で、本当に感謝しています。</div>
+        
+                    <div class="feedback-widget-description">50代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div><div class="slick-slide slick-cloned" data-slick-index="7" id="" aria-hidden="true" tabindex="-1" style="width: 340px;"><div><div class="slick-slider-widget-item" style="width: 100%; display: inline-block;"><div id="" class="feedback-widget">
+    <div class="feedback-widget-head">
+        
+        
+        <div class="feedback-widget-date">昨日</div>
+
+        
+        <div class="feedback-widget-rate">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="18" height="18" fill="#00B67A"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4473 7.63355H15.1581L11.364 10.3307L9.01865 11.9849L5.20615 14.682L6.65402 10.3315L2.84229 7.63355H7.5523L9.00018 3.28223L10.4473 7.63355ZM11.6758 11.3375L9.00018 12.0018L12.7942 14.7167L11.6758 11.336V11.3375Z" fill="white"></path>
+                        </svg>        </div>
+    </div>
+    <div class="feedback-widget-body">
+        <div class="feedback-widget-title">朝の自信が戻ってきました！</div>
+        <div class="feedback-widget-message">体の変化をはっきりと実感しています。トレーニングを始めてから、朝の目覚めが以前とは全く違います。10分から15分ほど、しっかりとした手応えが続くようになりました。エクササイズの効果が確実に出ている証拠だと思います。自分の体が再び目覚めたような感覚で、毎日がとても前向きになりました。</div>
+        
+                    <div class="feedback-widget-description">50代・男性 | 認証済みユーザー</div>
+            </div>
+</div></div></div></div></div></div></div>
+</div>        </div>
+
+                    <script type="application/json" id="quiz-ab-variations">[{"code":"split_APP.pe_ios_app_access","variation":"v3"},{"code":"payment-method.therelify","variation":"v0"},{"code":"split_SessionReplay.quiz","variation":"v0"},{"code":"split0168.pejp_overall","variation":"v2"}]</script>
+        
+        <div id="quiz-submit-block" class="hidden-quiz-submit-block ">
+            <button type="submit" id="quiz-submit-button">続行</button>
+        </div>
+    </form>
+    </div>    </div>
+</main><div class="waiting-spinner-wrapper">
+    <div class="waiting-spinner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#paint0_angular_271_743_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0266667 0 0 0.0266667 32 31.9999)"><foreignObject x="-1000" y="-1000" width="2000" height="2000"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(20, 18, 24, 1) 0deg,rgba(235, 51, 73, 1) 359.964deg,rgba(20, 18, 24, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z" data-figma-gradient-fill="{&quot;type&quot;:&quot;GRADIENT_ANGULAR&quot;,&quot;stops&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;stopsVar&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;transform&quot;:{&quot;m00&quot;:53.333328247070312,&quot;m01&quot;:0.0,&quot;m02&quot;:5.33337402343750,&quot;m10&quot;:0.0,&quot;m11&quot;:53.333328247070312,&quot;m12&quot;:5.3332519531250},&quot;opacity&quot;:1.0,&quot;blendMode&quot;:&quot;NORMAL&quot;,&quot;visible&quot;:true}"></path>
+<defs>
+<clipPath id="paint0_angular_271_743_clip_path"><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z"></path></clipPath></defs>
+</svg>
+</div>
+</div>
+
+<div class="waiting-spinner-wrapper">
+    <div class="waiting-spinner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#paint0_angular_271_743_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0266667 0 0 0.0266667 32 31.9999)"><foreignObject x="-1000" y="-1000" width="2000" height="2000"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(20, 18, 24, 1) 0deg,rgba(235, 51, 73, 1) 359.964deg,rgba(20, 18, 24, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z" data-figma-gradient-fill="{&quot;type&quot;:&quot;GRADIENT_ANGULAR&quot;,&quot;stops&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;stopsVar&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;transform&quot;:{&quot;m00&quot;:53.333328247070312,&quot;m01&quot;:0.0,&quot;m02&quot;:5.33337402343750,&quot;m10&quot;:0.0,&quot;m11&quot;:53.333328247070312,&quot;m12&quot;:5.3332519531250},&quot;opacity&quot;:1.0,&quot;blendMode&quot;:&quot;NORMAL&quot;,&quot;visible&quot;:true}"></path>
+<defs>
+<clipPath id="paint0_angular_271_743_clip_path"><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z"></path></clipPath></defs>
+</svg>
+</div>
+</div>
+
+<div class="waiting-spinner-wrapper">
+    <div class="waiting-spinner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#paint0_angular_271_743_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0266667 0 0 0.0266667 32 31.9999)"><foreignObject x="-1000" y="-1000" width="2000" height="2000"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(20, 18, 24, 1) 0deg,rgba(235, 51, 73, 1) 359.964deg,rgba(20, 18, 24, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z" data-figma-gradient-fill="{&quot;type&quot;:&quot;GRADIENT_ANGULAR&quot;,&quot;stops&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;stopsVar&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;transform&quot;:{&quot;m00&quot;:53.333328247070312,&quot;m01&quot;:0.0,&quot;m02&quot;:5.33337402343750,&quot;m10&quot;:0.0,&quot;m11&quot;:53.333328247070312,&quot;m12&quot;:5.3332519531250},&quot;opacity&quot;:1.0,&quot;blendMode&quot;:&quot;NORMAL&quot;,&quot;visible&quot;:true}"></path>
+<defs>
+<clipPath id="paint0_angular_271_743_clip_path"><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z"></path></clipPath></defs>
+</svg>
+</div>
+</div>
+
+<div class="waiting-spinner-wrapper">
+    <div class="waiting-spinner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#paint0_angular_271_743_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0266667 0 0 0.0266667 32 31.9999)"><foreignObject x="-1000" y="-1000" width="2000" height="2000"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(20, 18, 24, 1) 0deg,rgba(235, 51, 73, 1) 359.964deg,rgba(20, 18, 24, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z" data-figma-gradient-fill="{&quot;type&quot;:&quot;GRADIENT_ANGULAR&quot;,&quot;stops&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;stopsVar&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;transform&quot;:{&quot;m00&quot;:53.333328247070312,&quot;m01&quot;:0.0,&quot;m02&quot;:5.33337402343750,&quot;m10&quot;:0.0,&quot;m11&quot;:53.333328247070312,&quot;m12&quot;:5.3332519531250},&quot;opacity&quot;:1.0,&quot;blendMode&quot;:&quot;NORMAL&quot;,&quot;visible&quot;:true}"></path>
+<defs>
+<clipPath id="paint0_angular_271_743_clip_path"><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z"></path></clipPath></defs>
+</svg>
+</div>
+</div>
+
+
+
+
+
+<div></div><div><style>.feedback-widget{
+    padding: 16px;
+    border: 1px solid #9FC65B;
+    background: #FFF;
+    box-shadow: 5px 6px 8px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 24px;
+}
+.feedback-widget .feedback-widget-head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #bfbfbf;
+    position: relative;
+}
+.feedback-widget .feedback-widget-date{
+    position: absolute;
+    right: 0;
+    bottom: -32px;
+    color: #818181;
+    font-size: 9px;
+    font-weight: 500;
+}
+.feedback-widget .feedback-widget-body{
+    padding-top: 32px;
+}
+.feedback-widget .feedback-widget-avatar{
+    width: 32px;
+    height: 32px;
+}
+.feedback-widget .feedback-widget-name{
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+.feedback-widget .feedback-widget-reviews,
+.feedback-widget .feedback-widget-location,
+.feedback-widget .feedback-widget-verified{
+    font-size: 9px;
+    font-weight: 400;
+    color: #818181;
+}
+
+.feedback-widget .feedback-widget-title{
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 10px 0;
+}
+.feedback-widget .feedback-widget-message{
+    color: #000;
+    font-size: 12px;
+    font-weight: 400;
+}
+.feedback-widget .feedback-widget-verified{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: absolute;
+    bottom: -32px;
+    left: 109px;
+}
+.feedback-widget .feedback-widget-verified svg{
+    margin-top:-1px;
+}
+.feedback-widget .feedback-widget-rate{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+}
+.feedback-widget .feedback-widget-rate i{
+    width: 18px;
+    height: 18px;
+    background: url(/images/rating_star.png) center center no-repeat #00B67A;
+}
+.feedback-widget .row{
+    gap: 10px;
+}
+
+.feedback-widget.wo-shadow{
+    box-shadow: none;
+}.progressbar-widget{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: -20px;
+}
+.progressbar-widget .circle-progressbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+.progressbar-widget .circle-progressbar .box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+    border-radius: 50%;
+}
+.progressbar-widget .circle-progressbar .box::before {
+    position: absolute;
+    content: '';
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    border-radius: 50%;
+    border: 13px solid #e3e3e3;
+}
+.progressbar-widget .circle-progressbar .box .number {
+    line-height: initial;
+}
+.progressbar-widget .circle-progressbar .box .number span {
+    color: #000000;
+}
+.progressbar-widget .circle-progressbar .box .number .num,
+.progressbar-widget .circle-progressbar .box .number .sub {
+    font-size: 46px;
+    font-weight: 600;
+}
+.progressbar-widget .circle-progressbar .dots,
+.progressbar-widget .circle-progressbar .dots-top {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: 0.2s transform linear;
+}
+.progressbar-widget .circle-progressbar .dots::after {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 16px;
+    top: 2px;
+    border-radius: 30%;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 5px 2px #FFFFFF;
+}
+.progressbar-widget .circle-progressbar .dots-top {
+    position: absolute;
+    content: '';
+    width: 14px;
+    height: 14.5px;
+    background-color: #3a78e6;
+    top: 3px;
+    margin-left: -2px;
+    box-shadow: 0px 0px 3px #3a78e6;
+    filter: blur(0.5px);
+}
+.progressbar-widget .circle-progressbar .dots::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+.progressbar-widget .circle-progressbar .svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    transform: rotate(-90deg);
+}
+.progressbar-widget .circle-progressbar .circle {
+    stroke: url(#gradientStyle);
+    stroke-width: 15px;
+    stroke-dasharray: 503;
+    stroke-dashoffset: 503;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+.progressbar-widget .circle {
+    transition: 0.2s stroke-dashoffset linear;
+    filter: drop-shadow(0px 0px 3px rgb(225 163 210 / 1));
+}
+.progressbar-widget .progressbar-text-wrap {
+    overflow: hidden;
+    width: 311px;
+    height: 160px;
+    margin-top: -10px;
+    position: relative;
+}
+.progressbar-widget .progressbar-text-wrap .progressbar-text {
+    list-style: none;
+    padding:0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 0;
+    gap: 10px;
+    transition: margin-top 0.4s ease-in-out;
+}
+.progressbar-widget .progressbar-text-wrap .progressbar-text li{
+    font-size: 14px;
+    line-height: 1.3;
+    letter-spacing: 0.28px;
+    font-style: normal;
+    font-weight: 400;
+}
+.progressbar-widget .progressbar-text-wrap::before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 118px;
+    max-height: 60%;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(245, 245, 245, 0) 0%, rgba(245, 245, 245, 0.9) 100%);
+}
+.progressbar-widget input{
+    display: none;
+}.slick-slider-widget{
+    width: 400px;
+    overflow: hidden;
+}
+.slick-slider-widget .slick-slider-widget-item{
+    padding: 0 5px;
+    height: 100%;
+    overflow: auto;
+}
+.slick-slider-widget .slick-slider-widget-item>div{
+    margin-top: 0;
+    box-shadow: none;
+    border: 1px solid #E5E5DD;
+}
+.slick-slider-widget .slick-slide{
+    overflow: hidden;
+}
+.slick-slider-widget .slick-slide.slick-active{
+    overflow: auto;
+}@keyframes waiting-spinner {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.waiting-spinner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: transparent;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.waiting-spinner-wrapper .waiting-spinner {
+    display: none;
+}
+.waiting-spinner-wrapper.active {
+    opacity: 1;
+    z-index: 1000;
+}
+.waiting-spinner-wrapper.active .waiting-spinner {
+    display: block;
+    width: 64px;
+    height: 64px;
+    animation: waiting-spinner 1.2s linear infinite;
+}
+</style></div>
+<script>
+(function(){
+  // QUIZ NAVIGATION OVERRIDE (local linkagem sequencial)
+  const m = location.pathname.match(/(\d{2})\.html?$/);
+  const cur = m ? parseInt(m[1], 10) : 1;
+  const total = 35;
+  const nextFile = cur + 1 <= total ? String(cur + 1).padStart(2,'0') + '.html' : null;
+  const prevFile = cur > 1 ? String(cur - 1).padStart(2,'0') + '.html' : null;
+
+  function goNext(e){
+    if (e) { e.preventDefault(); e.stopImmediatePropagation && e.stopImmediatePropagation(); }
+    if (nextFile) window.location.href = nextFile;
+    return false;
+  }
+  function goPrev(e){
+    if (e) { e.preventDefault(); e.stopImmediatePropagation && e.stopImmediatePropagation(); }
+    if (prevFile) window.location.href = prevFile;
+    return false;
+  }
+
+  document.addEventListener('submit', goNext, true);
+
+  document.addEventListener('click', function(e){
+    // Submit / continuar
+    if (e.target.closest('button[type="submit"], #quiz-submit-button, #quiz-submit-button-new, .next-button, [data-action="next"]')) {
+      return goNext(e);
+    }
+    // Back
+    if (e.target.closest('#slide-header-back-button, .back-button, [data-action="back"]')) {
+      return goPrev(e);
+    }
+    // Image radio / cards de resposta — clica direto vai pro próximo (UX típico de quiz)
+    const card = e.target.closest('.image-radio-widget, .image-widget, .answers-widget > div > div');
+    if (card) {
+      // Marca visualmente como selecionado pro user ver feedback
+      card.classList.add('selected');
+      // Delay pequeno pro user ver o feedback visual antes de avançar
+      setTimeout(goNext, 300);
+      e.preventDefault();
+      return false;
+    }
+  }, true);
+})();
+</script>
+
+</body></html>

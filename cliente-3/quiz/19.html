@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/favicon-96x96.png?v=1756126673" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/favicon.svg?v=1756126673">
+<link rel="shortcut icon" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/favicon.ico?v=1756126673">
+<link rel="apple-touch-icon" sizes="180x180" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/apple-touch-icon.png?v=1756126673">
+<link rel="manifest" href="https://quiz.getrelatio.com/themes/pe-black/images/favicon/v2/site.webmanifest?v=1756126673">
+        <meta property="og:image" content="https://quiz.getrelatio.com/images/preview.png">
+    <meta name="robots" content="follow,index">    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="prefetch" as="font" href="/fonts/Poppins/Poppins-Medium.ttf" type="woff">
+<link rel="prefetch" as="font" href="/fonts/Poppins/Poppins-SemiBold.ttf" type="woff">
+<link rel="prefetch" as="font" href="/fonts/Poppins/Poppins-Regular.ttf" type="woff">
+<link rel="prefetch" as="font" href="/fonts/Poppins/Poppins-Light.ttf" type="woff">    
+<style>.answers-widget.size-50p > div:not(.answers-widget-background){
+    width: 50%;
+}
+
+.answers-widget{
+    position: relative;
+}
+
+.answers-widget.position-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.answers-widget.with-background{
+    position: relative;
+}
+
+.answers-widget-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.answers-widget-background-wrapper{
+    position: absolute;
+}
+
+.answers-widget-background-wrapper.position-top_left{
+    top: 0;
+    left: 0;
+}
+
+.answers-widget-background-wrapper.position-top_right{
+    top: 0;
+    right: 0;
+}
+
+.answers-widget-background-wrapper.position-bottom_right{
+    bottom: 0;
+    right: 0;
+}
+
+.answers-widget-background-wrapper.size-50p{
+    width: 50%;
+}
+
+.answers-widget-position-top_left{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.answers-widget-position-top_right{
+    position: absolute;
+    top: 0;
+    right: 0;
+}</style>
+<style>.image-radio-widget{
+    width: 144px;
+    height: 184px;
+    background: #EBEBEB;
+    border-radius: 24px;
+    overflow: visible;
+    position: relative;
+}
+.image-radio-widget label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    color: #000000;
+}
+.image-radio-widget label img{
+    order: 1;
+    width: 100%;
+    border-radius: 24px;
+}
+.image-radio-widget label span{
+    order: 2;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 21px;
+    padding: 17px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+
+    min-height: 55px;
+    padding: 5px 16px;
+}
+.image-radio-widget label span:before{
+    margin: 0 12px 0 0;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    border: 2px solid #bfbfbf;
+    content:"";
+    flex-shrink: 0;
+}
+.image-radio-widget input{
+    display: none;
+}
+
+.image-radio-widget.selected label span:before{
+    opacity: 0;
+}
+.image-radio-widget .image-radio-widget-selected-background{
+    z-index: 1;
+    border-radius: inherit;
+    background: #0080FF;
+}
+.image-radio-widget .image-radio-widget-selected-background:before{
+    content:"";
+    background:inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.image-radio-widget .image-radio-widget-selected-background:after{
+    content:"";
+    background:inherit;
+    background-image: url(/images/ok.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 17px 16px;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.image-radio-widget.selected label+.image-radio-widget-selected-background:before{
+    opacity: 0.1;
+}
+.image-radio-widget.selected label+.image-radio-widget-selected-background:after{
+    opacity: 1;
+}
+.image-radio-widget.center label span,
+.image-radio-widget.hidden-radio label span,
+.image-radio-widget.hidden-label label span{
+    text-align: center;
+    justify-content: center;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.image-radio-widget.hidden-radio label span::before,
+.image-radio-widget.hidden-radio .image-radio-widget-selected-background::after {
+    display: none;
+}
+
+.image-radio-widget.selected label span{
+    color: #0080FF;
+}
+.image-radio-widget.hidden-radio.selected label span{
+    color: #0080FF;
+}
+
+.image-radio-widget.hidden-label label span::before{
+    margin: 0;
+}
+.image-radio-widget.hidden-label .image-radio-widget-selected-background::after{
+    margin-left: -12px;
+    left: 50%;
+}
+
+.image-radio-widget.center label span:before{
+    margin: 0;
+}
+
+.image-radio-widget.center .image-radio-widget-selected-background::after{
+    left: calc(50% - 27px);
+}
+
+
+.image-radio-widget{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    transition: all var(--button-animation-speed, 0.2s) ease-out;
+}
+.image-radio-widget.active{
+    transform: scale(0.95);
+}
+</style>
+<style>@keyframes waiting-spinner {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.waiting-spinner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: transparent;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.waiting-spinner-wrapper .waiting-spinner {
+    display: none;
+}
+.waiting-spinner-wrapper.active {
+    opacity: 1;
+    z-index: 1000;
+}
+.waiting-spinner-wrapper.active .waiting-spinner {
+    display: block;
+    width: 64px;
+    height: 64px;
+    animation: waiting-spinner 1.2s linear infinite;
+}
+</style>
+<link rel="stylesheet" type="text/css" media="screen" href="https://quiz.getrelatio.com/css/reset.css?v=1759484861">
+<link rel="stylesheet" type="text/css" media="screen" href="https://quiz.getrelatio.com/themes/pe-black/css/style.css?v=1763052139">
+<link rel="stylesheet" type="text/css" media="screen" href="https://quiz.getrelatio.com/thirdparty/slick/slick.css?v=1759484862">
+<link rel="stylesheet" type="text/css" media="screen" href="https://quiz.getrelatio.com/funnels/Pe3MbJp/css/pejp_overall/v2/style.css?v=1770707077">
+<style>:root{--button-animation-speed:0ms;}</style>        <script src="https://quiz.getrelatio.com/js/jquery.min.js?v=1735494199"></script>
+
+<script src="https://quiz.getrelatio.com/thirdparty/slick/slick.js?v=1759484862"></script>    
+    
+<script>
+var TrackingManager = function(params){
+    this.url = params.url;
+};
+TrackingManager.prototype = {
+    batch: [],
+    timer: null,
+    url: null,
+
+    /**
+     * Tracks a provided event by adding it to a batch for processing.
+     * If a timer exists, it clears the previous timer and sets a new timeout
+     * to ensure batched events are flushed after a delay.
+     *
+     * @param {string} provider - The name of the event provider.
+     * @param {string} eventName - The name of the event to track.
+     * @param {Object} eventData - An object containing additional event data.
+     */
+    track: function (provider, eventName, eventData) {
+        this.batch.push({
+            provider: provider,
+            eventName: eventName,
+            eventData: eventData
+        });
+
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+
+        this.timer = setTimeout(() => {
+            this.flush();
+        }, 10);
+    },
+    /**
+     * Sends the current batch of data to a specified endpoint and clears the batch.
+     *
+     * This method creates a deep copy of the current `batch`, clears the existing `batch` array,
+     * and sends the copied data using an AJAX POST request to the specified `url` property.
+     *
+     * It is used to flush the accumulated data in `batch` and ensure that any modifications
+     * to the `batch` property after the method call do not affect the data being transmitted.
+     */
+    flush: function () {
+        let batch = JSON.parse(JSON.stringify(this.batch));
+        this.batch = [];
+
+        ajax.post(this.url, {data: JSON.stringify(batch)});
+    }
+}
+var initTrackingManager = function(params){
+    return new TrackingManager(params);
+}
+
+</script>
+    <script>
+    (function () {
+        let manager = initTrackingManager({"url":"\/Pe3MbJp\/track-event\/x8lns1od-twbs-0fn3-ypsvmehuulrd"});
+        window.addEventListener('TrackingManager.track', function (e) {
+            manager.track(e.detail.provider, e.detail.event.name, e.detail.event.data);
+        });
+    })();
+</script>
+
+<script>
+    (function(){
+        let manager = initFacebookManager({"dataset":"2696245493878143","userParameters":{"external_id":"81960813","country":"id"},"sendGender":true,"frontEnable":false,"apiEnable":false,"signalsGateWay":{"enabled":false,"dataset":"","publicDomain":""}});
+        QuizEvents.setHandlers('FacebookEvent', manager.library, manager);
+
+            })();
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T49XX6J7');</script>
+<!-- End Google Tag Manager -->
+
+            
+            <script type="text/javascript">
+            amplitude.add({
+                name: 'set-referrer-for-view-page',
+                type: 'enrichment',
+                execute: async (event) => {
+                    if (window.parent === window) {
+                        return event;
+                    }
+
+                    if (event.event_type !== '[Amplitude] Page Viewed') {
+                        return event;
+                    }
+
+                    try {
+                        let referrer = window.parent.document.referrer;
+                        if (referrer.length === 0) {
+                            delete event.event_properties.referrer;
+                            delete event.event_properties.referring_domain;
+                        } else {
+                            let url = new URL(referrer);
+
+                            event.event_properties.referrer = referrer;
+                            event.event_properties.referring_domain = url.host;
+                        }
+                    } catch (e) {
+                        delete event.event_properties.referrer;
+                        delete event.event_properties.referring_domain;
+                    }
+
+                    return event;
+                }
+            });
+            amplitude.add({
+                name: 'set-referrer-for-$identify',
+                type: 'enrichment',
+                execute: async (event) => {
+                    if (window.parent === window) {
+                        return event;
+                    }
+
+                    if (event.event_type !== '$identify') {
+                        return event;
+                    }
+
+                    if (('user_properties' in event) === false) {
+                        return event;
+                    }
+                    try {
+                        let referrer = window.parent.document.referrer;
+                        if (referrer.length === 0) {
+                            if (('$set' in event.user_properties)) {
+                                for (let k in event.user_properties['$set']) {
+                                    if (k === 'referrer') {
+                                        delete event.user_properties['$set'][k];
+                                        continue;
+                                    }
+
+                                    if (k === 'referring_domain') {
+                                        delete event.user_properties['$set'][k];
+                                        continue;
+                                    }
+                                }
+                            }
+                            if (('$setOnce' in event.user_properties)) {
+                                for (let k in event.user_properties['$setOnce']) {
+                                    if (k === 'initial_referrer') {
+                                        delete event.user_properties['$setOnce'][k];
+                                        continue;
+                                    }
+
+                                    if (k === 'initial_referring_domain') {
+                                        delete event.user_properties['$setOnce'][k];
+                                        continue;
+                                    }
+                                }
+                            }
+                        } else {
+                            if (('$set' in event.user_properties)) {
+                                for (let k in event.user_properties['$set']) {
+                                    if (k === 'referrer') {
+                                        if (referrer === document.referrer) {
+                                            delete event.user_properties['$set'][k];
+                                        } else {
+                                            event.user_properties['$set'][k] = referrer;
+                                        }
+                                        continue;
+                                    }
+
+                                    if (k === 'referring_domain') {
+                                        if (referrer === document.referrer) {
+                                            delete event.user_properties['$set'][k];
+                                        } else {
+                                            let url = new URL(referrer);
+                                            event.user_properties['$set'][k] = url.host;
+                                        }
+                                        continue;
+                                    }
+                                }
+                            }
+
+                            if (('$setOnce' in event.user_properties)) {
+                                for (let k in event.user_properties['$setOnce']) {
+                                    if (k === 'initial_referrer') {
+                                        if (referrer === document.referrer) {
+                                            delete event.user_properties['$setOnce'][k];
+                                        } else {
+                                            event.user_properties['$setOnce'][k] = referrer;
+                                        }
+                                        continue;
+                                    }
+
+                                    if (k === 'initial_referring_domain') {
+                                        if (referrer === document.referrer) {
+                                            delete event.user_properties['$setOnce'][k];
+                                        } else {
+                                            let url = new URL(referrer);
+                                            event.user_properties['$setOnce'][k] = url.host;
+                                        }
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        if (('$set' in event.user_properties)) {
+                            for (let k in event.user_properties['$set']) {
+                                if (k === 'referrer') {
+                                    delete event.user_properties['$set'][k];
+                                    continue;
+                                }
+
+                                if (k === 'referring_domain') {
+                                    delete event.user_properties['$set'][k];
+                                    continue;
+                                }
+                            }
+                        }
+                        if (('$setOnce' in event.user_properties)) {
+                            for (let k in event.user_properties['$setOnce']) {
+                                if (k === 'initial_referrer') {
+                                    delete event.user_properties['$setOnce'][k];
+                                    continue;
+                                }
+
+                                if (k === 'initial_referring_domain') {
+                                    delete event.user_properties['$setOnce'][k];
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+
+
+                    return event;
+                }
+            });
+            amplitude.init('e29eb830c718d785a4166e94e03b24cf', {
+                fetchRemoteConfig: false,
+                autocapture: {
+                    pageViews: true,
+                    sessions: true,
+                    formInteractions: false,
+                    fileDownloads: false,
+                    elementInteractions: false,
+                    attribution: {
+                        excludeReferrers: []
+                    }
+                },
+                // logLevel: 'debug'
+            });
+        </script>
+                
+        
+    
+    <script>
+        QuizEvents.setListeners([{"type":"Quiz","event":"Slide","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"PageView"},"AxonEvent":{"type":"AxonEvent","event":"PageView"}}},{"type":"Quiz","event":"SetSlide","listeners":{"AxonEvent":{"type":"AxonEvent","event":"PageView"}}},{"type":"Quiz","event":"OfferPage","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"PageView"},"AxonEvent":{"type":"AxonEvent","event":"ItemView"}}},{"type":"Quiz","event":"SessionStarted","listeners":{"TiktokEvent":{"type":"TiktokEvent","event":"ViewContent"},"AxonEvent":{"type":"AxonEvent","event":"PageView"}}},{"type":"Quiz","event":"SaveEmail","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"Contact"},"TiktokEvent":{"type":"TiktokEvent","event":"CompleteRegistration"},"GoogleTagEvent":{"type":"GoogleTagEvent","event":"SendLead"},"AxonEvent":{"type":"AxonEvent","event":"SendLead"}}},{"type":"Purchase","event":"ChangeProduct","listeners":{"AxonEvent":{"type":"AxonEvent","event":"ItemView"}}},{"type":"Quiz","event":"CompleteRegistration","listeners":{"AxonEvent":{"type":"AxonEvent","event":"SignUp"}}},{"type":"Purchase","event":"AddToCart","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"AddToCart"},"TiktokEvent":{"type":"TiktokEvent","event":"AddToCart"},"GoogleTagEvent":{"type":"GoogleTagEvent","event":"AddToCart"},"AxonEvent":{"type":"AxonEvent","event":"AddToCart"}}},{"type":"Purchase","event":"InitiateCheckout","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"InitiateCheckout"},"TiktokEvent":{"type":"TiktokEvent","event":"InitiateCheckout"}}},{"type":"Purchase","event":"Success","listeners":{"FacebookEvent":{"type":"FacebookEvent","event":"Purchase"},"TiktokEvent":{"type":"TiktokEvent","event":"CompletePayment"},"GoogleTagEvent":{"type":"GoogleTagEvent","event":"Purchase"},"AxonEvent":{"type":"AxonEvent","event":"Purchase"}}}]);
+        QuizEvents.dispatch('Page.View');
+    </script>
+
+    <style type="text/css"></style><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104075908&amp;cv=11&amp;fst=1779104075908&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=gtag.config&amp;gtm=45be65d0v9222258107z89251335150za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;data=event%3Dgtag.config&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104087274&amp;cv=11&amp;fst=1779104087274&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_start&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_start&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104087285&amp;cv=11&amp;fst=1779104087285&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104089891&amp;cv=11&amp;fst=1779104089891&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104098513&amp;cv=11&amp;fst=1779104098513&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104101099&amp;cv=11&amp;fst=1779104101099&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104104405&amp;cv=11&amp;fst=1779104104405&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/17160513468/?random=1779104123669&amp;cv=11&amp;fst=1779104123669&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=form_submit&amp;gtm=45be65d0v9222258107za20gzb9251335150zd9251335150xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=0~115616985~115938466~115938469~116701382&amp;u_w=390&amp;u_h=844&amp;url=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2Fx8lns1od-twbs-0fn3-ypsvmehuulrd&amp;ref=https%3A%2F%2Fquiz.getrelatio.com%2FPe3MbJp%2F&amp;rcb=8&amp;frm=1&amp;ae=a&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=44422691.1779104076&amp;uaa=arm&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=1&amp;uam=&amp;uap=iOS&amp;uapv=17_0&amp;uaw=0&amp;data=event%3Dform_submit&amp;rfmt=3&amp;fmt=4"></script></head>
+<body id="_wid18" class="theme-pe-black hidden-quiz-submit-block">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T49XX6J7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<main>
+    <div class="page-wrapper">
+        
+<div id="quiz-container">
+    <form method="post" action="/Pe3MbJp/x8lns1od-twbs-0fn3-ypsvmehuulrd/31">
+        
+<div id="slide-header" class="hidden-numbers   ">
+    <div id="slide-header-main">
+        <div id="slide-header-back-button">
+            <button type="button"></button>
+        </div>
+        <img src="/themes/pe-black/images/Relatio.png" id="slide-header-logo">        <div id="slide-header-numbers">
+            <div id="slide-header-numbers-current">17</div>
+            <span>/</span>
+            <div id="slide-header-numbers-total">27</div>
+        </div>
+    </div>
+    <div id="slide-header-progress">
+        <div id="slide-header-progress-complete" data-target-width="54" style="width: 54%;"></div>
+    </div>
+</div>
+
+        <div id="quiz-body" class="">
+            <input type="hidden" name="answers[231_SexPerMonth][question]" value="平均して、月に何回性行為をしますか？" style="">
+            <h1 class="slide-question">平均して、月に何回性行為をしますか？</h1><div id="_wid8" class="answers-widget questions"><div id="_wid9" class="hidden-radio-widget">
+    <input id="w_wid9" type="radio" name="answers[231_SexPerMonth][answers][]" value="Less than 3 times per month" style="">
+    <label for="w_wid9">
+                <span>月に3回未満</span>
+    </label>
+    <div class="hidden-radio-widget-selected-background"></div>
+</div>
+<div id="_wid10" class="hidden-radio-widget">
+    <input id="w_wid10" type="radio" name="answers[231_SexPerMonth][answers][]" value="3-6 times per month" style="">
+    <label for="w_wid10">
+                <span>月に3〜6回</span>
+    </label>
+    <div class="hidden-radio-widget-selected-background"></div>
+</div>
+<div id="_wid11" class="hidden-radio-widget">
+    <input id="w_wid11" type="radio" name="answers[231_SexPerMonth][answers][]" value="7-15 times per month" style="">
+    <label for="w_wid11">
+                <span>月に7〜15回</span>
+    </label>
+    <div class="hidden-radio-widget-selected-background"></div>
+</div>
+<div id="_wid12" class="hidden-radio-widget">
+    <input id="w_wid12" type="radio" name="answers[231_SexPerMonth][answers][]" value="More than 15 times per month" style="">
+    <label for="w_wid12">
+                <span>月に15回以上</span>
+    </label>
+    <div class="hidden-radio-widget-selected-background"></div>
+</div>
+<div id="_wid13" class="hidden-radio-widget">
+    <input id="w_wid13" type="radio" name="answers[231_SexPerMonth][answers][]" value="I don’t want to answer" style="">
+    <label for="w_wid13">
+                <span>答えたくありません</span>
+    </label>
+    <div class="hidden-radio-widget-selected-background"></div>
+</div>
+</div>        </div>
+
+                    <script type="application/json" id="quiz-ab-variations">[{"code":"split_APP.pe_ios_app_access","variation":"v3"},{"code":"payment-method.therelify","variation":"v0"},{"code":"split_SessionReplay.quiz","variation":"v0"},{"code":"split0168.pejp_overall","variation":"v2"}]</script>
+        
+        <div id="quiz-submit-block" class="hidden-quiz-submit-block ">
+            <button type="submit" id="quiz-submit-button">続行</button>
+        </div>
+    </form>
+    </div>    </div>
+</main><div class="waiting-spinner-wrapper">
+    <div class="waiting-spinner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#paint0_angular_271_743_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0266667 0 0 0.0266667 32 31.9999)"><foreignObject x="-1000" y="-1000" width="2000" height="2000"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(20, 18, 24, 1) 0deg,rgba(235, 51, 73, 1) 359.964deg,rgba(20, 18, 24, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z" data-figma-gradient-fill="{&quot;type&quot;:&quot;GRADIENT_ANGULAR&quot;,&quot;stops&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;stopsVar&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;transform&quot;:{&quot;m00&quot;:53.333328247070312,&quot;m01&quot;:0.0,&quot;m02&quot;:5.33337402343750,&quot;m10&quot;:0.0,&quot;m11&quot;:53.333328247070312,&quot;m12&quot;:5.3332519531250},&quot;opacity&quot;:1.0,&quot;blendMode&quot;:&quot;NORMAL&quot;,&quot;visible&quot;:true}"></path>
+<defs>
+<clipPath id="paint0_angular_271_743_clip_path"><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z"></path></clipPath></defs>
+</svg>
+</div>
+</div>
+
+<div class="waiting-spinner-wrapper">
+    <div class="waiting-spinner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#paint0_angular_271_743_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0266667 0 0 0.0266667 32 31.9999)"><foreignObject x="-1000" y="-1000" width="2000" height="2000"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(20, 18, 24, 1) 0deg,rgba(235, 51, 73, 1) 359.964deg,rgba(20, 18, 24, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z" data-figma-gradient-fill="{&quot;type&quot;:&quot;GRADIENT_ANGULAR&quot;,&quot;stops&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;stopsVar&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;transform&quot;:{&quot;m00&quot;:53.333328247070312,&quot;m01&quot;:0.0,&quot;m02&quot;:5.33337402343750,&quot;m10&quot;:0.0,&quot;m11&quot;:53.333328247070312,&quot;m12&quot;:5.3332519531250},&quot;opacity&quot;:1.0,&quot;blendMode&quot;:&quot;NORMAL&quot;,&quot;visible&quot;:true}"></path>
+<defs>
+<clipPath id="paint0_angular_271_743_clip_path"><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z"></path></clipPath></defs>
+</svg>
+</div>
+</div>
+
+<div class="waiting-spinner-wrapper">
+    <div class="waiting-spinner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#paint0_angular_271_743_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0266667 0 0 0.0266667 32 31.9999)"><foreignObject x="-1000" y="-1000" width="2000" height="2000"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(20, 18, 24, 1) 0deg,rgba(235, 51, 73, 1) 359.964deg,rgba(20, 18, 24, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z" data-figma-gradient-fill="{&quot;type&quot;:&quot;GRADIENT_ANGULAR&quot;,&quot;stops&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;stopsVar&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;transform&quot;:{&quot;m00&quot;:53.333328247070312,&quot;m01&quot;:0.0,&quot;m02&quot;:5.33337402343750,&quot;m10&quot;:0.0,&quot;m11&quot;:53.333328247070312,&quot;m12&quot;:5.3332519531250},&quot;opacity&quot;:1.0,&quot;blendMode&quot;:&quot;NORMAL&quot;,&quot;visible&quot;:true}"></path>
+<defs>
+<clipPath id="paint0_angular_271_743_clip_path"><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z"></path></clipPath></defs>
+</svg>
+</div>
+</div>
+
+<div class="waiting-spinner-wrapper">
+    <div class="waiting-spinner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#paint0_angular_271_743_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0.0266667 0 0 0.0266667 32 31.9999)"><foreignObject x="-1000" y="-1000" width="2000" height="2000"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(20, 18, 24, 1) 0deg,rgba(235, 51, 73, 1) 359.964deg,rgba(20, 18, 24, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z" data-figma-gradient-fill="{&quot;type&quot;:&quot;GRADIENT_ANGULAR&quot;,&quot;stops&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;stopsVar&quot;:[{&quot;color&quot;:{&quot;r&quot;:0.92156863212585449,&quot;g&quot;:0.20000000298023224,&quot;b&quot;:0.28627452254295349,&quot;a&quot;:1.0},&quot;position&quot;:0.99989998340606689},{&quot;color&quot;:{&quot;r&quot;:0.078431375324726105,&quot;g&quot;:0.070588238537311554,&quot;b&quot;:0.094117648899555206,&quot;a&quot;:1.0},&quot;position&quot;:1.0}],&quot;transform&quot;:{&quot;m00&quot;:53.333328247070312,&quot;m01&quot;:0.0,&quot;m02&quot;:5.33337402343750,&quot;m10&quot;:0.0,&quot;m11&quot;:53.333328247070312,&quot;m12&quot;:5.3332519531250},&quot;opacity&quot;:1.0,&quot;blendMode&quot;:&quot;NORMAL&quot;,&quot;visible&quot;:true}"></path>
+<defs>
+<clipPath id="paint0_angular_271_743_clip_path"><path d="M58.6667 31.9999C58.6667 46.7275 46.7276 58.6666 32 58.6666C17.2724 58.6666 5.33337 46.7275 5.33337 31.9999C5.33337 17.2723 17.2724 5.33325 32 5.33325C46.7276 5.33325 58.6667 17.2723 58.6667 31.9999ZM12 31.9999C12 43.0456 20.9543 51.9999 32 51.9999C43.0457 51.9999 52 43.0456 52 31.9999C52 20.9542 43.0457 11.9999 32 11.9999C20.9543 11.9999 12 20.9542 12 31.9999Z"></path></clipPath></defs>
+</svg>
+</div>
+</div>
+
+
+
+
+
+<div></div><div>
+<style>.answers-widget.size-50p > div:not(.answers-widget-background){
+    width: 50%;
+}
+
+.answers-widget{
+    position: relative;
+}
+
+.answers-widget.position-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.answers-widget.with-background{
+    position: relative;
+}
+
+.answers-widget-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.answers-widget-background-wrapper{
+    position: absolute;
+}
+
+.answers-widget-background-wrapper.position-top_left{
+    top: 0;
+    left: 0;
+}
+
+.answers-widget-background-wrapper.position-top_right{
+    top: 0;
+    right: 0;
+}
+
+.answers-widget-background-wrapper.position-bottom_right{
+    bottom: 0;
+    right: 0;
+}
+
+.answers-widget-background-wrapper.size-50p{
+    width: 50%;
+}
+
+.answers-widget-position-top_left{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.answers-widget-position-top_right{
+    position: absolute;
+    top: 0;
+    right: 0;
+}</style>
+<style>.hidden-radio-widget{
+    width: 100%;
+    background: #EBEBEB77;
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 0 8px 0;
+
+}
+.hidden-radio-widget label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 64px;
+    position: relative;
+    z-index: 2;
+    color: #000000;
+    padding: 0 24px 0 24px;
+    cursor: pointer;
+}
+.hidden-radio-widget label img{
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 16px;
+}
+
+.hidden-radio-widget label svg{
+    max-width: 32px;
+    max-height: 32px;
+    margin: 0 16px;
+}
+
+.hidden-radio-widget label img:first-child, .hidden-radio-widget label svg:first-child{
+    margin-left: 0;
+}
+.hidden-radio-widget label span{
+    order: 2;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    overflow: hidden;
+    /*flex-shrink: 0;*/
+    position: relative;
+}
+.hidden-radio-widget input{
+    display: none;
+}
+.hidden-radio-widget .hidden-radio-widget-selected-background{
+    z-index: 1;
+    border-radius: inherit;
+    background: #0080FF;
+}
+.hidden-radio-widget .hidden-radio-widget-selected-background:before{
+    content:"";
+    background:inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.hidden-radio-widget .hidden-radio-widget-selected-background:after{
+    content:"";
+    background:inherit;
+    background-image: url(/images/ok.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 21px 24px;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+ .hidden-radio-widget.selected label{
+    color: #0080FF;
+}
+.hidden-radio-widget.selected label+.hidden-radio-widget-selected-background:before{
+    opacity: 0.1;
+}
+.hidden-radio-widget.selected label+.hidden-radio-widget-selected-background:after{
+    opacity: 1;
+}
+
+.hidden-radio-widget{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    transition: all var(--button-animation-speed, 0.2s) ease-out;
+}
+.hidden-radio-widget.active{
+    transform: scale(0.95);
+}
+</style>
+<style>@keyframes waiting-spinner {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.waiting-spinner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: transparent;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.waiting-spinner-wrapper .waiting-spinner {
+    display: none;
+}
+.waiting-spinner-wrapper.active {
+    opacity: 1;
+    z-index: 1000;
+}
+.waiting-spinner-wrapper.active .waiting-spinner {
+    display: block;
+    width: 64px;
+    height: 64px;
+    animation: waiting-spinner 1.2s linear infinite;
+}
+</style></div>
+<script>
+(function(){
+  // QUIZ NAVIGATION OVERRIDE (local linkagem sequencial)
+  const m = location.pathname.match(/(\d{2})\.html?$/);
+  const cur = m ? parseInt(m[1], 10) : 1;
+  const total = 35;
+  const nextFile = cur + 1 <= total ? String(cur + 1).padStart(2,'0') + '.html' : null;
+  const prevFile = cur > 1 ? String(cur - 1).padStart(2,'0') + '.html' : null;
+
+  function goNext(e){
+    if (e) { e.preventDefault(); e.stopImmediatePropagation && e.stopImmediatePropagation(); }
+    if (nextFile) window.location.href = nextFile;
+    return false;
+  }
+  function goPrev(e){
+    if (e) { e.preventDefault(); e.stopImmediatePropagation && e.stopImmediatePropagation(); }
+    if (prevFile) window.location.href = prevFile;
+    return false;
+  }
+
+  document.addEventListener('submit', goNext, true);
+
+  document.addEventListener('click', function(e){
+    // Submit / continuar
+    if (e.target.closest('button[type="submit"], #quiz-submit-button, #quiz-submit-button-new, .next-button, [data-action="next"]')) {
+      return goNext(e);
+    }
+    // Back
+    if (e.target.closest('#slide-header-back-button, .back-button, [data-action="back"]')) {
+      return goPrev(e);
+    }
+    // Image radio / cards de resposta — clica direto vai pro próximo (UX típico de quiz)
+    const card = e.target.closest('.image-radio-widget, .image-widget, .answers-widget > div > div');
+    if (card) {
+      // Marca visualmente como selecionado pro user ver feedback
+      card.classList.add('selected');
+      // Delay pequeno pro user ver o feedback visual antes de avançar
+      setTimeout(goNext, 300);
+      e.preventDefault();
+      return false;
+    }
+  }, true);
+})();
+</script>
+
+</body></html>
