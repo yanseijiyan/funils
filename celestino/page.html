@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celestino – El Antiguo Tarot de los Ángeles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B0000;
+    --crimson-light: #C0392B;
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --bg-dark: #0A0A0A;
+    --bg-card: #111111;
+    --bg-card2: #1A0A0A;
+    --text: #E8E0D5;
+    --text-muted: #9A8E85;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139,0,0,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      var(--bg-dark);
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle 600px at 50% 40%, rgba(139,0,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 6px 18px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 6vw, 76px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: #fff;
+    text-shadow: 0 0 60px rgba(139,0,0,0.6);
+  }
+
+  .hero h1 span {
+    color: var(--crimson-light);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2.2vw, 21px);
+    color: var(--gold-light);
+    font-style: italic;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+
+  /* Stars */
+  .stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: var(--gold);
+  }
+
+  .hero-badge {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    letter-spacing: 1px;
+  }
+
+  /* Symbol */
+  .hero-symbol {
+    font-size: 80px;
+    line-height: 1;
+    margin-bottom: 28px;
+    filter: drop-shadow(0 0 30px rgba(201,168,76,0.5));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  /* ── CTA BUTTON ── */
+  .btn-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #C0392B 0%, #8B0000 50%, #C0392B 100%);
+    background-size: 200% 200%;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2px;
+    padding: 20px 52px;
+    border-radius: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 0 40px rgba(192,57,43,0.5), 0 4px 20px rgba(0,0,0,0.5);
+    transition: all 0.3s;
+    animation: pulse-btn 2.5s ease-in-out infinite;
+  }
+
+  .btn-cta:hover {
+    box-shadow: 0 0 60px rgba(192,57,43,0.8), 0 6px 30px rgba(0,0,0,0.6);
+    transform: translateY(-2px);
+    background-position: right center;
+  }
+
+  @keyframes pulse-btn {
+    0%, 100% { box-shadow: 0 0 40px rgba(192,57,43,0.5), 0 4px 20px rgba(0,0,0,0.5); }
+    50% { box-shadow: 0 0 70px rgba(192,57,43,0.8), 0 4px 20px rgba(0,0,0,0.5); }
+  }
+
+  .btn-guarantee {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+
+  .section-inner.wide {
+    max-width: 1100px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+  .divider-sym { color: var(--gold); font-size: 18px; }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--crimson-light);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .section-title .red { color: var(--crimson-light); }
+
+  .section-desc {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 620px;
+    margin: 0 auto 56px;
+    line-height: 1.8;
+  }
+
+  /* ── WHAT IS ── */
+  .whatis {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #0F0505 50%, var(--bg-dark) 100%);
+  }
+
+  .whatis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  @media(max-width: 640px) { .whatis-grid { grid-template-columns: 1fr; } }
+
+  .whatis-card {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 24px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .whatis-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    box-shadow: 0 0 30px rgba(139,0,0,0.15);
+  }
+
+  .wi-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    filter: drop-shadow(0 0 8px rgba(201,168,76,0.4));
+  }
+
+  .wi-title {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .wi-text {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── WHAT'S INSIDE ── */
+  .inside {
+    background: var(--bg-dark);
+  }
+
+  .inside-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .inside-item {
+    background: var(--bg-card);
+    border: 1px solid rgba(139,0,0,0.3);
+    border-left: 3px solid var(--crimson-light);
+    border-radius: 4px;
+    padding: 22px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+
+  .inside-item:hover {
+    box-shadow: 0 0 25px rgba(139,0,0,0.2);
+    border-color: rgba(192,57,43,0.6);
+  }
+
+  .inside-num {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--crimson-light);
+    opacity: 0.6;
+    flex-shrink: 0;
+    line-height: 1;
+    min-width: 36px;
+  }
+
+  .inside-title {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .inside-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── CARDS ── */
+  .cards-section {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #0D0305 50%, var(--bg-dark) 100%);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .card-item {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .card-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card-item:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .card-item:hover::before { opacity: 1; }
+
+  .card-icon { font-size: 36px; margin-bottom: 14px; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); }
+  .card-name { font-family: 'Cinzel', serif; font-size: 14px; color: var(--gold); margin-bottom: 8px; font-weight: 600; }
+  .card-role { font-size: 11px; letter-spacing: 2px; color: var(--crimson-light); text-transform: uppercase; margin-bottom: 12px; }
+  .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── BONUS ── */
+  .bonus-section { background: var(--bg-dark); }
+
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .bonus-card {
+    background: var(--bg-card2);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+  }
+
+  .bonus-card:hover { box-shadow: 0 0 30px rgba(201,168,76,0.15); }
+
+  .bonus-header {
+    background: linear-gradient(135deg, #8B0000, #5C0000);
+    padding: 12px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .bonus-body { padding: 24px 20px; text-align: center; }
+  .bonus-icon { font-size: 40px; margin-bottom: 14px; filter: drop-shadow(0 0 12px rgba(201,168,76,0.3)); }
+  .bonus-title { font-family: 'Cinzel', serif; font-size: 15px; color: #fff; margin-bottom: 10px; font-weight: 600; }
+  .bonus-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+  .bonus-price { font-size: 12px; color: var(--text-muted); }
+  .bonus-price s { color: rgba(255,255,255,0.3); }
+  .bonus-price strong { color: var(--gold); }
+
+  /* ── TESTIMONIALS ── */
+  .testi-section {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #0A0305 50%, var(--bg-dark) 100%);
+  }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 18px;
+  }
+
+  .testi-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+    padding: 24px 20px;
+    position: relative;
+  }
+
+  .testi-quote {
+    font-size: 36px;
+    color: var(--crimson-light);
+    opacity: 0.5;
+    line-height: 1;
+    margin-bottom: 8px;
+    font-family: Georgia, serif;
+  }
+
+  .testi-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.75;
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  .testi-stars { color: var(--gold); font-size: 13px; margin-bottom: 8px; }
+
+  .testi-name {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--gold-light);
+    letter-spacing: 1px;
+  }
+
+  .testi-loc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── PRICE BOX ── */
+  .price-section {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #0F0203 30%, var(--bg-dark) 100%);
+  }
+
+  .price-box {
+    background: var(--bg-card);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px;
+    padding: 52px 48px;
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto;
+    box-shadow: 0 0 80px rgba(139,0,0,0.2), 0 0 40px rgba(201,168,76,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--crimson-light), var(--gold), transparent);
+  }
+
+  .price-product {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--crimson-light);
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .price-was {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .price-was s { color: rgba(255,255,255,0.3); }
+
+  .price-main {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(56px, 10vw, 82px);
+    font-weight: 900;
+    color: var(--crimson-light);
+    line-height: 1;
+    margin-bottom: 6px;
+    text-shadow: 0 0 40px rgba(192,57,43,0.4);
+  }
+
+  .price-main sup {
+    font-size: 36px;
+    vertical-align: top;
+    margin-top: 14px;
+    display: inline-block;
+  }
+
+  .price-install {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+  }
+
+  .price-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 36px;
+    text-align: left;
+  }
+
+  .pi-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .pi-check { color: var(--gold); font-size: 14px; }
+
+  .price-trust {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .pt-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .pt-icon { font-size: 16px; }
+
+  /* ── FAQ ── */
+  .faq-section { background: var(--bg-dark); }
+
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 22px 0;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+
+  .faq-q:hover { color: var(--gold); }
+
+  .faq-arrow {
+    color: var(--crimson-light);
+    font-size: 18px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  .faq-a {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding-bottom: 20px;
+  }
+
+  /* ── WHO ── */
+  .who-section {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #0D0305 50%, var(--bg-dark) 100%);
+  }
+
+  .who-box {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 48px 40px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .who-sym { font-size: 48px; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.4)); }
+  .who-name { font-family: 'Cinzel', serif; font-size: 28px; color: #fff; font-weight: 700; margin-bottom: 6px; }
+  .who-role { font-size: 13px; color: var(--crimson-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+  .who-text { font-size: 15px; color: var(--text-muted); line-height: 1.85; font-style: italic; }
+
+  /* ── FOOTER CTA ── */
+  .footer-cta {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(139,0,0,0.3) 0%, transparent 70%),
+      var(--bg-dark);
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .footer-cta h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(24px, 4vw, 40px);
+    color: #fff;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .footer-cta p {
+    color: var(--text-muted);
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 40px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  /* ── SCROLL FADE ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media(max-width: 600px) {
+    .price-box { padding: 36px 24px; }
+    .who-box { padding: 36px 24px; }
+    .inside-item { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero">
+  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;">
+    <div class="hero-tag">✦ Mensaje Urgente del Universo ✦</div>
+    <div class="hero-symbol">☽ ✦ ☾</div>
+    <h1>
+      CELESTINO
+      <span>El Antiguo Tarot de los Ángeles</span>
+    </h1>
+    <p class="hero-sub">
+      Tu lectura personal ya fue revelada. Ahora es el momento de recibir la guía completa que las cartas tienen para ti.
+    </p>
+    <div class="stars">★ ★ ★ ★ ★</div>
+    <p class="hero-badge">+3.000 almas transformadas</p>
+    <a href="https://go.centerpag.com/PPU38CQAG82" class="btn-cta">
+      ✦ Recibir Mi Guía Completa ✦
+    </a>
+    <span class="btn-guarantee">🔒 Pago seguro · Garantía de 7 días</span>
+  </div>
+</section>
+
+<!-- ══════════════════ WHAT IS ══════════════════ -->
+<section class="whatis">
+  <div class="section-inner fade-in">
+    <span class="section-label">✦ Lo Que Recibirás ✦</span>
+    <h2 class="section-title">Una travesía íntima a través de<br><span class="red">señales, cartas y guía espiritual</span></h2>
+    <p class="section-desc">
+      Destinada a iluminar tu pasado, tu presente y el umbral de tu transformación.
+    </p>
+
+    <div class="whatis-grid">
+      <div class="whatis-card">
+        <span class="wi-icon">🃏</span>
+        <div>
+          <div class="wi-title">Lectura Completa de 4 Cartas</div>
+          <div class="wi-text">Tu pasado, presente, encrucijada y guía maestra revelados en profundidad. Cada carta cargaba un mensaje urgente destinado únicamente para ti.</div>
+        </div>
+      </div>
+      <div class="whatis-card">
+        <span class="wi-icon">🕯️</span>
+        <div>
+          <div class="wi-title">3 Rituales de Activación (21 días)</div>
+          <div class="wi-text">Prácticas simples y poderosas para reprogramar tu energía y abrir una nueva frecuencia en tu vida. Solo minutos al día.</div>
+        </div>
+      </div>
+      <div class="whatis-card">
+        <span class="wi-icon">🙏</span>
+        <div>
+          <div class="wi-title">Oraciones Sanadoras del Guía</div>
+          <div class="wi-text">Anclas energéticas para la abundancia, el amor y la protección — compartidas por el Guardián en sus 30 años de trabajo espiritual.</div>
+        </div>
+      </div>
+      <div class="whatis-card">
+        <span class="wi-icon">✨</span>
+        <div>
+          <div class="wi-title">Guía Viva y Permanente</div>
+          <div class="wi-text">No es solo una lectura — es una guía a la que volver siempre que necesites claridad, consuelo o dirección interior.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SUMÁRIO ══════════════════ -->
+<section class="inside">
+  <div class="section-inner fade-in">
+    <span class="section-label">✦ Contenido Completo ✦</span>
+    <h2 class="section-title">Lo Que Encontrarás<br><span class="red">Dentro de tu Guía</span></h2>
+    <p class="section-desc">Tres partes que componen un camino completo de comprensión, práctica y sostén espiritual.</p>
+
+    <div class="inside-list">
+      <div class="inside-item">
+        <span class="inside-num">I</span>
+        <div>
+          <div class="inside-title">El Significado Profundo de Tus Cuatro Cartas</div>
+          <div class="inside-desc">La Rueda de la Fortuna, El Mago, La Torre y El Ermitaño — leídas juntas como un mapa espiritual de tu camino completo. Descubre de dónde vienes, dónde estás y hacia dónde vas.</div>
+        </div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-num">II</span>
+        <div>
+          <div class="inside-title">Rituales y Prácticas para Activar tu Transformación</div>
+          <div class="inside-desc">El Decreto de la Mañana, La Escritura de Gratitud y La Visualización de los Ángeles. Tres prácticas diarias para los próximos 21 días que reprograman tu energía hacia el cambio real.</div>
+        </div>
+      </div>
+      <div class="inside-item">
+        <span class="inside-num">III</span>
+        <div>
+          <div class="inside-title">Las Oraciones Sanadoras del Guía</div>
+          <div class="inside-desc">Oraciones por la Abundancia, el Amor y la Protección. Frases que sostienen, orientan y devuelven calma — anclas energéticas para los momentos de mayor necesidad.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ LAS 4 CARTAS ══════════════════ -->
+<section class="cards-section">
+  <div class="section-inner wide fade-in">
+    <span class="section-label">✦ Tu Tirada Personal ✦</span>
+    <h2 class="section-title">Las Cuatro Cartas<br><span class="red">de tu Destino</span></h2>
+    <p class="section-desc">Cuando cuatro cartas se unen en una misma lectura, no solo tienen significado: tienen certeza. Juntas componen un mapa espiritual de tu vida entera.</p>
+
+    <div class="cards-grid">
+      <div class="card-item">
+        <div class="card-icon">☸️</div>
+        <div class="card-name">La Rueda de la Fortuna</div>
+        <div class="card-role">Tu Pasado</div>
+        <div class="card-desc">La memoria de tus ciclos y pruebas. Lo que estaba abajo comienza a subir. El karma sembrado con bondad se acerca a su tiempo de cosecha.</div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon">⚡</div>
+        <div class="card-name">El Mago</div>
+        <div class="card-role">Tu Momento Presente</div>
+        <div class="card-desc">El poder que ya vive dentro de ti. Ha llegado el momento de actuar con intención. Tus decisiones ahora tienen un peso mayor.</div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon">🗼</div>
+        <div class="card-name">La Torre</div>
+        <div class="card-role">Tu Encrucijada</div>
+        <div class="card-desc">La ruptura necesaria antes de la verdad. Las estructuras falsas deben caer para que tu destino real pueda ser visto sin velos.</div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon">🔦</div>
+        <div class="card-name">El Ermitaño</div>
+        <div class="card-role">Tu Guía Maestra</div>
+        <div class="card-desc">La luz sabia que sostiene tu avance. No debes continuar solo. La guía correcta ya ha entrado en tu vida.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ BONUS ══════════════════ -->
+<section class="bonus-section">
+  <div class="section-inner wide fade-in">
+    <span class="section-label">✦ Bônus Exclusivos ✦</span>
+    <h2 class="section-title">Recibe También<br><span class="red">Estos Regalos Especiales</span></h2>
+    <p class="section-desc">Al adquirir tu guía Celestino, recibes de forma gratuita dos materiales complementarios de transformación.</p>
+
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <div class="bonus-header">✦ Bônus 1 ✦</div>
+        <div class="bonus-body">
+          <div class="bonus-icon">📖</div>
+          <div class="bonus-title">Ritual 1 — El Decreto de la Mañana</div>
+          <div class="bonus-desc">Un ritual de 5 minutos al despertar para abrir el día con intención, calma y receptividad. Incluye el decreto sagrado completo y guía de visualización.</div>
+          <div class="bonus-price"><s>$27</s> → <strong>GRATIS</strong></div>
+        </div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-header">✦ Bônus 2 ✦</div>
+        <div class="bonus-body">
+          <div class="bonus-icon">🕯️</div>
+          <div class="bonus-title">Rituales de Activación Completos</div>
+          <div class="bonus-desc">Los tres rituales de 21 días en formato práctico: Decreto de la Mañana, Escritura de Gratitud y Visualización de los Ángeles.</div>
+          <div class="bonus-price"><s>$37</s> → <strong>GRATIS</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TESTIMONIALS ══════════════════ -->
+<section class="testi-section">
+  <div class="section-inner wide fade-in">
+    <span class="section-label">✦ Testimonios ✦</span>
+    <h2 class="section-title">Lo Que Dicen Quienes<br><span class="red">Ya Recibieron su Guía</span></h2>
+    <p class="section-desc">Miles de almas han encontrado claridad, dirección y paz a través de esta lectura.</p>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Lo compré y me llegó de inmediato. Lo amé — sin contar el atendimiento rápido y atencioso. Súper recomendado para quienes buscan dirección espiritual real.</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-name">María G.</div>
+        <div class="testi-loc">Ciudad de México</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Ya lo descargué y lo voy a imprimir para consultar siempre que necesite. Material excelente y muy completo, de una profundidad que no esperaba.</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-name">Carlos M.</div>
+        <div class="testi-loc">Buenos Aires</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Material increíble. Súper completo y profesional a un precio increíble. Me ayudó mucho a entender por qué estoy viviendo lo que estoy viviendo.</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-name">Ana L.</div>
+        <div class="testi-loc">Bogotá</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Lo tengo en PDF, es top demás. Me estoy adorando cada página. Nunca pensé que algo así pudiera ser tan preciso con lo que estoy viviendo ahora.</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-name">Sofía R.</div>
+        <div class="testi-loc">Lima</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PRICE ══════════════════ -->
+<section class="price-section">
+  <div class="section-inner fade-in">
+    <span class="section-label">✦ Oferta Especial ✦</span>
+    <h2 class="section-title" style="margin-bottom:48px;">El Momento de<br><span class="red">Recibir tu Guía</span></h2>
+
+    <div class="price-box">
+      <div class="price-product">Celestino + Todos los Bonos</div>
+      <div class="price-was">De <s>$147</s> — Por solo</div>
+      <div class="price-main"><sup>$</sup>67</div>
+      <div class="price-install">pago único · acceso inmediato</div>
+
+      <div class="price-includes">
+        <div class="pi-row"><span class="pi-check">✦</span> El Antiguo Tarot de los Ángeles — Lectura Personal Completa</div>
+        <div class="pi-row"><span class="pi-check">✦</span> Los 3 Rituales de Activación de 21 días</div>
+        <div class="pi-row"><span class="pi-check">✦</span> Las Oraciones Sanadoras del Guía (Abundancia, Amor y Protección)</div>
+        <div class="pi-row"><span class="pi-check">✦</span> Bono: Ritual del Decreto de la Mañana</div>
+        <div class="pi-row"><span class="pi-check">✦</span> Acceso digital inmediato — disponible en todos los dispositivos</div>
+      </div>
+
+      <a href="https://go.centerpag.com/PPU38CQAG82" class="btn-cta" style="font-size:13px; padding:18px 40px;">
+        ✦ Sí, Quiero Recibir mi Guía Ahora ✦
+      </a>
+
+      <div class="price-trust">
+        <div class="pt-item"><span class="pt-icon">🔒</span> Pago Seguro</div>
+        <div class="pt-item"><span class="pt-icon">✅</span> Garantía de 7 Días</div>
+        <div class="pt-item"><span class="pt-icon">⚡</span> Acceso Inmediato</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FAQ ══════════════════ -->
+<section class="faq-section">
+  <div class="section-inner fade-in">
+    <span class="section-label">✦ Preguntas Frecuentes ✦</span>
+    <h2 class="section-title" style="margin-bottom:48px;">¿Tienes Dudas?</h2>
+
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cuándo recibo el material? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          El acceso es inmediato después de la confirmación del pago. Recibirás el material en tu email en minutos — sin esperas.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cómo recibo la guía? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Recibirás un email con el enlace de descarga directa. El material está en formato PDF de alta calidad, ideal para leer en pantalla o imprimir.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Tiene garantía? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Sí. Tienes 7 días completos para revisar todo el material. Si no quedas satisfecho por cualquier razón, te devolvemos el 100% de tu inversión sin preguntas.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Para quién es esta guía? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Para cualquier persona que busca claridad, dirección espiritual y herramientas concretas para transformar su energía y su vida. No necesitas experiencia previa con el tarot.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Con qué dispositivos es compatible? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Compatible con todos los dispositivos: celular, tablet, computadora. El formato PDF funciona en cualquier sistema operativo — Android, iOS, Windows y Mac.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ QUIEN SOY ══════════════════ -->
+<section class="who-section">
+  <div class="section-inner fade-in">
+    <span class="section-label">✦ El Guardián ✦</span>
+    <h2 class="section-title" style="margin-bottom:48px;">Quién Está<br><span class="red">Detrás de tu Lectura</span></h2>
+
+    <div class="who-box">
+      <div class="who-sym">🌙</div>
+      <div class="who-name">El Guardián de las Cartas</div>
+      <div class="who-role">Maestro Espiritual · 30 años de lecturas</div>
+      <div class="who-text">
+        "En décadas de trabajo espiritual, aprendí una verdad fundamental: nada llega a nuestras manos por casualidad. Cada carta que apareció en tu lectura cargaba un mensaje urgente, un llamado de fuerzas superiores que ya estaban trabajando a tu favor antes incluso de que empezaras a leer estas palabras.
+        <br><br>
+        Lo que tienes en tus manos es una guía viva. Vuelve a ella siempre que sientas duda, miedo o necesidad de dirección. Las respuestas ya están aquí, esperándote."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FINAL CTA ══════════════════ -->
+<div class="footer-cta fade-in">
+  <div class="divider"><span class="divider-sym">✦</span></div>
+  <h2>El Camino Comienza Hoy</h2>
+  <p>No mañana. Las señales ya están aquí. El universo responde a quienes deciden avanzar.</p>
+  <a href="https://go.centerpag.com/PPU38CQAG82" class="btn-cta">
+    ✦ Recibir Mi Guía Completa por $67 ✦
+  </a>
+  <span class="btn-guarantee">🔒 Pago seguro · Acceso inmediato · Garantía de 7 días</span>
+</div>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  CELESTINO – EL ANTIGUO TAROT DE LOS ÁNGELES · TODOS LOS DERECHOS RESERVADOS
+</footer>
+
+<script>
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

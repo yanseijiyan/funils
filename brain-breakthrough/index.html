@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ViralScript PRO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060608;
+      --s1: #0e0e12;
+      --s2: #16161c;
+      --s3: #1e1e26;
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(255, 255, 255, 0.13);
+      --red: #ff2b4e;
+      --red2: #ff6b35;
+      --cyan: #00e5ff;
+      --green: #00ffaa;
+      --gold: #ffd60a;
+      --purple: #a855f7;
+      --purple2: #c084fc;
+      --text: #f2f2f8;
+      --muted: #5a5a72;
+      --muted2: #8888aa;
+      --sidebar-w: 220px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    /* ── GRID BG ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 43, 78, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 43, 78, 0.02) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .sidebar {
+      width: var(--sidebar-w);
+      min-height: 100vh;
+      background: var(--s1);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--red);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      margin-bottom: 10px;
+      animation: hexPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes hexPulse {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(255, 43, 78, 0.6)); }
+      50% { filter: drop-shadow(0 0 18px rgba(255, 43, 78, 1)); }
+    }
+
+    .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; line-height: 1; }
+    .logo-text span { color: var(--red); }
+    .logo-sub { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1.5px; margin-top: 3px; }
+
+    .sidebar-nav { flex: 1; padding: 16px 10px; display: flex; flex-direction: column; gap: 4px; }
+    .nav-section-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); padding: 10px 10px 6px; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 8px;
+      cursor: pointer; transition: all 0.2s;
+      color: var(--muted2); font-size: 13px; font-weight: 600;
+      border: 1px solid transparent; position: relative; user-select: none;
+    }
+
+    .nav-item:hover { background: var(--s2); color: var(--text); }
+    .nav-item.active { background: var(--s2); color: var(--text); border-color: var(--border2); }
+    .nav-item.active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 60%; background: var(--red); border-radius: 0 3px 3px 0; }
+    .nav-item.active.kb-nav::before { background: var(--purple); }
+
+    .nav-icon { font-size: 16px; min-width: 20px; text-align: center; }
+    .nav-label { flex: 1; }
+    .nav-badge { font-family: 'Space Mono', monospace; font-size: 9px; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px; }
+    .nav-badge.green { background: rgba(0, 255, 170, 0.12); color: var(--green); border: 1px solid rgba(0, 255, 170, 0.2); }
+    .nav-badge.red { background: rgba(255, 43, 78, 0.12); color: var(--red); border: 1px solid rgba(255, 43, 78, 0.2); }
+
+    .kb-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex-shrink: 0; transition: background 0.3s; }
+    .kb-status-dot.on { background: var(--purple); box-shadow: 0 0 6px var(--purple); }
+
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid var(--border); }
+    .api-status { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+    .api-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .api-dot.ok { background: var(--green); box-shadow: 0 0 5px var(--green); }
+
+    /* ══════════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════════ */
+    .main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; position: relative; z-index: 1; }
+    .page { display: none; padding: 36px 40px; max-width: 800px; }
+    .page.active { display: block; }
+
+    .page-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .page-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+    .page-eyebrow.purple { color: var(--purple2); }
+    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 1px; line-height: 1.05; }
+    .page-desc { font-size: 14px; color: var(--muted2); margin-top: 8px; line-height: 1.6; }
+
+    .card { background: var(--s1); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 16px; }
+    .card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+    .card-title { font-size: 14px; font-weight: 700; letter-spacing: -0.2px; }
+    .card-sub { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted2); margin-top: 2px; }
+
+    label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted2); margin-bottom: 6px; }
+    input[type="text"], textarea, select { width: 100%; background: var(--s2); border: 1px solid var(--border2); border-radius: 8px; padding: 11px 14px; color: var(--text); font-family: 'Manrope', sans-serif; font-size: 13px; outline: none; transition: all 0.2s; resize: vertical; }
+    input:focus, textarea:focus, select:focus { border-color: var(--red); background: var(--s3); }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .ig { margin-bottom: 14px; }
+    .card.kb-card { border-left: 3px solid var(--purple); }
+
+    /* KB CHIPS & ENTRIES */
+    .cw-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .cw-chip { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border2); background: var(--s2); color: var(--muted2); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .cw-chip.selected { background: rgba(168, 85, 247, 0.15); border-color: var(--purple); color: var(--purple2); }
+
+    .kb-entry { background: var(--s2); border: 1px solid var(--border2); border-radius: 12px; padding: 18px; margin-bottom: 12px; position: relative; }
+    .kb-entry-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .kb-entry-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--purple2); display: flex; align-items: center; gap: 8px; }
+    .kb-entry-num { background: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.3); color: var(--purple2); font-family: 'Space Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 4px; }
+    .kb-rm-btn { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    
+    .kb-entry textarea { min-height: 140px; font-family: 'Space Mono', monospace !important; font-size: 11.5px !important; line-height: 1.7 !important; border-color: transparent !important; background: var(--s3) !important; }
+    .kb-entry-title input { background: transparent !important; border: none !important; border-bottom: 1px solid var(--border) !important; border-radius: 0 !important; font-size: 13px !important; font-weight: 600 !important; padding: 6px 0 !important; margin-bottom: 10px; }
+
+    .add-kb-btn { width: 100%; padding: 12px; background: transparent; border: 1px dashed rgba(168, 85, 247, 0.3); border-radius: 10px; color: var(--purple2); font-weight: 600; cursor: pointer; margin-top: 4px; }
+    .kb-stats { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .kb-stat { background: var(--s2); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; }
+    .kb-stat-val { font-size: 20px; font-weight: 800; color: var(--purple2); }
+    .kb-stat-label { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted); text-transform: uppercase; }
+
+    .kb-save-btn { display: flex; align-items: center; gap: 8px; padding: 12px 24px; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.35); border-radius: 10px; color: var(--purple2); font-weight: 700; cursor: pointer; margin-top: 16px; }
+    .kb-save-btn.saved { background: rgba(0, 255, 170, 0.1); border-color: rgba(0, 255, 170, 0.3); color: var(--green); }
+
+    /* LINKS & RUN */
+    .links-list { display: flex; flex-direction: column; gap: 10px; }
+    .link-row { display: flex; gap: 8px; align-items: center; background: var(--s2); border: 1px solid var(--border2); border-radius: 10px; padding: 10px 14px; }
+    .link-row input { flex: 1; background: transparent; border: none; font-size: 13px; color: white; outline: none; }
+    .link-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--red); font-weight: 700; min-width: 22px; }
+
+    .run-btn { width: 100%; padding: 18px; background: var(--red); border: none; border-radius: 12px; color: white; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+    .run-btn:hover { background: #ff1a3e; box-shadow: 0 8px 32px rgba(255, 43, 78, 0.4); transform: translateY(-1px); }
+
+    /* PIPELINE */
+    .pipeline { display: none; padding: 36px 40px; max-width: 800px; }
+    .pipeline.show { display: block; }
+    .pip-step { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .pip-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--s2); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; }
+    .pip-step.active .pip-icon { border-color: var(--red); animation: iconPulse 1s ease-in-out infinite; }
+    @keyframes iconPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 43, 78, .4) } 50% { box-shadow: 0 0 0 6px rgba(255, 43, 78, 0) } }
+
+    /* RESULTS */
+    .results-page { display: none; padding: 36px 40px; }
+    .results-page.show { display: block; }
+    .tabs { display: flex; gap: 4px; background: var(--s1); border: 1px solid var(--border); border-radius: 10px; padding: 4px; margin-bottom: 20px; overflow-x: auto; }
+    .tab { flex: 1; padding: 9px 6px; background: transparent; border: none; border-radius: 7px; color: var(--muted2); font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .tab.on { background: var(--s3); color: var(--text); border: 1px solid var(--border2); }
+    .tc { display: none; }
+    .tc.on { display: block; }
+
+    .rblock { background: var(--s1); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin-bottom: 14px; position: relative; }
+    .rblock::after { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: var(--red); border-radius: 12px 0 0 12px; }
+    .rblock-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .rblock-text { font-size: 14px; line-height: 1.75; color: #c8c8e0; white-space: pre-wrap; }
+
+    .script-card { background: var(--s1); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin-bottom: 16px; position: relative; overflow: hidden; }
+    .sbox { background: var(--s2); border: 1px solid var(--border2); border-radius: 10px; padding: 16px; margin-top: 12px; position: relative; }
+    .sbox-text { font-size: 14px; line-height: 1.75; color: var(--text); white-space: pre-wrap; padding-right: 70px; }
+    .copy-btn { position: absolute; top: 12px; right: 12px; background: var(--s3); border: 1px solid var(--border2); border-radius: 6px; color: var(--muted2); padding: 5px 10px; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; }
+
+    @media (max-width: 700px) {
+      .sidebar { width: 60px; }
+      .sidebar .nav-label, .sidebar .logo-text, .sidebar .logo-sub, .sidebar .nav-badge, .sidebar .kb-status-dot, .sidebar-footer, .nav-section-label { display: none; }
+      .main { margin-left: 60px; }
+    }
+
+    .fade-in { animation: fadeUp 0.3s ease forwards; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: translateY(0) } }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">🎯</div>
+      <div class="logo-text">VIRAL<span>SCRIPT</span></div>
+      <div class="logo-sub">PRO</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">FERRAMENTAS</div>
+      <div class="nav-item active" onclick="goPage('generate')" id="nav-generate">
+        <div class="nav-icon">▶</div>
+        <div class="nav-label">Gerar Scripts</div>
+        <div class="nav-badge red">MAIN</div>
+      </div>
+      <div class="nav-item kb-nav" onclick="goPage('knowledge')" id="nav-knowledge">
+        <div class="nav-icon">📚</div>
+        <div class="nav-label">Base de Copy</div>
+        <div class="kb-status-dot" id="kbDot"></div>
+      </div>
+      <div class="nav-section-label" style="margin-top:8px">CONFIG</div>
+      <div class="nav-item" onclick="goPage('settings')" id="nav-settings">
+        <div class="nav-icon">🔑</div>
+        <div class="nav-label">APIs & Config</div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="api-status"><div class="api-dot" id="dotSupa"></div>Supadata</div>
+      <div class="api-status"><div class="api-dot" id="dotAnth"></div>Anthropic</div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <div class="page active fade-in" id="page-generate">
+      <div class="page-header">
+        <div class="page-eyebrow">// PIPELINE AUTOMÁTICO</div>
+        <div class="page-title">GERAR SCRIPTS VIRAIS</div>
+        <div class="page-desc">Cole links do TikTok → transcrição automática → análise de padrões → scripts adaptados para seu nicho.</div>
+      </div>
+
+      <div class="kb-active-banner" id="kbBanner">
+        <span>📚</span>
+        <span><strong>Base de Copy ativa</strong> — os scripts aplicarão seus frameworks</span>
+        <span id="kbBannerCw" style="opacity:0.6;font-size:12px"></span>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(255,43,78,0.15)">🎯</div>
+          <div><div class="card-title">Contexto</div><div class="card-sub">// nicho, público e tom</div></div>
+        </div>
+        <div class="grid2">
+          <div class="ig"><label>Seu Nicho *</label><input type="text" id="myNiche" placeholder="Ex: finanças, fitness..." /></div>
+          <div class="ig"><label>Nicho do Perfil Analisado</label><input type="text" id="theirNiche" placeholder="Ex: motivação..." /></div>
+        </div>
+        <div class="grid2">
+          <div class="ig"><label>Público-Alvo</label><input type="text" id="audience" placeholder="Ex: jovens 18-30..." /></div>
+          <div class="ig">
+            <label>Tom de Voz</label>
+            <select id="tone">
+              <option value="descontraido">😄 Descontraído</option>
+              <option value="autoridade">🎯 Autoridade</option>
+              <option value="storytelling">📖 Storytelling</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="ig">
+            <label>Modo de Geração</label>
+            <select id="useKB">
+              <option value="auto">Usar base se existir</option>
+              <option value="off">Ignorar base</option>
+            </select>
+          </div>
+          <div class="ig">
+            <label>Variações</label>
+            <select id="numVars">
+              <option value="2">2 variações</option>
+              <option value="3" selected>3 variações</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(0,229,255,0.1)">🔗</div>
+          <div><div class="card-title">Links Virais</div><div class="card-sub">// transcrição via Supadata</div></div>
+        </div>
+        <div class="err-box" id="errBox"></div>
+        <div class="links-list" id="linksList"></div>
+        <button class="add-link-btn" onclick="addLink()" style="width:100%; padding:10px; background:transparent; border:1px dashed var(--border2); color:var(--muted2); cursor:pointer; margin-top:8px;">+ Adicionar link</button>
+      </div>
+
+      <button class="run-btn" onclick="run()">▶ TRANSCREVER E GERAR SCRIPTS</button>
+    </div>
+
+    <div class="page fade-in" id="page-knowledge">
+      <div class="page-header">
+        <div class="page-eyebrow purple">// COPYWRITING · BASE DE CONHECIMENTO</div>
+        <div class="page-title">BASE DE COPY</div>
+      </div>
+      <div class="kb-stats" id="kbStats">
+        <div class="kb-stat"><div class="kb-stat-val" id="statChars">0</div><div class="kb-stat-label">Caracteres</div></div>
+        <div class="kb-stat"><div class="kb-stat-val" id="statModules">0</div><div class="kb-stat-label">Módulos</div></div>
+        <div class="kb-stat"><div class="kb-stat-val" id="statStatus">VAZIA</div><div class="kb-stat-label">Status</div></div>
+      </div>
+      <div class="card kb-card">
+        <div class="cw-chips">
+          <div class="cw-chip" onclick="selCW(this,'Dan Kennedy')">Dan Kennedy</div>
+          <div class="cw-chip" onclick="selCW(this,'Alex Hormozi')">Alex Hormozi</div>
+          <div class="cw-chip" onclick="selCW(this,'Ícaro de Carvalho')">Ícaro de Carvalho</div>
+        </div>
+        <input type="text" id="copywriterName" placeholder="Nome do método..." oninput="updateKBStats()" />
+      </div>
+      <div id="kbEntries"></div>
+      <button class="add-kb-btn" onclick="addKBEntry()">+ Adicionar módulo</button>
+      <button class="kb-save-btn" id="kbSaveBtn" onclick="saveKB()">💾 Salvar Base</button>
+    </div>
+
+    <div class="page fade-in" id="page-settings">
+      <div class="page-header"><div class="page-title">APIs & CONFIG</div></div>
+      <div class="card"><label>Supadata API Key</label><input type="text" id="supadataKey" /></div>
+      <div class="card"><label>Anthropic API Key</label><input type="text" id="anthropicKey" /></div>
+      <button class="kb-save-btn" onclick="saveSettings()">💾 Salvar Chaves</button>
+    </div>
+
+    <div class="pipeline" id="pipeline">
+      <div class="pip-title">// PIPELINE EM EXECUÇÃO</div>
+      <div class="pip-step waiting" id="pip1"><div class="pip-icon">🔗</div><div class="pip-name">Validando links</div><div class="pip-tag">AGUARDANDO</div></div>
+      <div class="pip-step waiting" id="pip2"><div class="pip-icon">📝</div><div class="pip-name">Extraindo transcrições</div><div class="pip-tag">AGUARDANDO</div></div>
+      <div class="pip-step waiting" id="pip3"><div class="pip-icon">📚</div><div class="pip-name">Base de copy</div><div class="pip-tag">AGUARDANDO</div></div>
+      <div class="pip-step waiting" id="pip4"><div class="pip-icon">🧠</div><div class="pip-name">Analisando padrões</div><div class="pip-tag">AGUARDANDO</div></div>
+      <div class="pip-step waiting" id="pip5"><div class="pip-icon">✍️</div><div class="pip-name">Gerando scripts</div><div class="pip-tag">AGUARDANDO</div></div>
+    </div>
+
+    <div class="results-page" id="resultsPage">
+      <div class="res-bar"><div class="res-title">ANÁLISE <span>COMPLETA</span></div><button class="reset-btn" onclick="resetToGenerate()">Nova Análise</button></div>
+      <div class="tabs" id="tabsRow"></div>
+      <div class="tc on" id="tc-scripts"></div>
+      <div class="tc" id="tc-hooks"></div>
+      <div class="tc" id="tc-why"></div>
+      <div class="tc" id="tc-structure"></div>
+      <div class="tc" id="tc-principles"></div>
+      <div class="tc" id="tc-transcripts"></div>
+    </div>
+
+  </div>
+
+  <script>
+    let linkCount = 0;
+    let kbEntryCount = 0;
+    let fetchedTranscripts = [];
+
+    function init() {
+      const sk = localStorage.getItem('supa_key') || '';
+      const ak = localStorage.getItem('anth_key') || '';
+      document.getElementById('supadataKey').value = sk;
+      document.getElementById('anthropicKey').value = ak;
+      updateApiDots(sk, ak);
+      loadKBFromStorage();
+      addLink(); addLink();
+      updateKBBanner();
+    }
+
+    function goPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('pipeline').classList.remove('show');
+      document.getElementById('resultsPage').classList.remove('show');
+      const pg = document.getElementById('page-' + name);
+      if (pg) pg.classList.add('active');
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      const navEl = document.getElementById('nav-' + name);
+      if (navEl) navEl.classList.add('active');
+      if (name === 'knowledge') updateKBStats();
+    }
+
+    function saveSettings() {
+      const sk = document.getElementById('supadataKey').value.trim();
+      const ak = document.getElementById('anthropicKey').value.trim();
+      localStorage.setItem('supa_key', sk);
+      localStorage.setItem('anth_key', ak);
+      updateApiDots(sk, ak);
+      alert('Configurações salvas!');
+    }
+
+    function updateApiDots(sk, ak) {
+      document.getElementById('dotSupa').classList.toggle('ok', sk.length > 5);
+      document.getElementById('dotAnth').classList.toggle('ok', ak.length > 10);
+    }
+
+    function selCW(el, name) {
+      document.querySelectorAll('.cw-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('copywriterName').value = name;
+      updateKBStats();
+    }
+
+    function addKBEntry(title = '', content = '') {
+      kbEntryCount++;
+      const container = document.getElementById('kbEntries');
+      const div = document.createElement('div');
+      div.className = 'kb-entry';
+      div.id = `kbe-${kbEntryCount}`;
+      div.innerHTML = `
+        <div class="kb-entry-header">
+          <div class="kb-entry-label"><span class="kb-entry-num">MÓDULO ${kbEntryCount}</span> Transcrição</div>
+          <button class="kb-rm-btn" onclick="removeKBEntry(${kbEntryCount})">×</button>
+        </div>
+        <div class="kb-entry-title"><input type="text" placeholder="Título..." value="${title}" oninput="updateKBStats()" /></div>
+        <textarea placeholder="Conteúdo..." oninput="updateKBStats()">${content}</textarea>
+      `;
+      container.appendChild(div);
+      updateKBStats();
+    }
+
+    function removeKBEntry(id) {
+      const el = document.getElementById(`kbe-${id}`);
+      if (el) { el.remove(); updateKBStats(); }
+    }
+
+    function getKBData() {
+      const copywriter = document.getElementById('copywriterName').value.trim();
+      const entries = [];
+      document.querySelectorAll('.kb-entry').forEach(entry => {
+        const title = entry.querySelector('.kb-entry-title input').value;
+        const text = entry.querySelector('textarea').value;
+        if (text.length > 20) entries.push({ title, text });
+      });
+      return { copywriter, entries };
+    }
+
+    function updateKBStats() {
+      const data = getKBData();
+      const totalChars = data.entries.reduce((a, e) => a + e.text.length, 0);
+      document.getElementById('statChars').textContent = totalChars;
+      document.getElementById('statModules').textContent = data.entries.length;
+      document.getElementById('kbDot').classList.toggle('on', data.entries.length > 0);
+    }
+
+    function saveKB() {
+      const data = getKBData();
+      localStorage.setItem('kb_data', JSON.stringify(data));
+      const btn = document.getElementById('kbSaveBtn');
+      btn.classList.add('saved');
+      setTimeout(() => btn.classList.remove('saved'), 2000);
+      updateKBBanner();
+    }
+
+    function loadKBFromStorage() {
+      const raw = localStorage.getItem('kb_data');
+      if (raw) {
+        const data = JSON.parse(raw);
+        document.getElementById('copywriterName').value = data.copywriter || '';
+        data.entries.forEach(e => addKBEntry(e.title, e.text));
+      } else {
+        addKBEntry();
+      }
+      updateKBStats();
+    }
+
+    function updateKBBanner() {
+      const raw = localStorage.getItem('kb_data');
+      const banner = document.getElementById('kbBanner');
+      banner.style.display = raw ? 'flex' : 'none';
+    }
+
+    function addLink() {
+      linkCount++;
+      const list = document.getElementById('linksList');
+      const div = document.createElement('div');
+      div.className = 'link-row';
+      div.id = `lr-${linkCount}`;
+      div.innerHTML = `<span class="link-num">#${linkCount}</span><input type="text" id="lnk-${linkCount}" placeholder="Link TikTok..." />`;
+      list.appendChild(div);
+    }
+
+    function setPip(id, state) {
+      const el = document.getElementById(id);
+      if (el) el.className = `pip-step ${state}`;
+    }
+
+    async function run() {
+      const supaKey = localStorage.getItem('supa_key');
+      const anthKey = localStorage.getItem('anth_key');
+      const myNiche = document.getElementById('myNiche').value;
+      if (!supaKey || !anthKey || !myNiche) { alert('Preencha as chaves e o nicho!'); return; }
+
+      const links = Array.from(document.querySelectorAll('[id^="lnk-"]')).map(i => i.value).filter(v => v);
+      if (links.length === 0) { alert('Adicione links!'); return; }
+
+      goPage('generate');
+      document.getElementById('page-generate').classList.remove('active');
+      document.getElementById('pipeline').classList.add('show');
+
+      setPip('pip1', 'active'); await sleep(500); setPip('pip1', 'done');
+      setPip('pip2', 'active');
+      
+      fetchedTranscripts = [];
+      for (let lnk of links) {
+        try {
+          const res = await fetch(`https://api.supadata.ai/v1/transcript?url=${encodeURIComponent(lnk)}&text=true`, { headers: { 'x-api-key': supaKey } });
+          const data = await res.json();
+          fetchedTranscripts.push({ link: lnk, transcript: data.content || 'Sem conteúdo' });
+        } catch (e) { fetchedTranscripts.push({ link: lnk, transcript: 'Erro na transcrição' }); }
+      }
+      setPip('pip2', 'done');
+
+      const kbData = JSON.parse(localStorage.getItem('kb_data') || '{"entries":[]}');
+      setPip('pip3', kbData.entries.length > 0 ? 'done' : 'skip');
+
+      setPip('pip4', 'active');
+      const prompt = `Gere scripts para o nicho ${myNiche}. Baseado nestes vídeos: ${JSON.stringify(fetchedTranscripts)}. Use o tom ${document.getElementById('tone').value}.`;
+      
+      try {
+        const payload = {
+          model: 'claude-3-5-sonnet-20240620',
+          max_tokens: 4000,
+          messages: [{ role: 'user', content: prompt + " Responda APENAS em JSON seguindo a estrutura de scripts virais." }]
+        };
+        const anthKey = localStorage.getItem('anth_key') || document.getElementById('anthropicKey').value.trim();
+        const res = await fetch('/anthropic-proxy.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Anthropic-Key': anthKey
+          },
+          body: JSON.stringify(anthropicPayload)
+        });
+        const raw = await res.json();
+        const result = JSON.parse(raw.content[0].text.replace(/```json|```/g, '').trim());
+
+        setPip('pip4', 'done');
+        setPip('pip5', 'done');
+        await sleep(700);
+        document.getElementById('pipeline').classList.remove('show');
+        renderResults(result, fetchedTranscripts, myNiche);
+      } catch (e) {
+        alert('Erro na geração: ' + e.message);
+        document.getElementById('pipeline').classList.remove('show');
+        goPage('generate');
+      }
+    }
+
+    function renderResults(data, transcripts, niche) {
+      document.getElementById('resMeta').textContent = `${niche} · ${data.scripts?.length || 0} variações`;
+      const tabs = ['scripts', 'hooks', 'why', 'structure', 'transcripts'];
+      document.getElementById('tabsRow').innerHTML = tabs.map(t => `<button class="tab" onclick="switchTab('${t}')">${t.toUpperCase()}</button>`).join('');
+      
+      document.getElementById('tc-scripts').innerHTML = (data.scripts || []).map((s, i) => `
+        <div class="script-card">
+          <div class="rblock-label">VARIAÇÃO ${i+1}</div>
+          <div class="sbox"><div class="sbox-text"><strong>HOOK:</strong> ${s.hook}</div><button class="copy-btn" onclick="cp('${s.hook}', this)">Copiar</button></div>
+          <div class="sbox"><div class="sbox-text">${s.full_script || s.script}</div><button class="copy-btn" onclick="cp('${s.full_script || s.script}', this)">Copiar</button></div>
+        </div>
+      `).join('');
+      
+      document.getElementById('tc-transcripts').innerHTML = transcripts.map(t => `<div class="rblock"><div class="rblock-text">${t.transcript}</div></div>`).join('');
+      document.getElementById('resultsPage').classList.add('show');
+      switchTab('scripts');
+    }
+
+    function switchTab(name) {
+      document.querySelectorAll('.tc').forEach(c => c.classList.remove('on'));
+      document.getElementById('tc-' + name).classList.add('on');
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.textContent.toLowerCase() === name));
+    }
+
+    function resetToGenerate() { goPage('generate'); }
+    function cp(txt, btn) { navigator.clipboard.writeText(txt); btn.textContent = '✓'; setTimeout(() => btn.textContent = 'Copiar', 2000); }
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    init();
+  </script>
+</body>
+</html>

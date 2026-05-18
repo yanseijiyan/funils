@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Support — SantéAujourd'hui</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #d0021b;
+    --dark: #111111;
+    --mid: #444444;
+    --light: #888888;
+    --border: #e0e0e0;
+    --white: #ffffff;
+    --bg: #f7f7f5;
+    --font-serif: 'Merriweather', Georgia, serif;
+    --font-sans: 'Source Sans 3', Helvetica, sans-serif;
+  }
+  html, body {
+    background: var(--bg);
+    color: var(--dark);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--white);
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,.08);
+  }
+  .topbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-logo {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--dark);
+    margin-bottom: 7px;
+  }
+  .topbar-menu { display: flex; gap: 10px; align-items: center; }
+  .topbar-menu span {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--mid);
+    cursor: pointer;
+  }
+  .topbar-menu .btn-sub {
+    background: var(--red);
+    color: #fff;
+    padding: 5px 13px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: auto;
+  }
+  .content { padding: 28px 18px 40px; }
+  .page-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .page-subtitle {
+    font-size: 13px;
+    color: var(--light);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  .info-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .info-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+  }
+  .info-card-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .info-card-text strong { display: block; font-size: 13px; color: var(--dark); margin-bottom: 2px; }
+  .info-card-text span { font-size: 12px; color: var(--light); }
+  .info-card-text a { font-size: 12px; color: var(--red); text-decoration: none; font-weight: 600; }
+
+  .section-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 24px 0 20px;
+  }
+  .section-divider hr { flex: 1; border: none; border-top: 1px solid var(--border); }
+  .section-divider span {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--light); white-space: nowrap;
+  }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .05em;
+    color: var(--mid); margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 11px 13px;
+    border: 1.5px solid var(--border); border-radius: 6px;
+    font-family: var(--font-sans); font-size: 14px; color: var(--dark);
+    background: var(--white); outline: none;
+    transition: border-color .15s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--red); }
+  .form-group textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+
+  .submit-btn {
+    width: 100%; padding: 14px;
+    background: var(--red); color: #fff;
+    font-family: var(--font-sans); font-size: 14px; font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase;
+    border: none; border-radius: 6px; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(208,2,27,.25);
+    transition: opacity .15s; margin-top: 6px;
+  }
+  .submit-btn:active { opacity: .85; }
+
+  .success-msg {
+    display: none;
+    background: #edfaf3;
+    border: 1.5px solid #2ecc71;
+    border-radius: 8px;
+    padding: 18px 16px;
+    text-align: center;
+    margin-top: 16px;
+  }
+  .success-msg .check { font-size: 28px; margin-bottom: 8px; display: block; }
+  .success-msg strong { display: block; font-size: 15px; color: var(--dark); margin-bottom: 4px; }
+  .success-msg span { font-size: 13px; color: var(--mid); }
+
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0; font-size: 14px; font-weight: 600;
+    color: var(--dark); cursor: pointer; gap: 10px;
+  }
+  .faq-q .arrow { flex-shrink: 0; font-size: 11px; color: var(--light); transition: transform .2s; }
+  .faq-a { display: none; font-size: 13.5px; line-height: 1.65; color: var(--mid); padding-bottom: 14px; }
+  .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+  .faq-item.open .faq-a { display: block; }
+
+  .footer {
+    padding: 14px 16px 32px;
+    border-top: 1px solid var(--border);
+    font-size: 10.5px; color: #bbb;
+    text-align: center; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="topbar">
+    <div class="topbar-logo">SantéAujourd'hui</div>
+    <div class="topbar-menu">
+      <span>Accueil</span>
+      <span>Articles</span>
+      <span class="btn-sub">S'abonner</span>
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <h1 class="page-title">Support client</h1>
+    <p class="page-subtitle">Notre équipe vous répond dans les <strong>48 heures</strong> ouvrables. Décrivez votre demande ci-dessous ou écrivez-nous directement.</p>
+
+    <!-- INFO CARDS -->
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card-icon">⏱️</div>
+        <div class="info-card-text">
+          <strong>Délai de réponse</strong>
+          <span>Sous 48h ouvrables</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📅</div>
+        <div class="info-card-text">
+          <strong>Disponibilité</strong>
+          <span>Lundi – Vendredi, 9h – 18h</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">✉️</div>
+        <div class="info-card-text">
+          <strong>E-mail direct</strong>
+          <a href="mailto:contact@santeaujourdhui.com">contact@santeaujourdhui.com</a>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🏢</div>
+        <div class="info-card-text">
+          <strong>MONTSCALE LLC</strong>
+          <span>Orlando, Florida, États-Unis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="section-divider">
+      <hr><span>Envoyer un message</span><hr>
+    </div>
+
+    <form id="support-form" onsubmit="handleSubmit(event)" novalidate>
+      <div class="form-group">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" placeholder="Ex : Marie Dupont" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" placeholder="exemple@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="subject">Sujet</label>
+        <select id="subject" required>
+          <option value="" disabled selected>Choisissez un sujet…</option>
+          <option value="remboursement">Demande de remboursement (7 jours)</option>
+          <option value="commande">Problème de commande</option>
+          <option value="acces">Problème d'accès au contenu</option>
+          <option value="technique">Problème technique</option>
+          <option value="rgpd">Données personnelles / RGPD</option>
+          <option value="autre">Autre question</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Décrivez votre problème ou votre question en détail…" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Envoyer ma demande →</button>
+    </form>
+
+    <div class="success-msg" id="success-msg">
+      <span class="check">✅</span>
+      <strong>Message envoyé !</strong>
+      <span>Nous vous répondrons dans les 48h ouvrables à l'adresse indiquée.</span>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-divider" style="margin-top:36px">
+      <hr><span>Questions fréquentes</span><hr>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Comment obtenir un remboursement ?
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a">Vous pouvez demander un remboursement dans les <strong>7 jours</strong> suivant votre achat. Envoyez-nous un message via ce formulaire ou par e-mail à <strong>contact@santeaujourdhui.com</strong> en indiquant votre numéro de commande. Nous traitons votre demande sous 5 à 10 jours ouvrables.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Je n'ai pas reçu mon email de confirmation.
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a">Vérifiez d'abord votre dossier spam. Si l'email n'y est pas, contactez-nous à <strong>contact@santeaujourdhui.com</strong> en indiquant l'adresse e-mail utilisée lors de l'achat et nous vous renverrons la confirmation.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Comment annuler mon abonnement ?
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a">Pour annuler votre abonnement, envoyez-nous un message en choisissant "Problème de commande" dans le formulaire, ou écrivez directement à <strong>contact@santeaujourdhui.com</strong>. Notre équipe traitera votre demande dans les 48h.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Comment exercer mes droits sur mes données ?
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a">Pour toute demande concernant vos données personnelles (accès, rectification, suppression), sélectionnez "Données personnelles / RGPD" dans le formulaire ou écrivez à <strong>contact@santeaujourdhui.com</strong>. Nous répondons sous 48h ouvrables.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Le site ne fonctionne pas sur mon téléphone.
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a">Essayez de vider le cache de votre navigateur et de recharger la page. Si le problème persiste, contactez-nous en sélectionnant "Problème technique" et en indiquant votre modèle de téléphone et navigateur utilisé.</div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © 2026 SantéAujourd'hui — MONTSCALE LLC. Tous droits réservés.<br>
+    Ce contenu est purement informatif et ne remplace pas un avis médical.
+  </div>
+
+</div>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value.trim();
+    if (!name || !email || !subject || !message) {
+      alert('Veuillez remplir tous les champs.');
+      return;
+    }
+    document.getElementById('support-form').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+
+  function toggleFaq(el) {
+    el.parentElement.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Cargando el Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .loading-container {
+            text-align: center;
+            width: 82%;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .loading-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 0.2px;
+        }
+
+        .progress-wrapper {
+            width: 100%;
+            background: #f2e8d4;
+            border-radius: 50px;
+            height: 42px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12), inset 0 1px 3px rgba(0,0,0,0.08);
+            border: 1.5px solid #dfd4bc;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 50px;
+            background-color: #111111;
+            background-image:
+                radial-gradient(circle at 8% 30%, rgba(255,255,255,0.12) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 20% 75%, rgba(255,255,255,0.08) 1px, transparent 1px),
+                radial-gradient(circle at 33% 20%, rgba(255,255,255,0.10) 1px, transparent 1px),
+                radial-gradient(circle at 47% 65%, rgba(255,255,255,0.07) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 60% 35%, rgba(255,255,255,0.09) 1px, transparent 1px),
+                radial-gradient(circle at 72% 80%, rgba(255,255,255,0.06) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 85% 45%, rgba(255,255,255,0.08) 1px, transparent 1px),
+                radial-gradient(circle at 92% 20%, rgba(255,255,255,0.10) 1px, transparent 1px);
+            transition: width 80ms linear;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: 20px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.04));
+            border-radius: 0 50px 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <p class="loading-text">Cargando el Test</p>
+        <div class="progress-wrapper">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <script>
+        const fill = document.getElementById('progressFill');
+        let progress = 0;
+        const totalDuration = 2800;
+        const intervalMs = 30;
+        const totalSteps = totalDuration / intervalMs;
+        let step = 0;
+
+        function easeInOut(t) {
+            return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        }
+
+        const timer = setInterval(() => {
+            step++;
+            const t = step / totalSteps;
+            progress = easeInOut(Math.min(t, 1)) * 100;
+
+            fill.style.width = progress + '%';
+
+            if (step >= totalSteps) {
+                clearInterval(timer);
+                setTimeout(() => {
+                    window.location.href = 'quiz.html';
+                }, 350);
+            }
+        }, intervalMs);
+    </script>
+</body>
+</html>

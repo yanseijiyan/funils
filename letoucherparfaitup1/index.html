@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🔴 LIVE</title>
+
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/de0e2730-2609-4c1f-afcb-33a0e3924a03/players/69a6596f260b750c46ab90a3/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload" href="https://cdn.converteai.net/de0e2730-2609-4c1f-afcb-33a0e3924a03/69a6595f6d8aeabb2b264443/main.m3u8" as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
+  <script src="js/digistore.js"></script>
+
+
+    <script
+      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+      data-utmify-prevent-subids
+      async
+      defer
+    ></script>
+    
+    <script>
+      window.tikTokPixelId = "69b9693c832eb7ad94159ce8";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+      document.head.appendChild(a);
+    </script>
+    
+    
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* Header & Progress Bar */
+.header-warning { padding: 15px 10px; font-weight: bold; }
+.text-red { color: #d32f2f; margin: 5px 0; font-size: 20px; }
+.progress-container {
+    width: 90%;
+    height: 14px;
+    background: #eee;
+    margin: 10px auto;
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid #ddd;
+}
+.progress-bar {
+    width: 82%;
+    height: 100%;
+    background: linear-gradient(to right, #2e7d32, #4caf50);
+    border-radius: 10px;
+}
+.progress-percentage { font-size: 10px; position: absolute; right: -30px; top: 0; }
+
+/* Video Section */
+.video-instruction { font-weight: bold; font-size: 13px; margin: 10px 0; }
+.video-box {
+    width: 95%;
+    max-width: 500px;
+    aspect-ratio: 16/9;
+    background: #000 url('sua-thumbnail-do-video.jpg') center/cover;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 4px;
+}
+.play-button-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,0,0,0.8);
+    border-radius: 50%;
+    margin-bottom: 10px;
+    position: relative;
+}
+.play-button-icon::after {
+    content: '';
+    position: absolute;
+    left: 20px; top: 15px;
+    border-style: solid;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent white;
+}
+
+/* AVISO EM VERMELHO - O QUE PEDISTE */
+.red-alert-strip {
+    background-color: #ff0000;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 12px 5px;
+    margin: 20px 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+/* Offer Box (Estilo exato da foto) */
+.offer-container {
+    width: 92%;
+    margin: 20px auto;
+    padding: 30px 15px 20px 15px;
+    border: 2px solid #ffccbc;
+    border-radius: 12px;
+    background-color: #fffbf9;
+    position: relative;
+}
+.discount-badge {
+    position: absolute;
+    top: -12px;
+    right: 10px;
+    background-color: #ff5252;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.highlight-orange { color: #e65100; font-weight: bold; }
+.check-list { list-style: none; padding: 0; text-align: left; font-size: 14px; }
+.check-list li { margin-bottom: 10px; }
+
+.current-price-box {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    display: inline-block;
+    padding: 10px 25px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+.old-price { text-decoration: line-through; color: #888; margin-bottom: 0; }
+
+/* Conversion Note */
+.conversion-note { margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
+.small-text { font-size: 11px; color: #666; padding: 0 10px; }
+.bold { font-weight: bold; }
+
+/* Checkout CTA */
+.main-cta-link {
+    display: block; /* Faz o link ocupar a largura toda como um botão */
+    background-color: #449d44;
+    color: white;
+    text-decoration: none; /* Remove o sublinhado de link */
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: 0 4px 0 #2d6a2d;
+    text-align: center;
+}
+
+.main-cta-link:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #2d6a2d;
+}
+.terms-label { font-size: 10px; color: #888; display: block; padding: 0 20px; }
+.decline-link { display: block; margin: 15px 0; font-size: 12px; color: #333; text-decoration: underline; }
+
+/* Timer */
+.timer-box { background: #f4f4f4; padding: 20px; margin-top: 30px; }
+.timer-display {
+    background: #000;
+    color: #ffcc00;
+    font-size: 35px;
+    font-family: monospace;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Footer */
+.site-footer { padding: 40px 20px; background: #fff; font-size: 11px; color: #999; }
+.google-logo { width: 80px; margin-bottom: 10px; }
+.footer-links a { color: red; text-decoration: none; }
+        
+    </style>
+</head>
+<body>
+        <header class="header-warning">
+        <h1 class="text-red">ATTENTION</h1>
+        <p>VOTRE ACHAT N'EST PAS ENCORE TERMINÉ</p>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+            <span class="progress-percentage">99%</span>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="video-area">
+            <vturb-smartplayer id="vid-69b815e4005f4e6dadb280e3" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/de0e2730-2609-4c1f-afcb-33a0e3924a03/players/69b815e4005f4e6dadb280e3/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+        </section>
+
+        <div class="red-alert-strip">
+            QUAND VOUS QUITTEZ CETTE PAGE, CETTE OPPORTUNITÉ SERA PERDUE À JAMAIS
+        </div>
+
+        <section class="offer-container">
+            <div class="discount-badge">🔥 69% OFF</div>
+            
+            <h3>Avec ce combo exclusif, tu vas débloquer <span class="highlight-orange">deux secrets</span> que très peu d'hommes connaissent...</h3>
+            
+            <ul class="check-list">
+                <li>✅ Des techniques <span class="highlight-orange">naturelles et puissantes</span> pour agrandir ton sexe...</li>
+                <li>✅ ...et <span class="highlight-orange">tenir plus longtemps au lit</span> sans perdre le contrôle.</li>
+            </ul>
+
+            <div class="price-section">
+                <p class="old-price">Prix normal : 62 euros</p>
+                <div class="current-price-box">
+                    👉 Aujourd'hui : 19 €
+                </div>
+            </div>
+
+            <div class="conversion-note">
+                <p class="text-red bold">NE T'INQUIÉTE PAS !</p>
+                <p class="small-text">Le montant de 30 € sera automatiquement converti dans la devise de votre pays lorsque vous cliquerez sur le bouton ci-dessous !</p>
+            </div>
+        </section>
+
+        <section class="checkout-area">
+            <h4>COMBO:Comment durer plus longtemps au lit+Guide des exercices secrets</h4>
+            <p class="final-price"><strong>20,05 €</strong></p>
+            <p class="tva-info"><strong>TVA inclus (1,05 €)</strong></p>
+
+            <!-- HOTMART - Sales Funnel Widget -->
+            <!--- sales funnel container --->
+            <div id="hotmart-sales-funnel"></div>
+            
+            <!--- script load and setup --->
+            <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+            <script>
+            checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+            </script>
+            <!-- HOTMART - Sales Funnel Widget -->
+            
+        </section>
+
+        <section class="timer-box">
+            <p>⌛ Temps restant de l'offre:</p>
+            <div id="countdown" class="timer-display">14:35</div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Secure" class="google-logo">
+        <hr>
+        <p>Copyright 2026 - Tous droits réservés</p>
+        <div class="footer-links">
+            <a href="#">Conditions d'utilisation</a> | <a href="#">Politique de confidentialité</a>
+        </div>
+        <p class="disclaimer">Important: Cette page n'a aucun lien avec Facebook S/A...</p>
+    </footer>
+    
+    <script>
+        // Função para o Cronómetro (Timer)
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+        
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+        
+                display.textContent = minutes + ":" + seconds;
+        
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "00:00";
+                }
+            }, 1000);
+        }
+        
+        window.onload = function () {
+            // 14 minutos e 35 segundos (igual à imagem)
+            let startTime = (14 * 60) + 35;
+            let display = document.querySelector('#countdown');
+            startTimer(startTime, display);
+        };
+        
+        // Função de clique no botão
+        function redirectToCheckout() {
+            // Insira aqui o seu link de vendas (Hotmart/Stripe/etc)
+            window.location.href = "https://pay.hotmart.com/YOUR_ID";
+        }
+    </script>
+  
+</body>
+</html>

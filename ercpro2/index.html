@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🔴 LIVE</title>
+
+  <script async src="js/fbevents.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/de0e2730-2609-4c1f-afcb-33a0e3924a03/players/69a6596f260b750c46ab90a3/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload" href="https://cdn.converteai.net/de0e2730-2609-4c1f-afcb-33a0e3924a03/69a6595f6d8aeabb2b264443/main.m3u8" as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
+  <script src="js/digistore.js"></script>
+  <script>
+    digistorePromocode({ product_id: 638004, adjust_domain: true });
+  </script>
+
+  <script
+      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+      data-utmify-prevent-xcod-sck
+      data-utmify-prevent-subids
+      async
+      defer
+    ></script>
+    <script>
+      window.tikTokPixelId = "69a67d7a8b393ddaed574f8f";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+      document.head.appendChild(a);
+    </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: #000 !important;
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .hide { display: none; }
+
+    .video-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 20px 12px 0;
+    }
+
+    .urgency-banner {
+      background: linear-gradient(135deg, #c8102e 0%, #e31b23 50%, #c8102e 100%);
+      padding: 18px 16px 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .urgency-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.04) 10px,
+        rgba(255,255,255,0.04) 20px
+      );
+    }
+
+    .urgency-banner-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFE234;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .timer-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timer-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timer-digit {
+      background: #1a1a1a;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      width: 62px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform 0.12s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timer-digit::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .timer-digit.flash {
+      transform: scale(1.08);
+      color: #FFE234;
+    }
+
+    .timer-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.08em;
+      margin-top: 5px;
+    }
+
+    .timer-colon {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 18px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .urgency-sub {
+      position: relative;
+      z-index: 1;
+      margin-top: 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .urgency-sub::before, .urgency-sub::after {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .live-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+      animation: pulse-dot 1.5s ease-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0% { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+      100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+    }
+
+    .stock-bar-wrap {
+      background: #111;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 0 0 14px 14px;
+    }
+
+    .stock-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .stock-bar-label span:first-child { color: #aaa; }
+    .stock-bar-label span:last-child { color: #e31b23; }
+
+    .stock-bar-track {
+      background: #222;
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .stock-bar-fill {
+      height: 100%;
+      width: 73%;
+      background: linear-gradient(90deg, #e31b23, #ff4d55);
+      border-radius: 4px;
+    }
+    .stock-counter{
+      background:#111;
+      padding:14px 18px;
+      max-width:400px;
+      margin:0 auto;
+      border-radius:0 0 14px 14px;
+      text-align:center;
+    }
+    
+    .stock-title{
+      font-family:'Barlow Condensed',sans-serif;
+      font-weight:900;
+      font-size:1.1rem;
+      letter-spacing:.04em;
+      color:#ff3b3b;
+    }
+    
+    .stock-title span{
+      color:#fff;
+      font-size:1.3rem;
+    }
+
+.stock-sub{
+  margin-top:6px;
+  font-size:.8rem;
+  font-weight:700;
+  color:#aaa;
+}
+
+    .pricing-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 15px;
+      padding: 20px 10px 30px;
+      flex-wrap: wrap;
+    }
+
+    .pricing-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      width: 310px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .pricing-card.highlight {
+      border: 2px solid #e31b23;
+      box-shadow: 0 10px 30px rgba(227, 27, 35, 0.2);
+    }
+
+    .card-header {
+      background-color: #1a1a1a;
+      color: white;
+      padding: 15px 10px;
+      border-radius: 20px 20px 0 0;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .pricing-card.has-tag .card-header { padding-top: 65px; }
+
+    .best-value-tag {
+      background-color: #e31b23;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+
+    .header-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .header-subtitle {
+      font-size: 0.9rem;
+      margin-top: 2px;
+      font-weight: 400;
+      color: #ccc;
+    }
+
+    .product-area {
+      position: relative;
+      padding: 15px 0 5px;
+      flex-grow: 1;
+    }
+
+    .product-image {
+      height: 140px;
+      width: auto;
+      max-width: 90%;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .guarantee-seal {
+      position: absolute;
+      top: 0px;
+      right: 20px;
+      width: 65px;
+      height: 65px;
+      z-index: 10;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2px;
+      color: #1a1a1a;
+    }
+
+    .currency {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .big-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .per-bottle {
+      text-align: left;
+      font-size: 0.75rem;
+      margin-left: 5px;
+      font-weight: 700;
+      color: #555;
+      line-height: 1.2;
+    }
+
+    .save-pill {
+      background-color: #e31b23;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 6px 15px;
+      border-radius: 50px;
+      display: inline-block;
+      margin: 6px 0;
+      letter-spacing: 0.03em;
+    }
+
+    .guarantee-text {
+      font-size: 0.75rem;
+      color: #666;
+      margin: 10px 0 5px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .btn-wrapper { margin: 8px 20px; }
+
+    .btn-buy {
+      display: block;
+      width: 100%;
+      padding: 14px 0;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .btn-yellow {
+      background: linear-gradient(to bottom, #ffde00, #e6bc00);
+      color: #000;
+    }
+
+    .btn-orange {
+      background: linear-gradient(to bottom, #e31b23, #b7151b);
+      color: #fff;
+    }
+
+    .btn-title {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-subtitle {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .payment-row {
+      display: flex;
+      justify-content: center;
+      margin: 4px auto;
+      align-items: center;
+    }
+
+    .payment-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin-top: 10px;
+      margin-left: 30px;
+      flex-grow: 1;
+    }
+
+    .payment-icons img {
+      height: 22px;
+      width: 52px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .total-area { margin-bottom: 4px; }
+
+    .strike-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-right: 5px;
+    }
+
+    .final-total {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem;
+      color: #1a1a1a;
+      font-weight: 900;
+    }
+
+    .shipping-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .ship-red, .ship-green { color: #e31b23; }
+    .purchase-popup{
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      background: rgba(17,17,17,0.96);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+      font-size: 0.88rem;
+      font-weight: 600;
+      max-width: 320px;
+      line-height: 1.35;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      border-left: 4px solid #e31b23;
+    }
+    
+    .purchase-popup.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .purchase-popup strong{
+      color: #FFE234;
+    }
+
+    @media (max-width: 950px) {
+      .pricing-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+      .pricing-card {
+        width: 100%;
+        max-width: 360px;
+      }
+      .timer-digit {
+        width: 58px;
+        height: 58px;
+        font-size: 2.1rem;
+      }
+      .purchase-popup{
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        max-width: none;
+        font-size: 0.82rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="flex w-full flex-col gap-8">
+
+    <!-- VIDEO -->
+    <section class="flex flex-col gap-4">
+      <div class="video-wrap">
+        <vturb-smartplayer id="vid-69a6596f260b750c46ab90a3" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/de0e2730-2609-4c1f-afcb-33a0e3924a03/players/69a6596f260b750c46ab90a3/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+
+      <!-- DELAY CODE VTURB -->
+      <script>
+        var PITCH_SECONDS = 2190; // EXEMPLO: 22:47 = 2190
+        var player = document.querySelector("vturb-smartplayer");
+
+        player.addEventListener("player:ready", function() {
+          player.displayHiddenElements(PITCH_SECONDS, [".hide"], {
+            persist: true
+          });
+        });
+      </script>
+    </section>
+
+    <!-- BLOCO ESCONDIDO ATÉ O PITCH -->
+    <section id="offer-block" class="hide">
+      <div class="urgency-banner">
+        <p class="urgency-banner-text">
+          🔥 Sichern Sie sich jetzt Ihr ErecPro mit Rabatt –<br>nur solange der Vorrat reicht!
+        </p>
+
+        <div class="timer-wrap">
+          <div class="timer-block">
+            <div class="timer-digit" id="t-h">00</div>
+            <div class="timer-label">Std.</div>
+          </div>
+
+          <div class="timer-colon">:</div>
+
+          <div class="timer-block">
+            <div class="timer-digit" id="t-m">30</div>
+            <div class="timer-label">Min.</div>
+          </div>
+
+          <div class="timer-colon">:</div>
+
+          <div class="timer-block">
+            <div class="timer-digit" id="t-s">00</div>
+            <div class="timer-label">Sek.</div>
+          </div>
+        </div>
+
+        <div class="urgency-sub">
+          <span class="live-dot"></span>
+          Angebot läuft ab
+        </div>
+      </div>
+
+      <div class="stock-counter">
+
+          <div class="stock-title">
+            ⚠ NUR NOCH <span id="stock-number">37</span> FLASCHEN VERFÜGBAR
+          </div>
+        
+          <div class="stock-sub">
+            🔥 HEUTE BEREITS <span id="orders-today">113</span> BESTELLT
+          </div>
+        
+      </div>
+
+      <div class="pricing-wrapper">
+        <div class="pricing-card highlight six has-tag">
+          <div class="card-header">
+            <div class="best-value-tag">BESTES ANGEBOT!</div>
+            <h3 class="header-title">6 FLASCHEN</h3>
+            <span class="header-subtitle" style="color:#fff;">Vorrat für 360 Tage</span>
+          </div>
+
+          <div class="product-area">
+            <img src="images/garantia.webp" class="guarantee-seal" alt="Garantie">
+            <img src="images/erecpro6.webp" class="product-image" style="height:150px;" alt="6 Flaschen">
+          </div>
+
+          <div class="price-row">
+            <span class="currency">€</span><span class="big-price">49</span>
+            <div class="per-bottle">pro<br>Flasche</div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <span class="save-pill">SIE SPAREN 588€</span>
+          </div>
+
+          <div class="guarantee-text">30 Tage Geld-zurück-Garantie</div>
+
+          <div class="btn-wrapper">
+            <a href="https://www.checkout-ds24.com/product/638002/?aff=yanseijiyan" class="btn-buy btn-orange" onclick="ttq.track('InitiateCheckout');">
+              <span class="btn-title">JETZT BESTELLEN!</span>
+              <span class="btn-subtitle">MAXIMALER RABATT!</span>
+            </a>
+          </div>
+
+          <div class="footer-area" style="padding-bottom:14px;">
+            <div class="payment-row"><img src="images/credit-cards.png" alt="Cards"></div>
+            <div class="payment-icons">
+              <img src="images/apple-pay.png" alt="Apple Pay">
+              <img src="images/go-pay.png" alt="Google Pay">
+              <img src="images/klarna.svg" alt="Klarna">
+            </div>
+            <div class="total-area">
+              <span class="strike-price">882€</span><span class="final-total">294€</span>
+            </div>
+            <span class="shipping-text ship-green">+ KOSTENLOSER VERSAND</span>
+          </div>
+        </div>
+
+        <div class="pricing-card popular has-tag">
+          <div class="card-header">
+            <div class="best-value-tag">BELIEBTESTES ANGEBOT</div>
+            <h3 class="header-title">3 FLASCHEN</h3>
+            <span class="header-subtitle">Vorrat für 180 Tage</span>
+          </div>
+
+          <div class="product-area">
+            <img src="images/garantia.webp" class="guarantee-seal" alt="Garantie">
+            <img src="images/erecpro3.webp" class="product-image" alt="3 Flaschen">
+          </div>
+
+          <div class="price-row">
+            <span class="currency">€</span><span class="big-price">69</span>
+            <div class="per-bottle">pro<br>Flasche</div>
+          </div>
+
+          <div><span class="save-pill">SIE SPAREN 234€</span></div>
+          <div class="guarantee-text">30 Tage Geld-zurück-Garantie</div>
+
+          <div class="btn-wrapper">
+            <a href="https://www.checkout-ds24.com/product/638001/?aff=yanseijiyan" class="btn-buy btn-yellow" onclick="ttq.track('InitiateCheckout');">
+              <span class="btn-title">JETZT BESTELLEN!</span>
+              <span class="btn-subtitle">MAXIMALER RABATT!</span>
+            </a>
+          </div>
+
+          <div class="footer-area" style="padding-bottom:14px;">
+            <div class="payment-row"><img src="images/credit-cards.png" alt="Cards"></div>
+            <div class="payment-icons">
+              <img src="images/apple-pay.png" alt="Apple Pay">
+              <img src="images/go-pay.png" alt="Google Pay">
+              <img src="images/klarna.svg" alt="Klarna">
+            </div>
+            <div class="total-area">
+              <span class="strike-price">441€</span><span class="final-total">207€</span>
+            </div>
+            <span class="shipping-text ship-green">+ KOSTENLOSER VERSAND</span>
+          </div>
+        </div>
+
+        <div class="pricing-card basic has-tag">
+          <div class="card-header">
+            <div class="best-value-tag">STANDARD-ANGEBOT</div>
+            <h3 class="header-title">2 FLASCHEN</h3>
+            <span class="header-subtitle">Vorrat für 120 Tage</span>
+          </div>
+
+          <div class="product-area">
+            <img src="images/garantia.webp" class="guarantee-seal" alt="Garantie">
+            <img src="images/erecpro2.webp" class="product-image" alt="2 Flaschen">
+          </div>
+
+          <div class="price-row">
+            <span class="currency">€</span><span class="big-price">89</span>
+            <div class="per-bottle">pro<br>Flasche</div>
+          </div>
+
+          <div><span class="save-pill">SIE SPAREN 116€</span></div>
+          <div class="guarantee-text">30 Tage Geld-zurück-Garantie</div>
+
+          <div class="btn-wrapper">
+            <a href="https://www.checkout-ds24.com/product/638004/?aff=yanseijiyan" class="btn-buy btn-yellow" onclick="ttq.track('InitiateCheckout');">
+              <span class="btn-title">JETZT BESTELLEN!</span>
+              <span class="btn-subtitle">MAXIMALER RABATT!</span>
+            </a>
+          </div>
+
+          <div class="footer-area" style="padding-bottom:14px;">
+            <div class="payment-row"><img src="images/credit-cards.png" alt="Cards"></div>
+            <div class="payment-icons">
+              <img src="images/apple-pay.png" alt="Apple Pay">
+              <img src="images/go-pay.png" alt="Google Pay">
+              <img src="images/klarna.svg" alt="Klarna">
+            </div>
+            <div class="total-area">
+              <span class="strike-price">294€</span><span class="final-total">178€</span>
+            </div>
+            <span class="shipping-text ship-red">+ VERSANDKOSTEN</span>
+          </div>
+        </div>
+      </div>
+      <div id="purchase-popup" class="purchase-popup">
+          <span id="purchase-popup-text"></span>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/track.js"></script>
+
+  <script>
+    (function() {
+      var OFFER_DURATION = 10 * 60; // 30 minutos
+      var countdownStarted = false;
+
+      function pad(n) {
+        return n < 10 ? '0' + n : '' + n;
+      }
+
+      function flash(el) {
+        el.classList.add('flash');
+        setTimeout(function() {
+          el.classList.remove('flash');
+        }, 200);
+      }
+
+      function startCountdown() {
+        if (countdownStarted) return;
+        countdownStarted = true;
+
+        var storageKey = 'erec_offer_timer_end';
+        var stored = localStorage.getItem(storageKey);
+        var endTime = stored ? parseInt(stored, 10) : (Date.now() + OFFER_DURATION * 1000);
+
+        if (!stored) {
+          localStorage.setItem(storageKey, endTime);
+        }
+
+        var elH = document.getElementById('t-h');
+        var elM = document.getElementById('t-m');
+        var elS = document.getElementById('t-s');
+
+        function tick() {
+          var remaining = Math.floor((endTime - Date.now()) / 1000);
+
+          if (remaining <= 0) {
+            endTime = Date.now() + OFFER_DURATION * 1000;
+            localStorage.setItem(storageKey, endTime);
+            remaining = OFFER_DURATION;
+          }
+
+          var h = Math.floor(remaining / 3600);
+          var m = Math.floor((remaining % 3600) / 60);
+          var s = remaining % 60;
+
+          var newH = pad(h);
+          var newM = pad(m);
+          var newS = pad(s);
+
+          if (elH.textContent !== newH) {
+            elH.textContent = newH;
+            flash(elH);
+          }
+          if (elM.textContent !== newM) {
+            elM.textContent = newM;
+            flash(elM);
+          }
+          if (elS.textContent !== newS) {
+            elS.textContent = newS;
+            flash(elS);
+          }
+        }
+
+        tick();
+        setInterval(tick, 1000);
+      }
+
+      function revealDetected() {
+        var offerBlock = document.getElementById('offer-block');
+        if (!offerBlock) return false;
+
+        return window.getComputedStyle(offerBlock).display !== 'none';
+      }
+
+      function onOfferShown() {
+        startCountdown();
+        window.scrollBy({
+          top: 600,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      var observer = new MutationObserver(function() {
+        if (revealDetected()) {
+          observer.disconnect();
+          onOfferShown();
+        }
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style']
+      });
+
+      if (revealDetected()) {
+        observer.disconnect();
+        onOfferShown();
+      }
+    })();
+  </script>
+
+    <script>
+      var stock = 37;
+      var orders = 113;
+    
+      var names = [
+          "Lukas Schneider",
+          "Leon Müller",
+          "Jonas Wagner",
+          "Paul Becker",
+          "Felix Hoffmann",
+          "Tim Fischer",
+          "Jan Weber",
+          "David Schäfer",
+          "Max Klein",
+          "Julian Braun",
+          "Tobias Richter",
+          "Nico Wolf",
+          "Daniel Neumann",
+          "Philipp Schwarz",
+          "Sebastian Zimmermann",
+          "Florian Krüger",
+          "Patrick Hartmann",
+          "Andreas Schmitt",
+          "Marc Keller",
+          "Dennis Bauer"
+        ];
+    
+      var cities = [
+          "Berlin",
+          "Hamburg",
+          "München",
+          "Köln",
+          "Frankfurt",
+          "Stuttgart",
+          "Düsseldorf",
+          "Leipzig",
+          "Dortmund",
+          "Essen",
+          "Bremen",
+          "Dresden",
+          "Hannover",
+          "Nürnberg",
+          "Bochum",
+          "Wuppertal",
+          "Bielefeld",
+          "Bonn",
+          "Mannheim",
+          "Karlsruhe"
+        ];
+    
+      function showPurchasePopup(name, city, pack) {
+        var popup = document.getElementById("purchase-popup");
+        var text = document.getElementById("purchase-popup-text");
+    
+        var bottleText = pack === 1 ? "Flasche" : "Flaschen";
+    
+        text.innerHTML = "<strong>" + name + "</strong> aus <strong>" + city + "</strong> hat gerade <strong>" + pack + " " + bottleText + "</strong> gekauft";
+    
+        popup.classList.add("show");
+    
+        clearTimeout(popup.hideTimer);
+        popup.hideTimer = setTimeout(function() {
+          popup.classList.remove("show");
+        }, 3500);
+      }
+    
+      function randomItem(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+    
+      function updateStock() {
+        var packs = [2, 3, 6];
+    
+        if (stock > 6) {
+          var dropChance = Math.random() < 0.5;
+    
+          if (dropChance) {
+            var possiblePacks = packs.filter(function(pack) {
+              return stock - pack >= 6;
+            });
+    
+            if (possiblePacks.length > 0) {
+              var selectedPack = possiblePacks[Math.floor(Math.random() * possiblePacks.length)];
+    
+              stock -= selectedPack;
+              orders += selectedPack;
+    
+              document.getElementById("stock-number").innerText = stock;
+              document.getElementById("orders-today").innerText = orders;
+    
+              var selectedName = randomItem(names);
+              var selectedCity = randomItem(cities);
+    
+              showPurchasePopup(selectedName, selectedCity, selectedPack);
+            }
+          }
+        }
+      }
+    
+      setInterval(updateStock, 10000);
+    </script>
+</body>
+</html>

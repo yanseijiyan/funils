@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Secret des Lesbiennes</title>
+    <script
+      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+      data-utmify-prevent-subids
+      async
+      defer
+    ></script>
+    
+    <script>
+      window.tikTokPixelId = "69b9693c832eb7ad94159ce8";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+      document.head.appendChild(a);
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0000;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* TOP RED BAR */
+  .top-bar {
+    background: linear-gradient(180deg, #8b0000 0%, #3d0000 100%);
+    height: 8px;
+  }
+  .bottom-bar {
+    background: linear-gradient(180deg, #3d0000 0%, #8b0000 100%);
+    height: 8px;
+  }
+
+  /* PROGRESS MODAL */
+  .progress-box {
+    background: #fff;
+    color: #333;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 18px 22px;
+    max-width: 380px;
+    margin: 30px auto 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .progress-box .warning-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #c00;
+    margin-bottom: 6px;
+  }
+  .progress-box p {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .progress-track {
+    background: #e0e0e0;
+    border-radius: 20px;
+    height: 12px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, #cc0000, #ff4444);
+    height: 100%;
+    border-radius: 20px;
+    width: 0%;
+    transition: width 0.05s linear;
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #888;
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+    text-align: center;
+  }
+
+  .headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #ff3333;
+    text-shadow: 0 0 20px rgba(255,0,0,0.3);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .body-text {
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  /* URGENCY BANNER */
+  .urgency-banner {
+    background: linear-gradient(90deg, #aa0000, #dd0000, #aa0000);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 10px 16px;
+    margin: 24px -20px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  /* DISCOUNT */
+  .discount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #00dd66;
+    text-shadow: 0 0 20px rgba(0,220,100,0.4);
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  /* PRODUCT IMAGE */
+  .product-img-wrap {
+    background: linear-gradient(135deg, #1a0000 0%, #2a0a0a 50%, #1a0000 100%);
+    border: 2px solid #550000;
+    border-radius: 12px;
+    padding: 30px 20px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-img-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(180,0,0,0.15) 0%, transparent 70%);
+  }
+  .top2-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #cc0000, #ff2222);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transform: rotate(5deg);
+    letter-spacing: 1px;
+  }
+  .product-placeholder {
+    width: 200px;
+    height: 260px;
+    margin: 0 auto 16px;
+    background: linear-gradient(145deg, #2a0505 0%, #1a0000 100%);
+    border: 2px solid #660000;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .product-placeholder .book-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .product-placeholder .book-title span {
+    display: block;
+    font-size: 22px;
+    color: #ff3333;
+    margin: 4px 0;
+  }
+  .product-placeholder .book-icon {
+    font-size: 40px;
+    opacity: 0.6;
+  }
+  .product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+ }
+  .product-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #ff9999;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* BENEFITS BOX */
+  .benefits-box {
+    background: linear-gradient(145deg, #140000 0%, #1e0505 100%);
+    border: 1px solid #440000;
+    border-radius: 16px;
+    padding: 28px 22px;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+  .benefits-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .benefit-check {
+    background: linear-gradient(135deg, #007744, #00aa55);
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .benefit-text {
+    font-size: 13px;
+    color: #ddd;
+    line-height: 1.5;
+  }
+
+  /* BOTTOM CTA BOX */
+  .cta-box {
+    background: linear-gradient(145deg, #111 0%, #1a1a1a 100%);
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 24px 20px;
+    margin-bottom: 32px;
+  }
+  .cta-text {
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+  .cta-discount {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    color: #00dd66;
+    font-size: 18px;
+  }
+  .cta-note {
+    font-size: 11px;
+    color: #888;
+    margin-top: 10px;
+  }
+
+  /* CTA BUTTON */
+  .btn-cta {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #cc0000 0%, #ff1111 50%, #cc0000 100%);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 8px;
+    padding: 18px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 4px 30px rgba(200,0,0,0.5);
+    transition: transform 0.15s, box-shadow 0.15s;
+    animation: btnPulse 2.5s ease-in-out infinite;
+    margin-bottom: 10px;
+  }
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(200,0,0,0.7);
+  }
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 4px 30px rgba(200,0,0,0.5); }
+    50% { box-shadow: 0 4px 50px rgba(200,0,0,0.8); }
+  }
+
+  .btn-no {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 6px;
+    background: none;
+    border: none;
+  }
+
+  /* PAYMENT ICONS */
+  .payment-icons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .pay-icon {
+    background: #fff;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: #444;
+  }
+
+  /* PRICE DISPLAY */
+  .price-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 16px 0 24px;
+  }
+  .price-old {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: #666;
+    text-decoration: line-through;
+  }
+  .price-new {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #ff3333;
+  }
+  .vat-note {
+  font-size: 11px;
+  color: #888;
+  margin-top: -10px;
+  margin-bottom: 20px;
+ }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<!-- PROGRESS BOX -->
+<div class="progress-box">
+  <div class="warning-title">⚠️ VOTRE COMMANDE EST PRESQUE TERMINÉE</div>
+  <p>Veuillez patienter pendant que nous traitons les informations.</p>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-info">
+    <span>Ne quittez pas cette page.</span>
+    <span id="progressPct">0%</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <h1 class="headline">Le Secret des Lesbiennes</h1>
+
+  <p class="subtitle">
+    Offre spéciale pour les nouveaux élèves seulement.<br>
+    Tu viens de rejoindre la formation… et j'ai décidé de te donner accès à un module secret.
+  </p>
+
+  <p class="body-text">
+    Beaucoup d'hommes se demandent : pourquoi certaines femmes disent avoir les expériences les plus intenses avec d'autres femmes ?
+  </p>
+  <p class="body-text">
+    Dans le programme vidéo "Le Secret des Lesbiennes", tu vas découvrir les techniques, les gestes et les détails que les femmes utilisent entre elles pour créer un plaisir profond et intense.
+  </p>
+
+  <div class="urgency-banner">
+    ⚠ SI VOUS QUITTEZ CETTE PAGE, CETTE OPPORTUNITÉ SERA PERDUE À JAMAIS.
+  </div>
+
+  <div class="discount">70 % DE RÉDUCTION !</div>
+
+  <!-- PRODUCT IMAGE PLACEHOLDER -->
+  <div class="product-img-wrap">
+    <div class="top2-badge">TOP 3</div>
+    <div class="product-placeholder">
+      <img src="images/UP3-Banner.png" alt="Produit" class="product-img">
+    </div>
+    <div class="product-label">Leçons Vidéo</div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="benefits-box">
+    <div class="benefits-title">Dans ce programme exclusif tu vas apprendre</div>
+
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-text">Les techniques que les femmes utilisent entre elles</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-text">Comment augmenter le plaisir féminin étape par étape</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-text">Les gestes et rythmes qui créent les sensations les plus fortes</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-text">Comment rendre les moments intimes beaucoup plus intenses</div>
+    </div>
+  </div>
+
+  <!-- CTA BOX -->
+  <div class="cta-box">
+    <p class="cta-text">Ne ferme pas cette page maintenant.</p>
+    <p class="cta-text">Tu as <span class="cta-discount">70% de réduction</span> exclusive</p>
+    <p class="cta-text">parce que tu es déjà mon élève.</p>
+    <p class="cta-note">La conversion sera automatiquement faite dans la devise de ton pays.</p>
+  </div>
+
+  <!-- PRICE -->
+  <div class="price-wrap">
+    <span class="price-old">27€</span>
+    <span class="price-new">7.90€</span>
+    <span class="vat-note">+ VAT</span>
+  </div>
+  
+
+  <!-- HOTMART - Sales Funnel Widget -->
+  <!--- sales funnel container --->
+  <div id="hotmart-sales-funnel"></div>
+
+  <!--- script load and setup --->
+  <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+  <script>
+  checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+  </script>
+  <!-- HOTMART - Sales Funnel Widget -->
+
+
+</div>
+
+<div class="bottom-bar"></div>
+<footer>© 2026 - Tous droits réservés</footer>
+
+<script>
+  // Progress bar animation
+  let pct = 0;
+  const fill = document.getElementById('progressFill');
+  const pctLabel = document.getElementById('progressPct');
+  const interval = setInterval(() => {
+    pct += Math.random() * 1 + 10;
+    if (pct >= 99) { pct = 99; clearInterval(interval); }
+    fill.style.width = pct + '%';
+    pctLabel.textContent = Math.floor(pct) + '%';
+  }, 60);
+
+  // Exit intent warning
+  document.addEventListener('mouseleave', (e) => {
+    if (e.clientY < 10) {
+      alert('⚠️ Attention ! Si vous quittez cette page, cette offre sera perdue à jamais !');
+    }
+  }, { once: true });
+</script>
+
+</body>
+</html>

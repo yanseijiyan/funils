@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Politiques — SantéAujourd'hui</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #d0021b;
+    --dark: #111111;
+    --mid: #444444;
+    --light: #888888;
+    --border: #e0e0e0;
+    --white: #ffffff;
+    --bg: #f7f7f5;
+    --font-serif: 'Merriweather', Georgia, serif;
+    --font-sans: 'Source Sans 3', Helvetica, sans-serif;
+  }
+  html, body {
+    background: var(--bg);
+    color: var(--dark);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--white);
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,.08);
+  }
+  .topbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-logo {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--dark);
+    margin-bottom: 7px;
+  }
+  .topbar-menu { display: flex; gap: 10px; align-items: center; }
+  .topbar-menu span {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--mid);
+    cursor: pointer;
+  }
+  .topbar-menu .btn-sub {
+    background: var(--red);
+    color: #fff;
+    padding: 5px 13px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: auto;
+  }
+  .content { padding: 28px 18px 40px; }
+  .page-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .page-subtitle { font-size: 12px; color: var(--light); margin-bottom: 28px; }
+  .tab-nav {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 28px;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 9px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--light);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+  }
+  .tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
+  .section { display: none; }
+  .section.active { display: block; }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+  .section p { font-size: 14px; line-height: 1.7; color: var(--mid); margin-bottom: 14px; }
+  .section h3 {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin: 20px 0 8px;
+  }
+  .section ul { padding-left: 18px; margin-bottom: 14px; }
+  .section ul li { font-size: 14px; line-height: 1.7; color: var(--mid); margin-bottom: 6px; }
+  .info-box {
+    background: #f0f4ff;
+    border-left: 3px solid #3b6ef5;
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+    color: var(--dark);
+    margin: 16px 0;
+    line-height: 1.6;
+  }
+  .last-updated {
+    font-size: 11px;
+    color: var(--light);
+    margin-top: 28px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .footer {
+    padding: 14px 16px 32px;
+    border-top: 1px solid var(--border);
+    font-size: 10.5px;
+    color: #bbb;
+    text-align: center;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="topbar">
+    <div class="topbar-logo">SantéAujourd'hui</div>
+    <div class="topbar-menu">
+      <span>Accueil</span>
+      <span>Articles</span>
+      <span class="btn-sub">S'abonner</span>
+    </div>
+  </nav>
+
+  <div class="content">
+    <h1 class="page-title">Politiques &amp; Mentions légales</h1>
+    <p class="page-subtitle">Dernière mise à jour : <span id="update-date"></span></p>
+
+    <div class="tab-nav">
+      <div class="tab-btn active" onclick="showTab('confidentialite', this)">Confidentialité</div>
+      <div class="tab-btn" onclick="showTab('remboursement', this)">Remboursement</div>
+      <div class="tab-btn" onclick="showTab('mentions', this)">Mentions légales</div>
+      <div class="tab-btn" onclick="showTab('cgu', this)">CGU</div>
+    </div>
+
+    <!-- CONFIDENTIALITÉ -->
+    <div class="section active" id="confidentialite">
+      <h2 class="section-title">Politique de confidentialité</h2>
+      <p>Nous attachons une grande importance à la protection de vos données personnelles. Cette politique décrit comment nous collectons, utilisons et protégeons vos informations conformément aux réglementations applicables.</p>
+
+      <h3>Données collectées</h3>
+      <ul>
+        <li>Nom et prénom lors de l'inscription</li>
+        <li>Adresse e-mail pour la communication</li>
+        <li>Données de navigation (cookies, adresse IP)</li>
+        <li>Informations de paiement (traitées de manière sécurisée)</li>
+      </ul>
+
+      <h3>Utilisation des données</h3>
+      <p>Vos données sont utilisées exclusivement pour fournir nos services, améliorer votre expérience sur le site et vous envoyer des communications pertinentes si vous y avez consenti.</p>
+
+      <h3>Vos droits</h3>
+      <p>Vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données. Pour exercer ces droits, contactez-nous à l'adresse : <strong>contact@santeaujourdhui.com</strong></p>
+
+      <div class="info-box">
+        🔒 Nous ne vendons jamais vos données personnelles à des tiers.
+      </div>
+
+      <h3>Cookies</h3>
+      <p>Nous utilisons des cookies pour améliorer votre expérience de navigation. Vous pouvez désactiver les cookies dans les paramètres de votre navigateur, mais certaines fonctionnalités du site pourraient être affectées.</p>
+
+      <p class="last-updated">Cette politique est en vigueur à compter du 1er janvier 2026.</p>
+    </div>
+
+    <!-- REMBOURSEMENT -->
+    <div class="section" id="remboursement">
+      <h2 class="section-title">Politique de remboursement</h2>
+      <p>Nous souhaitons que vous soyez entièrement satisfait de votre achat. Si ce n'est pas le cas, voici notre politique de remboursement.</p>
+
+      <h3>Délai de remboursement</h3>
+      <p>Vous disposez de <strong>7 jours</strong> à compter de la date d'achat pour demander un remboursement complet, sans avoir à justifier votre demande.</p>
+
+      <h3>Conditions</h3>
+      <ul>
+        <li>La demande doit être effectuée dans les 7 jours suivant l'achat</li>
+        <li>Le remboursement est traité sous 5 à 10 jours ouvrables</li>
+        <li>Le remboursement est effectué sur le moyen de paiement utilisé</li>
+        <li>Les achats effectués lors de promotions sont également éligibles</li>
+      </ul>
+
+      <h3>Comment demander un remboursement</h3>
+      <p>Contactez notre équipe de support en indiquant votre numéro de commande et la raison de votre demande à : <strong>contact@santeaujourdhui.com</strong>. Nous vous répondrons dans les 48 heures.</p>
+
+      <div class="info-box">
+        💬 Pour toute question, notre équipe est disponible via le formulaire de support ou par e-mail.
+      </div>
+
+      <p class="last-updated">Cette politique est en vigueur à compter du 1er janvier 2026.</p>
+    </div>
+
+    <!-- MENTIONS LÉGALES -->
+    <div class="section" id="mentions">
+      <h2 class="section-title">Mentions légales</h2>
+
+      <h3>Éditeur du site</h3>
+      <p>
+        <strong>MONTSCALE LLC</strong><br>
+        Société à responsabilité limitée (LLC)<br>
+        Siège social : Orlando, Florida, États-Unis<br>
+        E-mail : contact@santeaujourdhui.com
+      </p>
+
+      <h3>Directeur de la publication</h3>
+      <p>L'équipe SantéAujourd'hui</p>
+
+      <h3>Hébergement</h3>
+      <p>
+        <strong>Hostinger International Ltd.</strong><br>
+        61 Lordou Vironos Street, 6023 Larnaca, Chypre<br>
+        <a href="https://www.hostinger.com" style="color:var(--red);">www.hostinger.com</a>
+      </p>
+
+      <h3>Propriété intellectuelle</h3>
+      <p>L'ensemble du contenu de ce site (textes, images, vidéos, logos) est protégé par le droit d'auteur. Toute reproduction, même partielle, est interdite sans autorisation écrite préalable de MONTSCALE LLC.</p>
+
+      <h3>Responsabilité</h3>
+      <p>Les informations publiées sur ce site sont fournies à titre informatif uniquement et ne constituent pas un avis médical. Consultez un professionnel de santé qualifié pour tout problème médical.</p>
+
+      <p class="last-updated">Mentions légales mises à jour le 1er janvier 2026.</p>
+    </div>
+
+    <!-- CGU -->
+    <div class="section" id="cgu">
+      <h2 class="section-title">Conditions générales d'utilisation</h2>
+      <p>En accédant à ce site, vous acceptez les présentes conditions générales d'utilisation. Veuillez les lire attentivement avant toute utilisation.</p>
+
+      <h3>Accès au site</h3>
+      <p>L'accès au site est gratuit. Certains contenus ou services peuvent être soumis à abonnement payant. MONTSCALE LLC se réserve le droit de modifier ou d'interrompre l'accès au site à tout moment, sans préavis.</p>
+
+      <h3>Utilisation du contenu</h3>
+      <ul>
+        <li>Le contenu est destiné à un usage personnel et non commercial</li>
+        <li>Il est interdit de copier, redistribuer ou vendre le contenu sans autorisation écrite</li>
+        <li>Les liens vers notre site sont autorisés sous réserve de ne pas nuire à notre image</li>
+      </ul>
+
+      <h3>Comportement des utilisateurs</h3>
+      <p>Vous vous engagez à utiliser ce site de manière légale et respectueuse. Tout comportement abusif, frauduleux ou nuisible entraînera la suspension immédiate de votre accès.</p>
+
+      <h3>Modification des CGU</h3>
+      <p>MONTSCALE LLC se réserve le droit de modifier les présentes CGU à tout moment. Les modifications prennent effet dès leur publication sur le site.</p>
+
+      <h3>Droit applicable</h3>
+      <p>Les présentes CGU sont soumises au droit de l'État de Floride, États-Unis. Tout litige sera soumis aux tribunaux compétents d'Orlando, Florida.</p>
+
+      <p class="last-updated">CGU en vigueur à compter du 1er janvier 2026.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © 2026 SantéAujourd'hui — MONTSCALE LLC. Tous droits réservés.<br>
+    Ce contenu est purement informatif et ne remplace pas un avis médical.
+  </div>
+
+</div>
+
+<script>
+  function showTab(id, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+  const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  const now = new Date();
+  document.getElementById('update-date').textContent =
+    now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+</script>
+</body>
+</html>
