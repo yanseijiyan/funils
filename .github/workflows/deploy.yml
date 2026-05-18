@@ -18,16 +18,16 @@ jobs:
       - id: changes
         name: Find changed site folders
         run: |
-          # Top-level folders changed since previous commit (compared to HEAD^)
+          # Top-level folders changed since previous commit
           changed=$(git diff --name-only HEAD^ HEAD | awk -F/ 'NF>1 {print $1}' | sort -u)
-          # Keep only those that have .vercel/project.json (i.e. linked to a Vercel project)
-          sites="[]"
+          # Keep only those that have .vercel/project.json
           arr=""
           for d in $changed; do
             if [ -f "$d/.vercel/project.json" ]; then
               arr="$arr\"$d\","
             fi
           done
+          sites="[]"
           if [ -n "$arr" ]; then
             sites="[${arr%,}]"
           fi
@@ -41,8 +41,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 10
       matrix:
         site: ${{ fromJson(needs.detect.outputs.sites) }}
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     steps:
       - uses: actions/checkout@v4
 
@@ -59,21 +63,11 @@ jobs:
           PID=$(jq -r '.projectId' "${{ matrix.site }}/.vercel/project.json")
           echo "id=$PID" >> "$GITHUB_OUTPUT"
 
-      - name: Pull Vercel environment
-        working-directory: ${{ matrix.site }}
-        run: |
-          vercel pull --yes --environment=production \
-            --token=${{ secrets.VERCEL_TOKEN }}
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ steps.pid.outputs.id }}
-
+      # Run vercel from the repo root — it reads the project's
+      # rootDirectory setting and enters the matrix.site subfolder itself.
       - name: Deploy to production
-        working-directory: ${{ matrix.site }}
-        run: |
-          vercel deploy --prod \
-            --token=${{ secrets.VERCEL_TOKEN }} \
-            --yes
         env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ steps.pid.outputs.id }}
+        run: |
+          vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+          vercel deploy --prod --token="$VERCEL_TOKEN" --yes
