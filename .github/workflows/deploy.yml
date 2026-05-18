@@ -18,9 +18,7 @@ jobs:
       - id: changes
         name: Find changed site folders
         run: |
-          # Top-level folders changed since previous commit
           changed=$(git diff --name-only HEAD^ HEAD | awk -F/ 'NF>1 {print $1}' | sort -u)
-          # Keep only those that have .vercel/project.json
           arr=""
           for d in $changed; do
             if [ -f "$d/.vercel/project.json" ]; then
@@ -57,17 +55,11 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
-      - name: Read project ID
-        id: pid
-        run: |
-          PID=$(jq -r '.projectId' "${{ matrix.site }}/.vercel/project.json")
-          echo "id=$PID" >> "$GITHUB_OUTPUT"
-
-      # Run vercel from the repo root — it reads the project's
-      # rootDirectory setting and enters the matrix.site subfolder itself.
-      - name: Deploy to production
+      - name: Deploy ${{ matrix.site }}
+        working-directory: ${{ matrix.site }}
         env:
-          VERCEL_PROJECT_ID: ${{ steps.pid.outputs.id }}
+          VERCEL_PROJECT_ID: ${{ env.VPID }}
         run: |
+          export VERCEL_PROJECT_ID=$(jq -r '.projectId' .vercel/project.json)
           vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
           vercel deploy --prod --token="$VERCEL_TOKEN" --yes
