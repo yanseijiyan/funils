@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Your Angel Tarot Reading</title>
+  <link rel="icon" type="image/png" href="images/celestino.png" />
+
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+          data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+  <!-- TikTok Pixel -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+  var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+  ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D7F3QPBC77U751P3JKA0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --pink: #d81b6a;
+      --pink-light: #f06292;
+      --wine: #6b0f35;
+      --gold: #d4af37;
+      --text-gradient: linear-gradient(160deg, #d81b6a 0%, #6b0f35 100%);
+      --gold-gradient: linear-gradient(135deg, #f4d35e 0%, #d4af37 50%, #b8860b 100%);
+      --shadow: 0 2px 16px rgba(216,27,106,0.18);
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: #1a1a1a;
+      overflow-x: hidden;
+      max-width: 480px;
+      margin: 0 auto;
+      background: url('images/ceu.webp') center top / cover fixed no-repeat;
+      min-height: 100svh;
+      padding: 24px 16px 60px;
+    }
+    @media (min-width: 480px) {
+      html { background: #c8b8d8; }
+      body { box-shadow: 0 0 40px rgba(0,0,0,0.22); }
+    }
+
+    .grad {
+      background: var(--text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-gold {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      transition: opacity 0.3s;
+    }
+    .header.hidden { display: none; }
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--pink);
+      box-shadow: var(--shadow);
+    }
+    .progress-bar {
+      display: flex;
+      gap: 4px;
+      width: 100%;
+    }
+    .progress-bar .seg {
+      flex: 1;
+      height: 6px;
+      border-radius: 99px;
+      background: rgba(216,27,106,0.2);
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar .seg.done::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--pink), var(--pink-light));
+    }
+    .step-counter {
+      font-size: 0.75rem;
+      color: var(--wine);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Question card */
+    .card {
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(8px);
+      border-radius: 22px;
+      padding: 28px 22px;
+      box-shadow: 0 8px 32px rgba(107,15,53,0.18);
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .q-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      line-height: 1.3;
+      text-align: center;
+      margin-bottom: 8px;
+      background: var(--text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .q-sub {
+      font-size: 0.95rem;
+      color: #555;
+      text-align: center;
+      margin-bottom: 22px;
+      line-height: 1.4;
+    }
+
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .option {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.85);
+      border: 2px solid rgba(216,27,106,0.25);
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 1rem; font-weight: 600;
+      color: #2a2a2a; text-align: left;
+      transition: all 0.2s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      font-family: inherit;
+    }
+    .option:active { transform: scale(0.98); }
+    .option:hover, .option.selected {
+      border-color: var(--pink);
+      background: linear-gradient(135deg, rgba(216,27,106,0.08), rgba(107,15,53,0.05));
+      color: var(--wine);
+      box-shadow: var(--shadow);
+    }
+    .option-emoji { font-size: 1.4rem; flex-shrink: 0; width: 32px; text-align: center; }
+    .options.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .options.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .options.grid-2 .option, .options.grid-3 .option {
+      flex-direction: column; text-align: center; padding: 14px 8px; gap: 6px; font-size: 0.88rem;
+    }
+
+    /* ========== INTRO with 3 face-down cards ========== */
+    .intro-card {
+      text-align: center;
+      padding: 24px 16px;
+    }
+    .intro-cards-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 24px 0 28px;
+    }
+    .intro-cards-row img {
+      width: 30%;
+      max-width: 110px;
+      animation: floatIn 0.8s ease forwards;
+      opacity: 0;
+      filter: drop-shadow(0 6px 18px rgba(107,15,53,0.4));
+    }
+    .intro-cards-row img:nth-child(1) { animation-delay: 0.1s; }
+    .intro-cards-row img:nth-child(2) { animation-delay: 0.35s; }
+    .intro-cards-row img:nth-child(3) { animation-delay: 0.6s; }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(30px) rotate(-8deg); }
+      to { opacity: 1; transform: translateY(0) rotate(0); }
+    }
+
+    /* ========== REVEAL screens ========== */
+    .reveal {
+      text-align: center;
+      padding: 20px 16px 32px;
+      animation: fadeIn 0.5s ease;
+    }
+    .reveal-card-img {
+      width: 70%;
+      max-width: 220px;
+      margin: 0 auto 18px;
+      filter: drop-shadow(0 8px 24px rgba(107,15,53,0.5));
+      animation: cardReveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      opacity: 0;
+      transform: scale(0.4) rotateY(180deg);
+    }
+    @keyframes cardReveal {
+      0% { opacity: 0; transform: scale(0.4) rotateY(180deg); }
+      60% { opacity: 1; transform: scale(1.06) rotateY(0); }
+      100% { opacity: 1; transform: scale(1) rotateY(0); }
+    }
+    .reveal-card-img.sideways {
+      animation: cardRevealSideways 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes cardRevealSideways {
+      0% { opacity: 0; transform: scale(0.4) rotate(0); }
+      40% { opacity: 1; transform: scale(1) rotate(0); }
+      100% { opacity: 1; transform: scale(0.95) rotate(90deg); }
+    }
+    .reveal-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 700;
+      margin-bottom: 8px;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 0.8s forwards;
+    }
+    .reveal-name {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      background: var(--text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 1.0s forwards;
+    }
+    .reveal-name.master {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .reveal-body {
+      font-size: 0.98rem;
+      color: #3a3a3a;
+      line-height: 1.55;
+      margin-bottom: 24px;
+      font-style: italic;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 1.3s forwards;
+    }
+
+    /* ========== Buttons ========== */
+    .cta-btn {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--pink), var(--wine));
+      color: white;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(216,27,106,0.4);
+      text-transform: uppercase;
+      transition: transform 0.15s ease;
+      font-family: inherit;
+      opacity: 0;
+      animation: fadeIn 0.5s ease 1.6s forwards;
+    }
+    .cta-btn:active { transform: scale(0.97); }
+    .cta-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    .intro-card .cta-btn { animation-delay: 1.0s; }
+
+    /* ========== Email ========== */
+    .email-input {
+      width: 100%;
+      padding: 16px 18px;
+      border: 2px solid rgba(216,27,106,0.3);
+      border-radius: 14px;
+      font-size: 1rem;
+      font-family: inherit;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .email-input:focus { border-color: var(--pink); }
+    .privacy {
+      font-size: 0.74rem;
+      color: #666;
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.4;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      color: var(--wine);
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-top: 18px;
+      opacity: 0.6;
+      text-decoration: underline;
+    }
+    .back-link:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="header" id="header">
+    <img src="images/celestino.png" alt="Celestino" class="logo" />
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="step-counter" id="stepCounter"></div>
+  </div>
+
+  <div class="card" id="quizCard"></div>
+
+  <script>
+    // ============================================
+    // QUIZ FLOW (questions + card reveals + email)
+    // ============================================
+    const FLOW = [
+      // INTRO ─ three face-down cards
+      {
+        type: 'intro',
+        title: 'Three cards have been chosen for you',
+        sub: 'The cards have been waiting. They sense your presence and have arranged themselves to reveal your path. Are you ready to receive their message?',
+        cta: 'Begin My Reading ✨'
+      },
+
+      // ── QUESTIONS 1-5: warming the spiritual connection ──
+      { type: 'q', title: "You're here for a reason.", sub: "Are you ready to receive what destiny holds for you?",
+        options: [
+          { emoji: "✨", label: "Yes, I'm ready" },
+          { emoji: "🙏", label: "I need this now" },
+          { emoji: "🔮", label: "Show me my path" } ] },
+      { type: 'q', title: "Have you noticed repeated number patterns lately?", sub: "Numbers like 11:11, 222, 333, 444…",
+        options: [
+          { emoji: "🌟", label: "Yes, constantly" },
+          { emoji: "👁️", label: "Sometimes, yes" },
+          { emoji: "🤔", label: "Not really" },
+          { emoji: "❓", label: "What does that mean?" } ] },
+      { type: 'q', title: "Do you believe everything happens for a reason?",
+        options: [
+          { emoji: "💫", label: "Absolutely" },
+          { emoji: "🌙", label: "I want to believe" },
+          { emoji: "🌫️", label: "I'm skeptical" } ] },
+      { type: 'q', title: "Which area of your life feels most stuck right now?",
+        options: [
+          { emoji: "💰", label: "Finances" },
+          { emoji: "❤️", label: "Love & Relationships" },
+          { emoji: "🌿", label: "Health" },
+          { emoji: "👨‍👩‍👧", label: "Family" },
+          { emoji: "🙏", label: "Spiritual purpose" } ] },
+      { type: 'q', title: "How long have you been feeling this way?",
+        options: [
+          { emoji: "📅", label: "A few months" },
+          { emoji: "🕰️", label: "1 to 3 years" },
+          { emoji: "⏳", label: "5+ years" },
+          { emoji: "♾️", label: "As long as I can remember" } ] },
+
+      // ── REVEAL 1: Wheel of Fortune (the past) ──
+      {
+        type: 'reveal',
+        cardImg: 'images/carta1.png',
+        eyebrow: 'The first card has appeared',
+        name: 'The Wheel of Fortune',
+        body: '"You have lived through cycles of doubt, loss, and uncertainty. The wheel has turned against you for too long — but it cannot stay still. What you have endured was not in vain. The cards reveal a turning point is near."',
+        cta: 'Continue the reading →'
+      },
+
+      // ── QUESTIONS 6-10: deepening the pain & worthiness ──
+      { type: 'q', title: "Deep down, do you feel you deserve a better life?",
+        options: [
+          { emoji: "💖", label: "Yes, I know I do" },
+          { emoji: "🌈", label: "I hope so" },
+          { emoji: "🌧️", label: "Sometimes I doubt it" } ] },
+      { type: 'q', title: "When was the last time you felt truly at peace?",
+        options: [
+          { emoji: "☀️", label: "This week" },
+          { emoji: "🌤️", label: "Months ago" },
+          { emoji: "🌥️", label: "Years ago" },
+          { emoji: "🌑", label: "I can't remember" } ] },
+      { type: 'q', title: "What do you sense is blocking you the most?",
+        options: [
+          { emoji: "🎲", label: "Bad luck" },
+          { emoji: "💔", label: "Past trauma" },
+          { emoji: "🪞", label: "Self-doubt" },
+          { emoji: "🧭", label: "Lack of spiritual guidance" },
+          { emoji: "❓", label: "I don't know yet" } ] },
+      { type: 'q', title: "If you woke up tomorrow with your dream life…", sub: "What would change first?",
+        options: [
+          { emoji: "💎", label: "Financial freedom" },
+          { emoji: "❤️", label: "True love" },
+          { emoji: "🕊️", label: "Family harmony" },
+          { emoji: "☮️", label: "Inner peace" },
+          { emoji: "🌿", label: "Vibrant health" } ] },
+      { type: 'q', title: "What's the biggest dream you've put on hold?",
+        options: [
+          { emoji: "🚪", label: "Quitting my job" },
+          { emoji: "💍", label: "Finding true love" },
+          { emoji: "🌱", label: "Starting over" },
+          { emoji: "🤝", label: "Healing relationships" },
+          { emoji: "✨", label: "Spiritual awakening" } ] },
+
+      // ── REVEAL 2: The Magician (the present) ──
+      {
+        type: 'reveal',
+        cardImg: 'images/carta2.png',
+        eyebrow: 'The second card reveals itself',
+        name: 'The Magician',
+        body: '"Above his head, the symbol of infinity. The Magician carries within himself the power to manifest his desires. And so do you. The tools are already in your hands — you only need to learn how to use them. The angels are about to show you how."',
+        cta: 'Continue →'
+      },
+
+      // ── QUESTIONS 11-15: personalization & commitment ──
+      { type: 'q', title: "Are you open to receiving guidance from the spiritual realm?",
+        options: [
+          { emoji: "🙌", label: "Yes, completely" },
+          { emoji: "👀", label: "Cautiously open" },
+          { emoji: "🛡️", label: "I need proof first" } ] },
+      { type: 'q', title: "What's your zodiac sign?", gridSize: 3,
+        options: [
+          { emoji: "♈", label: "Aries" }, { emoji: "♉", label: "Taurus" }, { emoji: "♊", label: "Gemini" },
+          { emoji: "♋", label: "Cancer" }, { emoji: "♌", label: "Leo" }, { emoji: "♍", label: "Virgo" },
+          { emoji: "♎", label: "Libra" }, { emoji: "♏", label: "Scorpio" }, { emoji: "♐", label: "Sagittarius" },
+          { emoji: "♑", label: "Capricorn" }, { emoji: "♒", label: "Aquarius" }, { emoji: "♓", label: "Pisces" } ] },
+      { type: 'q', title: "How old are you?", gridSize: 2,
+        options: [
+          { emoji: "🌸", label: "Under 30" },
+          { emoji: "🌺", label: "30 to 45" },
+          { emoji: "🌹", label: "46 to 60" },
+          { emoji: "🌷", label: "60 or older" } ] },
+      { type: 'q', title: "I identify as…", gridSize: 2,
+        options: [
+          { emoji: "♀️", label: "Woman" }, { emoji: "♂️", label: "Man" },
+          { emoji: "⚧️", label: "Other" }, { emoji: "🤐", label: "Prefer not to say" } ] },
+      { type: 'q', title: "Are you ready to discover what the angels have revealed for you?", sub: "Your personalized reading is being prepared…",
+        options: [
+          { emoji: "🌟", label: "YES, reveal my reading!" },
+          { emoji: "🙏", label: "I need this transformation" },
+          { emoji: "🔮", label: "Show me my path" } ] },
+
+      // ── REVEAL 3: The Tower (turned sideways!) — the future crossroads ──
+      {
+        type: 'reveal',
+        cardImg: 'images/carta3.png',
+        sideways: true,
+        eyebrow: 'The third card has appeared… in a strange position',
+        name: 'The Tower, Sideways',
+        body: '"In 30 years of readings, I have never seen this. A gust of wind turned the card on its side. This is no coincidence — it means you stand at a crossroads. One path leads to liberation, prosperity and love. The other deepens the pain you already know. Only your next decision will choose for you."',
+        cta: 'Reveal My Master Card 🔮'
+      },
+
+      // ── EMAIL STEP with The Hermit (master card from Ancient Tarot of the Angels) ──
+      {
+        type: 'email',
+        cardImg: 'images/carta.png',
+        eyebrow: 'From the Ancient Tarot of the Angels',
+        name: 'The Hermit — Your Guide',
+        body: '"The Hermit carries the lantern that lights the way. He cannot walk your path for you — but he can illuminate it. Enter your email below and I will send your complete personalized reading, along with three sacred gifts."'
+      }
+    ];
+
+    // Count only questions for progress bar
+    const TOTAL_QUESTIONS = FLOW.filter(s => s.type === 'q').length;
+
+    let current = 0;
+    const answers = [];
+
+    const STORAGE_KEY = 'celestino_quiz_state';
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      if (typeof saved.current === 'number' && Array.isArray(saved.answers)) {
+        current = Math.min(saved.current, FLOW.length - 1);
+        answers.push(...saved.answers);
+      }
+    } catch (e) {}
+
+    function persist() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ current, answers })); } catch (e) {}
+    }
+
+    function questionsAnsweredSoFar() {
+      return FLOW.slice(0, current).filter(s => s.type === 'q').length;
+    }
+
+    function renderProgress() {
+      const bar = document.getElementById('progressBar');
+      const counter = document.getElementById('stepCounter');
+      const done = questionsAnsweredSoFar();
+      let html = '';
+      for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        html += `<div class="seg ${i < done ? 'done' : ''}"></div>`;
+      }
+      bar.innerHTML = html;
+      const step = FLOW[current];
+      if (!step) { counter.textContent = ''; return; }
+      if (step.type === 'q') {
+        counter.textContent = `Step ${done + 1} of ${TOTAL_QUESTIONS}`;
+      } else if (step.type === 'reveal') {
+        counter.textContent = '✦ A message from the cards ✦';
+      } else if (step.type === 'intro') {
+        counter.textContent = '✦ Your reading begins ✦';
+      } else if (step.type === 'email') {
+        counter.textContent = '✦ Your reading is ready ✦';
+      }
+    }
+
+    function renderIntro(step) {
+      const card = document.getElementById('quizCard');
+      card.innerHTML = `
+        <div class="intro-card">
+          <h1 class="q-title">${step.title}</h1>
+          <div class="intro-cards-row">
+            <img src="images/carta.png" alt="" />
+            <img src="images/carta.png" alt="" />
+            <img src="images/carta.png" alt="" />
+          </div>
+          <p class="q-sub" style="margin-bottom: 22px;">${step.sub}</p>
+          <button class="cta-btn" id="ctaBtn">${step.cta}</button>
+        </div>
+      `;
+      document.getElementById('ctaBtn').addEventListener('click', advance);
+    }
+
+    function renderReveal(step) {
+      const card = document.getElementById('quizCard');
+      card.innerHTML = `
+        <div class="reveal">
+          <img src="${step.cardImg}" alt="${step.name}"
+               class="reveal-card-img ${step.sideways ? 'sideways' : ''}" />
+          <div class="reveal-eyebrow">${step.eyebrow}</div>
+          <h2 class="reveal-name">${step.name}</h2>
+          <p class="reveal-body">${step.body}</p>
+          <button class="cta-btn" id="ctaBtn">${step.cta}</button>
+        </div>
+      `;
+      document.getElementById('ctaBtn').addEventListener('click', advance);
+      if (window.ttq) ttq.track('ViewContent', { content_name: `reveal_${step.name}` });
+    }
+
+    function renderQuestion(step) {
+      const gridClass = step.gridSize === 2 ? 'grid-2' : (step.gridSize === 3 ? 'grid-3' : '');
+      const card = document.getElementById('quizCard');
+      card.innerHTML = `
+        <h1 class="q-title">${step.title}</h1>
+        ${step.sub ? `<p class="q-sub">${step.sub}</p>` : ''}
+        <div class="options ${gridClass}">
+          ${step.options.map((o, i) => `
+            <button class="option" data-idx="${i}">
+              <span class="option-emoji">${o.emoji || ''}</span>
+              <span class="option-label">${o.label}</span>
+            </button>
+          `).join('')}
+        </div>
+        ${current > 0 ? '<a class="back-link" id="backLink">← Go back</a>' : ''}
+      `;
+      card.querySelectorAll('.option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.idx, 10);
+          const choice = step.options[idx];
+          answers[current] = { q: step.title, a: choice.label };
+          btn.classList.add('selected');
+          if (window.ttq) ttq.track('ClickButton', { content_name: `quiz_step_${current}`, value: choice.label });
+          setTimeout(advance, 240);
+        });
+      });
+      const back = document.getElementById('backLink');
+      if (back) back.addEventListener('click', () => {
+        current = Math.max(0, current - 1);
+        persist();
+        render();
+      });
+    }
+
+    function renderEmail(step) {
+      const card = document.getElementById('quizCard');
+      card.innerHTML = `
+        <div class="reveal">
+          <img src="${step.cardImg}" alt="${step.name}" class="reveal-card-img" />
+          <div class="reveal-eyebrow">${step.eyebrow}</div>
+          <h2 class="reveal-name master">${step.name}</h2>
+          <p class="reveal-body">${step.body}</p>
+          <input type="email" class="email-input" id="emailInput"
+                 placeholder="your-email@example.com" autocomplete="email" required />
+          <button class="cta-btn" id="submitBtn">Reveal My Reading ✨</button>
+          <p class="privacy">Your email is sacred. We will never share it.</p>
+        </div>
+      `;
+      const btn = document.getElementById('submitBtn');
+      const input = document.getElementById('emailInput');
+      function submit() {
+        const email = input.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          input.style.borderColor = '#e74c3c';
+          input.focus();
+          return;
+        }
+        try {
+          localStorage.setItem('celestino_quiz_email', email);
+          localStorage.setItem('celestino_quiz_answers', JSON.stringify(answers));
+          if (window.ttq) ttq.track('CompleteRegistration', { email });
+        } catch (e) {}
+        btn.disabled = true;
+        btn.textContent = 'Preparing your reading…';
+        setTimeout(() => { window.location.href = '/'; }, 800);
+      }
+      btn.addEventListener('click', submit);
+      input.addEventListener('keypress', e => { if (e.key === 'Enter') submit(); });
+    }
+
+    function advance() {
+      current++;
+      persist();
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function render() {
+      const step = FLOW[current];
+      if (!step) { renderEmail(FLOW[FLOW.length - 1]); return; }
+      renderProgress();
+      if (step.type === 'intro') renderIntro(step);
+      else if (step.type === 'reveal') renderReveal(step);
+      else if (step.type === 'q') renderQuestion(step);
+      else if (step.type === 'email') renderEmail(step);
+    }
+
+    render();
+  </script>
+</body>
+</html>
