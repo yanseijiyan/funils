@@ -29,9 +29,17 @@ funils-tracker.vercel.app/
     └── tiktok-events.js
 ```
 
-## Adicionar um tenant novo (passo a passo)
+## Adicionar um tenant novo
 
-### 1. Adiciona entrada no `tenants.json`
+### Atalho: usa o `add-tenant.sh`
+```bash
+./add-tenant.sh meu-funil-x perfectpay [meta_pixel_id] [tiktok_pixel_id]
+```
+Adiciona entrada no `tenants.json` (idempotente — não sobrescreve) e imprime os 5 passos: envs Vercel, embed, URL do webhook.
+
+### Manual (se preferir)
+
+**1. Adiciona entrada no `tenants.json`** (não toca em `_template_*`):
 ```jsonc
 {
   "meu-funil-x": {
@@ -47,22 +55,17 @@ funils-tracker.vercel.app/
 }
 ```
 
-### 2. Seta as envs no Vercel
-Naming convention: `TENANT_<NOME_UPPER_SEM_DASHES>_<TIPO>`.
-Pro tenant `meu-funil-x` → prefix `TENANT_MEUFUNILX_`:
-
+**2. Seta envs no Vercel** (naming: `TENANT_<NOME_UPPER_SEM_DASHES>_<TIPO>`):
 ```bash
-vercel env add TENANT_MEUFUNILX_CAPI_TOKEN production
 vercel env add TENANT_MEUFUNILX_TIKTOK_ACCESS_TOKEN production
-vercel env add TENANT_MEUFUNILX_PERFECTPAY_TOKEN production   # se for usar webhook
-# opcionais:
-vercel env add TENANT_MEUFUNILX_CAPI_TEST_CODE production
+vercel env add TENANT_MEUFUNILX_PERFECTPAY_TOKEN production
+# opcionais (Meta como secundário, test codes pra debug):
+vercel env add TENANT_MEUFUNILX_CAPI_TOKEN production
 vercel env add TENANT_MEUFUNILX_TIKTOK_TEST_CODE production
 ```
+Fallback: se `TENANT_<NOME>_X` não existir, usa `DEFAULT_X` (útil pra compartilhar token entre tenants).
 
-Fallback: se uma env `TENANT_<NOME>_X` não existir, o tracker usa `DEFAULT_X` (útil quando vários tenants compartilham token).
-
-### 3. Cola o `<script>` no site (1 linha)
+**3. Cola o `<script>` no site (1 linha)**
 ```html
 <script src="https://funils-tracker.vercel.app/bridge/core.js"
         data-tenant="meu-funil-x"
