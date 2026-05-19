@@ -1,0 +1,38 @@
+{
+  "$schema": "tenants.schema",
+  "_comment": "Config pública dos tenants. APENAS pixel_ids (públicos por natureza). Tokens ficam em env vars: TENANT_<NOME_UPPER>_CAPI_TOKEN, TENANT_<NOME_UPPER>_TIKTOK_ACCESS_TOKEN, TENANT_<NOME_UPPER>_PERFECTPAY_TOKEN, TENANT_<NOME_UPPER>_SHOPIFY_WEBHOOK_SECRET.",
+
+  "cliente-4": {
+    "meta_pixel_id": "",
+    "tiktok_pixel_id": "",
+    "platform": "perfectpay",
+    "commission_rate": 1.0,
+    "content_category": "info-product",
+    "products": {
+      "tarot-celestino": {
+        "id": "",
+        "name": "Tarot Celestino",
+        "price": 197
+      }
+    }
+  },
+
+  "_template_perfectpay": {
+    "meta_pixel_id": "PREENCHER",
+    "tiktok_pixel_id": "PREENCHER",
+    "platform": "perfectpay",
+    "commission_rate": 1.0,
+    "content_category": "info-product",
+    "products": {}
+  },
+
+  "_template_shopify": {
+    "meta_pixel_id": "PREENCHER",
+    "tiktok_pixel_id": "PREENCHER",
+    "platform": "shopify",
+    "shopify_domain": "minha-loja.myshopify.com",
+    "commission_rate": 1.0,
+    "content_category": "ecommerce",
+    "products": {}
+  }
+}
