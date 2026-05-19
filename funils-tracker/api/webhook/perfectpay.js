@@ -16,6 +16,7 @@ const { getTenant, tenantByPerfectPayToken } = require('../../lib/tenant');
 const { sha256, digitsOnly, readJson } = require('../../lib/hash');
 const { sendMetaCapi } = require('../../lib/meta-capi');
 const { sendTikTokEvents } = require('../../lib/tiktok-events');
+const { recordSale } = require('../../lib/sales');
 
 function pick(obj, paths) {
   for (let i = 0; i < paths.length; i++) {
@@ -143,8 +144,8 @@ module.exports = async function handler(req, res) {
     }
   };
 
-  /* 7. Dispara em paralelo */
-  const [meta, tiktok] = await Promise.all([
+  /* 7. Dispara em paralelo: Meta CAPI + TikTok Events + INSERT no Postgres */
+  const [meta, tiktok, db] = await Promise.all([
     sendMetaCapi({
       pixelId: tenant.meta_pixel_id, token: tenant.capi_token,
       event: metaEvent, testCode: tenant.capi_test_code
@@ -152,6 +153,24 @@ module.exports = async function handler(req, res) {
     sendTikTokEvents({
       pixelId: tenant.tiktok_pixel_id, token: tenant.tiktok_access_token,
       event: ttEvent, testCode: tenant.tiktok_test_code
+    }),
+    recordSale({
+      order_id: orderCode || eventId,
+      tenant: tenantId,
+      status: eventName === 'Refund' ? 'refunded' : 'approved',
+      value: eventName === 'Refund' ? -saleAmount : saleAmount,
+      currency,
+      utm_source:   pick(pp, ['utm_source']),
+      utm_medium:   pick(pp, ['utm_medium']),
+      utm_campaign: pick(pp, ['utm_campaign']),
+      utm_content:  pick(pp, ['utm_content']),
+      utm_term:     pick(pp, ['utm_term']),
+      ttclid, fbclid,
+      product_id: productCode,
+      product_name: productName,
+      customer_email_hash: email ? sha256(email) : null,
+      customer_phone_hash: phone ? sha256(digitsOnly(phone)) : null,
+      raw: pp
     })
   ]);
 
@@ -162,6 +181,6 @@ module.exports = async function handler(req, res) {
     event_id: eventId,
     order: orderCode,
     sale_amount: saleAmount,
-    meta, tiktok
+    meta, tiktok, db
   });
 };

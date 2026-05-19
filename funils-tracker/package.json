@@ -5,5 +5,8 @@
   "description": "Tracker central multi-tenant — Meta CAPI + TikTok Events API + webhooks. Substitui Utmify/Hyros pra info-produto + e-commerce.",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0"
   }
 }
