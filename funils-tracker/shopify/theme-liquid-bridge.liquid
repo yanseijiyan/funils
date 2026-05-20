@@ -1,0 +1,115 @@
+{%- comment -%}
+  BB TRACKER BRIDGE — cole este bloco INTEIRO no theme.liquid,
+  logo ANTES da tag </body>.
+
+  O que faz: quando o visitante chega do funil pra loja Shopify, captura
+  ttclid / ttp / bb_user_id / utm_* da URL e persiste em cart.attributes.
+  Esses valores viram note_attributes no pedido — e o webhook
+  /api/webhook/shopify?tenant=loja-jp recupera pra atribuir a venda.
+
+  Sem isto, a atribuição QUEBRA entre o funil e a Shopify.
+{%- endcomment -%}
+<!-- BB TRACKER BRIDGE — persist ttclid/ttp/bb_user_id/utm_* to cart attributes -->
+<script>
+(function(){
+  try {
+    var KEYS = ['ttclid','ttp','bb_user_id','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var STORAGE_PREFIX = 'bb_';
+
+    // 1. Harvest from URL params
+    function harvestFromURL() {
+      var params = new URLSearchParams(window.location.search);
+      KEYS.forEach(function(k){
+        var v = params.get(k);
+        if (v) {
+          try { sessionStorage.setItem(STORAGE_PREFIX + k, v); } catch(e){}
+          try { localStorage.setItem(STORAGE_PREFIX + k, v); } catch(e){}
+        }
+      });
+    }
+
+    // 2. Read persisted values (session > local), fallback cookies
+    function getValues() {
+      var out = {};
+      KEYS.forEach(function(k){
+        var v = null;
+        try { v = sessionStorage.getItem(STORAGE_PREFIX + k); } catch(e){}
+        if (!v) { try { v = localStorage.getItem(STORAGE_PREFIX + k); } catch(e){} }
+        if (v) out[k] = v;
+      });
+      try {
+        var match = document.cookie.match(/ttclid=([^;]+)/);
+        if (match && !out.ttclid) out.ttclid = decodeURIComponent(match[1]);
+        var match2 = document.cookie.match(/_ttp=([^;]+)/);
+        if (match2 && !out.ttp) out.ttp = decodeURIComponent(match2[1]);
+      } catch(e){}
+      return out;
+    }
+
+    // 3. POST to Shopify cart with attributes
+    function pushToCart(values) {
+      if (!values || Object.keys(values).length === 0) return;
+      try {
+        fetch('/cart/update.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ attributes: values }),
+          credentials: 'same-origin'
+        }).catch(function(){});
+      } catch(e){}
+    }
+
+    // 4. Hook all forms posting to /cart or /checkout
+    function hookForms() {
+      var values = getValues();
+      document.querySelectorAll('form[action*="/cart"], form[action*="/checkout"]').forEach(function(form){
+        Object.keys(values).forEach(function(k){
+          if (form.querySelector('input[name="attributes['+k+']"]')) return;
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'attributes['+k+']';
+          input.value = values[k];
+          form.appendChild(input);
+        });
+      });
+    }
+
+    // 5. Hook clicks on /cart links — append params to href
+    function hookLinks() {
+      var values = getValues();
+      var qs = Object.keys(values).map(function(k){
+        return 'attributes['+encodeURIComponent(k)+']='+encodeURIComponent(values[k]);
+      }).join('&');
+      if (!qs) return;
+      document.querySelectorAll('a[href*="/cart"], a[href*="/checkout"]').forEach(function(a){
+        var href = a.getAttribute('href');
+        if (!href || href.indexOf('attributes[') >= 0) return;
+        var sep = href.indexOf('?') >= 0 ? '&' : '?';
+        a.setAttribute('href', href + sep + qs);
+      });
+    }
+
+    // Run
+    harvestFromURL();
+    pushToCart(getValues());
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function(){ hookForms(); hookLinks(); });
+    } else {
+      hookForms();
+      hookLinks();
+    }
+
+    // Re-push every 5s for 30s (covers late cart sessions / SPA-like themes)
+    var ticks = 0;
+    var iv = setInterval(function(){
+      ticks++;
+      pushToCart(getValues());
+      hookForms();
+      hookLinks();
+      if (ticks >= 6) clearInterval(iv);
+    }, 5000);
+
+  } catch(e){}
+})();
+</script>
+<!-- /BB TRACKER BRIDGE -->

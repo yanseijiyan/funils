@@ -17,6 +17,16 @@
     }
   },
 
+  "loja-jp": {
+    "meta_pixel_id": "",
+    "tiktok_pixel_id": "PREENCHER",
+    "platform": "shopify",
+    "shopify_domain": "PREENCHER.myshopify.com",
+    "commission_rate": 1.0,
+    "content_category": "ecommerce",
+    "products": {}
+  },
+
   "_template_perfectpay": {
     "meta_pixel_id": "PREENCHER",
     "tiktok_pixel_id": "PREENCHER",
