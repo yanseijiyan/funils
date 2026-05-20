@@ -84,3 +84,29 @@ CREATE TABLE IF NOT EXISTS sales (
 CREATE INDEX IF NOT EXISTS idx_sales_tenant_ts    ON sales (tenant, ts DESC);
 CREATE INDEX IF NOT EXISTS idx_sales_utm_source   ON sales (utm_source);
 CREATE INDEX IF NOT EXISTS idx_sales_utm_campaign ON sales (utm_campaign);
+
+-- ─────────────────────────────────────────────────────
+-- ad_stats: gasto/impressões/cliques por dia, por campanha/conjunto/anúncio.
+-- Vem da TikTok Marketing API (sync via /api/sync/tiktok-ads).
+-- O dashboard junta com events/sales (por id) → CPC/CPM/CTR/CPA/ROAS.
+-- ─────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS ad_stats (
+  id           BIGSERIAL PRIMARY KEY,
+  tenant       TEXT NOT NULL,
+  stat_date    DATE NOT NULL,
+  level        TEXT NOT NULL,              -- campaign | adset | ad
+  ref_id       TEXT NOT NULL,              -- id TikTok do campaign/adgroup/ad
+  name         TEXT,
+  campaign_id  TEXT,
+  adset_id     TEXT,
+  spend        NUMERIC(14,2) DEFAULT 0,
+  impressions  BIGINT DEFAULT 0,
+  clicks       BIGINT DEFAULT 0,
+  currency     TEXT,
+  source       TEXT DEFAULT 'tiktok',
+  updated_at   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE (tenant, stat_date, level, ref_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_ad_stats_tenant_date ON ad_stats (tenant, stat_date DESC);
+CREATE INDEX IF NOT EXISTS idx_ad_stats_level_ref   ON ad_stats (tenant, level, ref_id);

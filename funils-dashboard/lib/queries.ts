@@ -175,6 +175,42 @@ export async function getCampaignBreakdown(f: Filters): Promise<CampaignRow[]> {
   }
 }
 
+/* Gasto de Ads (tabela ad_stats) agregado por nível + ref_id — pro join no breakdown */
+export type AdSpendRow = {
+  level: string;        // campaign | adset | ad
+  ref_id: string;
+  name: string | null;
+  campaign_id: string | null;
+  adset_id: string | null;
+  spend: number;
+  impressions: number;
+  clicks: number;
+};
+export async function getAdSpend(f: Filters): Promise<AdSpendRow[]> {
+  try {
+    const w = whereSales(f);
+    const rows = await sql`
+      SELECT
+        level, ref_id,
+        MAX(name)        AS name,
+        MAX(campaign_id) AS campaign_id,
+        MAX(adset_id)    AS adset_id,
+        COALESCE(SUM(spend), 0)       AS spend,
+        COALESCE(SUM(impressions), 0) AS impressions,
+        COALESCE(SUM(clicks), 0)      AS clicks
+      FROM ad_stats
+      WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.from}::date IS NULL OR stat_date >= ${w.from}::date)
+        AND (${w.to}::date IS NULL OR stat_date <= ${w.to}::date)
+      GROUP BY level, ref_id
+    `;
+    return rows as unknown as AdSpendRow[];
+  } catch (e) {
+    console.error('[getAdSpend]', e);
+    return [];
+  }
+}
+
 /* Quiz funnel: contagem de eventos QuizStep por step value */
 export type FunnelStep = { label: string; count: number };
 export async function getQuizFunnel(f: Filters): Promise<FunnelStep[]> {
