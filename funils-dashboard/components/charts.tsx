@@ -11,7 +11,7 @@ import {
 import type { DayPoint, FunnelStep } from '@/lib/queries';
 
 /* Gráfico de série temporal: visitas + leads + vendas */
-export function SeriesChart({ data, currency = 'BRL' }: { data: DayPoint[]; currency?: string }) {
+export function SeriesChart({ data, currency = 'USD' }: { data: DayPoint[]; currency?: string }) {
   if (!data.length) return <Empty label="Sem dados no período" />;
   const fmt = (v: number) => new Intl.NumberFormat('pt-BR').format(v);
   return (
@@ -42,7 +42,7 @@ export function SeriesChart({ data, currency = 'BRL' }: { data: DayPoint[]; curr
             borderRadius: 8,
             fontSize: 12
           }}
-          formatter={(v: number, k: string) => [fmt(Number(v)), k]}
+          formatter={(v, k) => [fmt(Number(v)), k]}
         />
         <Area type="monotone" dataKey="visitors" stroke="#71717a" fill="url(#gradVisitors)" name="Visitantes" />
         <Area type="monotone" dataKey="leads"    stroke="#3b82f6" fill="url(#gradLeads)"    name="Leads" />
@@ -96,7 +96,7 @@ export function BarRevenueChart({ data }: { data: { name: string; value: number 
         <YAxis tick={{ fontSize: 11 }} stroke="rgba(125,125,125,0.5)" />
         <Tooltip
           contentStyle={{ background: 'rgb(24 24 27)', color: 'rgb(228 228 231)', border: 'none', borderRadius: 8, fontSize: 12 }}
-          formatter={(v: number) => [new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(v)), 'Receita']}
+          formatter={(v) => [new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(v)), 'Receita']}
         />
         <Bar dataKey="value" radius={[6, 6, 0, 0]}>
           {data.map((_, i) => (

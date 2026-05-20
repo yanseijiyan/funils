@@ -1,5 +1,5 @@
 import { getCampaignBreakdown, getTenants, type Filters } from '@/lib/queries';
-import { FiltersBar, fmtBRL, fmtInt, fmtPct } from '@/components/filters';
+import { FiltersBar, fmtMoney, fmtInt, fmtPct } from '@/components/filters';
 import { CardSection } from '@/components/card';
 
 export const dynamic = 'force-dynamic';
@@ -146,7 +146,7 @@ function Row({
       <div className="col-span-1 text-right tabular-nums text-zinc-500">{fmtInt(stats.visitors)}</div>
       <div className="col-span-1 text-right tabular-nums text-zinc-500">{fmtInt(stats.leads)}</div>
       <div className="col-span-1 text-right tabular-nums font-medium">{fmtInt(stats.sales)}</div>
-      <div className="col-span-2 text-right tabular-nums font-medium">{fmtBRL(stats.revenue)}</div>
+      <div className="col-span-2 text-right tabular-nums font-medium">{fmtMoney(stats.revenue)}</div>
       <div className="col-span-2 text-right tabular-nums text-zinc-500">{stats.visitors ? fmtPct(conv) : '—'}</div>
     </div>
   );

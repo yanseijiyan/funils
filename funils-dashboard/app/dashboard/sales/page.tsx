@@ -1,5 +1,5 @@
 import { getSales, getTenants, type Filters } from '@/lib/queries';
-import { FiltersBar, fmtBRL, fmtDateTime } from '@/components/filters';
+import { FiltersBar, fmtMoney, fmtDateTime } from '@/components/filters';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,7 +49,7 @@ export default async function SalesPage(props: { searchParams: Promise<Filters> 
                     <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400 whitespace-nowrap">{fmtDateTime(s.ts)}</td>
                     <td className="px-4 py-3 font-medium">{s.tenant}</td>
                     <td className="px-4 py-3"><StatusPill status={s.status} /></td>
-                    <td className="px-4 py-3 font-medium tabular-nums">{fmtBRL(s.value, s.currency || 'BRL')}</td>
+                    <td className="px-4 py-3 font-medium tabular-nums">{fmtMoney(s.value, s.currency || 'USD')}</td>
                     <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400">{s.utm_source || '—'}</td>
                     <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400">{s.utm_campaign || '—'}</td>
                     <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400">{s.utm_content || '—'}</td>
