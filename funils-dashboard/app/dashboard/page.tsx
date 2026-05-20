@@ -1,5 +1,5 @@
 import { getOverviewCards, getSeriesByDay, getTenants, getCampaignBreakdown, type Filters } from '@/lib/queries';
-import { FiltersBar, fmtMoney, fmtInt, fmtPct } from '@/components/filters';
+import { FiltersBar, fmtBRL, fmtInt, fmtPct } from '@/components/filters';
 import { Card, CardSection } from '@/components/card';
 import { SeriesChart, BarRevenueChart } from '@/components/charts';
 
@@ -30,7 +30,7 @@ export default async function OverviewPage(props: { searchParams: Promise<Filter
         <Card label="Visitantes únicos"  value={fmtInt(cards.visitors)} />
         <Card label="Leads"              value={fmtInt(cards.leads)}     sub={cards.visitors ? `${fmtPct(cards.leads / cards.visitors)} conv.` : undefined} />
         <Card label="Vendas aprovadas"   value={fmtInt(cards.sales)}     sub={`taxa: ${fmtPct(conversionRate)}`} />
-        <Card label="Receita bruta"      value={fmtMoney(cards.revenue)}   sub={aov > 0 ? `ticket: ${fmtMoney(aov)}` : undefined} />
+        <Card label="Receita bruta"      value={fmtBRL(cards.revenue)}   sub={aov > 0 ? `ticket: ${fmtBRL(aov)}` : undefined} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">

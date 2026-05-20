@@ -3,6 +3,7 @@
  * Naming convention env vars:
  *   TENANT_<UPPER_NO_DASHES>_CAPI_TOKEN
  *   TENANT_<UPPER_NO_DASHES>_TIKTOK_ACCESS_TOKEN
+ *   TENANT_<UPPER_NO_DASHES>_TIKTOK_MARKETING_TOKEN
  *   TENANT_<UPPER_NO_DASHES>_PERFECTPAY_TOKEN
  *   TENANT_<UPPER_NO_DASHES>_SHOPIFY_WEBHOOK_SECRET
  *   TENANT_<UPPER_NO_DASHES>_CAPI_TEST_CODE
@@ -51,8 +52,10 @@ function getTenant(tenantId) {
     content_category: cfg.content_category || null,
     products:         cfg.products         || {},
     shopify_domain:   cfg.shopify_domain   || null,
+    tiktok_advertiser_id: cfg.tiktok_advertiser_id || null,
     capi_token:           envOrDefault(tenantId, 'CAPI_TOKEN'),
     tiktok_access_token:  envOrDefault(tenantId, 'TIKTOK_ACCESS_TOKEN'),
+    tiktok_marketing_token: envOrDefault(tenantId, 'TIKTOK_MARKETING_TOKEN'),
     perfectpay_token:     envOrDefault(tenantId, 'PERFECTPAY_TOKEN'),
     shopify_secret:       envOrDefault(tenantId, 'SHOPIFY_WEBHOOK_SECRET'),
     capi_test_code:       envOrDefault(tenantId, 'CAPI_TEST_CODE'),

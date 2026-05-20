@@ -37,7 +37,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-export function fmtMoney(v: number | string | null, currency = 'USD'): string {
+export function fmtBRL(v: number | string | null, currency = 'USD'): string {
   if (v == null || v === '') return '—';
   const n = typeof v === 'string' ? Number(v) : v;
   return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(n);
