@@ -839,49 +839,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     animation: waiting-spinner 1.2s linear infinite;
 }
 </style></div>
-<script>
-(function(){
-  // QUIZ NAVIGATION OVERRIDE (local linkagem sequencial)
-  const m = location.pathname.match(/(\d{2})\.html?$/);
-  const cur = m ? parseInt(m[1], 10) : 1;
-  const total = 35;
-  const nextFile = cur + 1 <= total ? String(cur + 1).padStart(2,'0') + '.html' : null;
-  const prevFile = cur > 1 ? String(cur - 1).padStart(2,'0') + '.html' : null;
-
-  function goNext(e){
-    if (e) { e.preventDefault(); e.stopImmediatePropagation && e.stopImmediatePropagation(); }
-    if (nextFile) window.location.href = nextFile;
-    return false;
-  }
-  function goPrev(e){
-    if (e) { e.preventDefault(); e.stopImmediatePropagation && e.stopImmediatePropagation(); }
-    if (prevFile) window.location.href = prevFile;
-    return false;
-  }
-
-  document.addEventListener('submit', goNext, true);
-
-  document.addEventListener('click', function(e){
-    // Submit / continuar
-    if (e.target.closest('button[type="submit"], #quiz-submit-button, #quiz-submit-button-new, .next-button, [data-action="next"]')) {
-      return goNext(e);
-    }
-    // Back
-    if (e.target.closest('#slide-header-back-button, .back-button, [data-action="back"]')) {
-      return goPrev(e);
-    }
-    // Image radio / cards de resposta — clica direto vai pro próximo (UX típico de quiz)
-    const card = e.target.closest('.image-radio-widget, .image-widget, .answers-widget > div > div');
-    if (card) {
-      // Marca visualmente como selecionado pro user ver feedback
-      card.classList.add('selected');
-      // Delay pequeno pro user ver o feedback visual antes de avançar
-      setTimeout(goNext, 300);
-      e.preventDefault();
-      return false;
-    }
-  }, true);
-})();
-</script>
+<script src="nav.js"></script>
 
 </body></html>

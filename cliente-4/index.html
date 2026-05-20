@@ -303,7 +303,7 @@
       background-clip: text;
     }
 
-    /* ── CTA ── */
+    /* ── CTA / CHECKOUT ── */
     #cta-section {
       display: none;
       padding: 28px 16px 56px;
@@ -311,31 +311,108 @@
     }
     #cta-section.visible { display: flex; }
 
-    .cta-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--pink) 0%, var(--wine) 100%);
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border: none;
-      border-radius: 60px;
-      padding: 20px 36px;
-      cursor: pointer;
-      width: 100%;
-      max-width: 400px;
-      text-decoration: none;
-      line-height: 1.25;
+    .cta-wrap {
       text-align: center;
-      animation: pulse 2s infinite;
+      background: linear-gradient(160deg, #4a0a2a 0%, #350518 60%, #200210 100%);
+      border-radius: 20px;
+      padding: 40px 24px;
+      max-width: 540px;
+      width: 100%;
+      margin: 0 auto;
+      border: 1px solid rgba(216, 27, 106, 0.25);
     }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 6px 28px rgba(216,27,106,0.45); }
-      50%       { box-shadow: 0 6px 42px rgba(216,27,106,0.75); }
+    .cta-message {
+      padding: 10px 24px 28px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(216, 27, 106, 0.25);
+      text-align: center;
+    }
+    .cta-message .msg-title {
+      font-family: Georgia, serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(255, 210, 230, 0.9);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+    .cta-message blockquote {
+      border-left: 3px solid rgba(216, 27, 106, 0.55);
+      margin: 0 0 16px 0;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      background: rgba(255,255,255,0.03);
+      text-align: left;
+    }
+    .cta-message blockquote p {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      color: rgba(255, 225, 240, 0.92);
+      line-height: 1.7;
+      margin: 0 0 10px 0;
+    }
+    .cta-message blockquote .author {
+      font-family: Georgia, serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 15px;
+      color: #ff5fa3;
+      text-align: right;
+      display: block;
+    }
+    .cta-message .msg-footer {
+      font-family: Georgia, serif;
+      font-size: 14px;
+      color: rgba(255, 200, 225, 0.78);
+      line-height: 1.65;
+      margin-top: 14px;
+    }
+    .seed-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      margin-top: 32px;
+    }
+    .seed-btn {
+      display: inline-block;
+      width: 82%;
+      text-decoration: none;
+      position: relative;
+      animation: glowPulse 2.2s ease-in-out infinite;
+    }
+    .seed-btn:nth-child(1) { animation-delay: 0s; }
+    .seed-btn:nth-child(3) { animation-delay: 0.7s; }
+    .seed-btn:nth-child(5) { animation-delay: 1.4s; }
+    @keyframes glowPulse {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(216, 27, 106, 0.4)); }
+      50%      { filter: drop-shadow(0 0 18px rgba(216, 27, 106, 0.85)); }
+    }
+    .seed-btn:hover {
+      animation: none;
+      transform: scale(1.04);
+      filter: brightness(1.12) drop-shadow(0 0 22px rgba(216, 27, 106, 1));
+    }
+    .seed-btn:active { transform: scale(0.97); }
+    .seed-btn img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+    .btn-arrow {
+      font-size: 18px;
+      color: rgba(255, 130, 180, 0.65);
+      animation: arrowBlink 1.4s ease-in-out infinite;
+      line-height: 1;
+      margin: -4px 0;
+    }
+    @keyframes arrowBlink {
+      0%   { opacity: 0.3; transform: translateY(0px); }
+      50%  { opacity: 1;   transform: translateY(3px); }
+      100% { opacity: 0.3; transform: translateY(0px); }
     }
   </style>
 </head>
@@ -407,11 +484,33 @@
 </section>
 
 <section id="cta-section">
-  <a href="vsl.html" class="cta-btn">
-    <span>⭐</span>
-    Receive Special Message
-    <span>→</span>
-  </a>
+  <div class="cta-wrap">
+    <div class="cta-message">
+      <p class="msg-title">This is not a purchase.<br>It is the spiritual answer that resonated within you while the cards revealed your message.</p>
+      <blockquote>
+        <p>"Plant this seed in fertile soil; when it blooms, its blessings will illuminate other paths."</p>
+        <span class="author">— Celestino</span>
+      </blockquote>
+      <p class="msg-footer">
+        Therefore, there is no fixed price.<br><br>
+        You decide the value of your offering as a symbolic gesture of faith that keeps this mission alive and allows more lives to be touched.
+      </p>
+    </div>
+
+    <div class="seed-buttons">
+      <a href="https://go.centerpag.com/PPU38CQAUOP" class="seed-btn" onclick="ttq.track('InitiateCheckout')">
+        <img src="images/button_59.jpeg" alt="Seed 59">
+      </a>
+      <div class="btn-arrow">▼</div>
+      <a href="https://go.centerpag.com/PPU38CQAUOO" class="seed-btn" onclick="ttq.track('InitiateCheckout')">
+        <img src="images/button_47.jpeg" alt="Seed 47">
+      </a>
+      <div class="btn-arrow">▼</div>
+      <a href="https://go.centerpag.com/PPU38CQAUON" class="seed-btn" onclick="ttq.track('InitiateCheckout')">
+        <img src="images/button_39.jpeg" alt="Seed 39">
+      </a>
+    </div>
+  </div>
 </section>
 
 <script>

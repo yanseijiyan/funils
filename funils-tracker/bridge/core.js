@@ -185,6 +185,13 @@
     return id;
   }
 
+  /* ── session_id ── (agrupa eventos do mesmo visitor pro dashboard) ── */
+  function getSessionId() {
+    var sid = lsGet('session_id');
+    if (!sid) { sid = uuid(); lsSet('session_id', sid); setCookie('session_id', sid); }
+    return sid;
+  }
+
   /* ── fire ── */
   function fireClient(eventName, params, eventId) {
     try { if (window.fbq) window.fbq('track', eventName, params || {}, { eventID: eventId }); } catch (e) {}
@@ -196,6 +203,7 @@
     var pii = Object.assign({}, IDENTITY, extras || {});
     var payload = {
       tenant: CFG.tenant,
+      session_id: getSessionId(),
       event_name: eventName,
       event_id: eventId,
       event_time: Math.floor(Date.now() / 1000),
@@ -314,12 +322,89 @@
     }
   }
 
+  /* ── auto-trackers de funil ─────────────────────────────────────────
+   * Atribui eventos sem precisar de código no HTML:
+   *  - VSL milestones (player HTML5 <video>): VSLPlay, VSL_25, VSL_50, VSL_75
+   *  - ScrollDepth: ScrollDepth_50, _75, _100
+   *  - Quiz: API manual (window.tracker.event('QuizStep', { step: 5 }))
+   *
+   * Pra desligar:
+   *   data-auto-vsl="false"
+   *   data-auto-scroll="false"
+   */
+  function setupVslTracking() {
+    if (DS.autoVsl === 'false') return;
+    function hookVideo(v) {
+      if (v.dataset.fnlVslHooked === '1') return;
+      v.dataset.fnlVslHooked = '1';
+      var fired = {};
+      v.addEventListener('play', function () {
+        if (fired.play) return;
+        fired.play = true;
+        trackEvent('VSLPlay', { src: v.currentSrc || v.src || null });
+      });
+      v.addEventListener('timeupdate', function () {
+        if (!v.duration || isNaN(v.duration)) return;
+        var pct = v.currentTime / v.duration;
+        [25, 50, 75].forEach(function (m) {
+          if (pct >= m / 100 && !fired[m]) {
+            fired[m] = true;
+            trackEvent('VSL_' + m, { pct: m, src: v.currentSrc || v.src || null });
+          }
+        });
+      });
+      v.addEventListener('ended', function () {
+        if (fired.end) return;
+        fired.end = true;
+        trackEvent('VSL_100', { pct: 100, src: v.currentSrc || v.src || null });
+      });
+    }
+    document.querySelectorAll('video').forEach(hookVideo);
+    /* Observer pra vídeos que renderizam tarde (SPA/VSL com placeholder) */
+    try {
+      var obs = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          m.addedNodes.forEach(function (n) {
+            if (n.nodeType !== 1) return;
+            if (n.tagName === 'VIDEO') hookVideo(n);
+            if (n.querySelectorAll) n.querySelectorAll('video').forEach(hookVideo);
+          });
+        });
+      });
+      obs.observe(document.body, { childList: true, subtree: true });
+    } catch (e) {}
+  }
+
+  function setupScrollTracking() {
+    if (DS.autoScroll === 'false') return;
+    var hits = {};
+    function check() {
+      var h = document.documentElement;
+      var max = Math.max(h.scrollHeight, document.body.scrollHeight || 0);
+      if (max <= 0) return;
+      var pct = ((window.scrollY || h.scrollTop || 0) + window.innerHeight) / max * 100;
+      [50, 75, 100].forEach(function (m) {
+        if (pct >= m && !hits[m]) {
+          hits[m] = true;
+          trackEvent('ScrollDepth_' + m, { pct: m });
+        }
+      });
+    }
+    var rafScheduled = false;
+    window.addEventListener('scroll', function () {
+      if (rafScheduled) return;
+      rafScheduled = true;
+      requestAnimationFrame(function () { rafScheduled = false; check(); });
+    }, { passive: true });
+  }
+
   /* ── public API ── */
   window.tracker = {
     event: trackEvent,
     identify: identify,
     getValues: getValues,
     getEventId: getEventId,
+    getSessionId: getSessionId,
     config: CFG
   };
 
@@ -332,6 +417,15 @@
     setTimeout(function () {
       trackEvent('ViewContent', { content_name: (document.title || '').trim().slice(0, 120) });
     }, 50);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      setupVslTracking();
+      setupScrollTracking();
+    });
+  } else {
+    setupVslTracking();
+    setupScrollTracking();
   }
 
   /* ── carrega adapter dinâmicamente, depois aplica hooks (com re-tick) ── */

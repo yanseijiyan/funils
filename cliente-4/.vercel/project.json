@@ -1,1 +1,16 @@
-{"projectId":"prj_CJ0qGn2x6A5Q0GMBszRjeRuFLhSe","orgId":"team_ZxdyURKfNUHUK5dn9lOuJU3E","projectName":"funils-cliente-4"}
+{
+  "projectId": "prj_a46PrQypYuVg32jL8I33gbF7k3Gj",
+  "orgId": "team_ZxdyURKfNUHUK5dn9lOuJU3E",
+  "projectName": "funils-ap8x",
+  "settings": {
+    "createdAt": 1779127271353,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}

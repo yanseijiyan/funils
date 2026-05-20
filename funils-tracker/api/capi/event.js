@@ -17,9 +17,10 @@
  * Retorna { ok, meta:{ok,...}, tiktok:{ok,...}, tenant:{id,meta_pixel_id,tiktok_pixel_id} }
  */
 const { getTenant } = require('../../lib/tenant');
-const { userDataMeta, userDataTikTok, readJson } = require('../../lib/hash');
+const { userDataMeta, userDataTikTok, readJson, clientIp } = require('../../lib/hash');
 const { sendMetaCapi } = require('../../lib/meta-capi');
 const { sendTikTokEvents } = require('../../lib/tiktok-events');
+const { recordEvent } = require('../../lib/events');
 
 module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
@@ -87,8 +88,43 @@ module.exports = async function handler(req, res) {
     page: { url, referrer }
   };
 
-  /* Dispara em paralelo */
-  const [meta, tiktok] = await Promise.all([
+  /* Persist event payload pro Postgres (dashboard) */
+  const ud = payload.user_data || {};
+  const utms = (customData.utms || {});
+  const dbEvent = {
+    event_id: eventId,
+    event_name: eventName,
+    tenant: payload.tenant,
+    session_id: payload.session_id || null,
+    ts: eventTime,
+    utm_source:   utms.source   || null,
+    utm_medium:   utms.medium   || null,
+    utm_campaign: utms.campaign || null,
+    utm_content:  utms.content  || null,
+    utm_term:     utms.term     || null,
+    fbclid: ud.fbclid || null,
+    ttclid: ud.ttclid || null,
+    gclid:  ud.gclid  || null,
+    url, referrer,
+    user_agent: ud.client_user_agent || req.headers['user-agent'] || null,
+    ip: clientIp(req),
+    value: customData.value != null ? Number(customData.value) : null,
+    currency: customData.currency || null,
+    custom: {
+      ...(customData.contents ? { contents: customData.contents } : {}),
+      ...(customData.content_name ? { content_name: customData.content_name } : {}),
+      ...(customData.content_category ? { content_category: customData.content_category } : {}),
+      ...(customData.order_id ? { order_id: customData.order_id } : {}),
+      ...(customData.step != null ? { step: customData.step } : {}),
+      ...(customData.pct != null ? { pct: customData.pct } : {}),
+      ...(customData.steps_total ? { steps_total: customData.steps_total } : {}),
+      platform: customData.platform || null,
+      affiliate: customData.affiliate || null
+    }
+  };
+
+  /* Dispara em paralelo: Meta CAPI + TikTok Events + INSERT events */
+  const [meta, tiktok, db] = await Promise.all([
     sendMetaCapi({
       pixelId: tenant.meta_pixel_id,
       token: tenant.capi_token,
@@ -100,7 +136,8 @@ module.exports = async function handler(req, res) {
       token: tenant.tiktok_access_token,
       event: ttEvent,
       testCode: tenant.tiktok_test_code
-    })
+    }),
+    recordEvent(dbEvent)
   ]);
 
   res.status(200).json({
@@ -108,6 +145,6 @@ module.exports = async function handler(req, res) {
     event_id: eventId,
     event: eventName,
     tenant: { id: tenant.id, meta_pixel_id: tenant.meta_pixel_id, tiktok_pixel_id: tenant.tiktok_pixel_id },
-    meta, tiktok
+    meta, tiktok, db
   });
 };

@@ -24,13 +24,42 @@ Se você não conhece o projeto, leia o [`README.md`](./README.md) primeiro pra 
 
 Tem que ter já configurado no computador (uma vez só, não por tenant):
 
-1. **Node.js 20+**: `node --version`
+1. **Node.js 22 LTS**: `node --version` (Node 26 pode dar problema com Next 16 do dashboard)
 2. **Vercel CLI logado**: `vercel whoami` deve retornar o email
    - Se não tiver: `npm i -g vercel && vercel login`
 3. **Repo clonado** em `~/Desktop/funils/`
 4. **Acesso ao team Vercel `yan-s-projects20`**
 5. **Conta TikTok Ads Manager** com pixel configurado
 6. **Conta na plataforma de checkout** (PerfectPay, Hotmart, etc) — como produtor (precisa pra configurar postback)
+7. **Postgres Neon provisionado** (Vercel Marketplace → Storage → Add Neon) — gera env `DATABASE_URL`. Mesma string vai em ambos: `funils-tracker` e `funils-dashboard`
+
+### Sobre o dashboard (funils-dashboard)
+
+Projeto Vercel separado em `funils/funils-dashboard/`. Visualiza dados que o tracker grava no Postgres.
+
+**Envs específicas do dashboard:**
+```bash
+cd ~/Desktop/funils/funils-dashboard
+vercel env add DATABASE_URL production       # mesma do funils-tracker
+vercel env add DASHBOARD_PASSWORD production # senha global pros sócios
+vercel env add AUTH_SECRET production        # openssl rand -hex 32 — trocar revoga TODOS os logins
+```
+
+**Schema:** rodar UMA VEZ no Neon SQL Editor (painel Vercel → Storage → seu DB → Query):
+```bash
+# conteúdo de funils-dashboard/lib/schema.sql
+```
+
+**Login:** vai pra `funils-dashboard.vercel.app` → digite senha → cookie 60 dias. Sócios só precisam saber a senha (passar via WhatsApp).
+
+**Páginas:**
+- `/dashboard` — Overview (cards + gráfico série + top 5 campanhas)
+- `/dashboard/campaigns` — Breakdown source → campanha → conjunto → ad
+- `/dashboard/funnels` — VSL retention + Quiz funnel + ScrollDepth
+- `/dashboard/sales` — Lista detalhada de vendas
+
+**Pra Quiz funcionar:** disparar evento no JS do site: `window.tracker.event('QuizStep', { step: 5 })` (substitui 5 pelo número da pergunta).
+**VSL e ScrollDepth:** automático — o bridge detecta `<video>` e scroll sozinho.
 
 **Saber se o funils-tracker está deployado:**
 ```bash
