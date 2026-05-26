@@ -238,10 +238,12 @@
     var url = ORIGIN + '/api/capi/event';
     try {
       var body = JSON.stringify(payload);
+      var sent = false;
       if (navigator.sendBeacon) {
-        navigator.sendBeacon(url, new Blob([body], { type: 'application/json' }));
-      } else {
-        fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true })
+        sent = navigator.sendBeacon(url, new Blob([body], { type: 'text/plain;charset=UTF-8' }));
+      }
+      if (!sent) {
+        fetch(url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body, keepalive: true, mode: 'cors' })
           .catch(function () {});
       }
     } catch (e) {}
