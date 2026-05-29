@@ -1,4 +1,4 @@
-import { getSales, getTenants, resolveFilters, type Filters } from '@/lib/queries';
+import { getSales, getTenants, getCampaigns, resolveFilters, type Filters } from '@/lib/queries';
 import { FiltersBar } from '@/components/filters';
 import { fmtBRL, fmtDateTime } from '@/lib/format';
 
@@ -15,11 +15,11 @@ function StatusPill({ status }: { status: string }) {
 
 export default async function SalesPage(props: { searchParams: Promise<Filters> }) {
   const filters = resolveFilters(await props.searchParams);
-  const [sales, tenants] = await Promise.all([getSales(filters), getTenants()]);
+  const [sales, tenants, campaignList] = await Promise.all([getSales(filters), getTenants(), getCampaigns(filters.tenant)]);
 
   return (
     <div className="space-y-6">
-      <FiltersBar tenants={tenants} current={filters} />
+      <FiltersBar tenants={tenants} campaigns={campaignList} current={filters} />
 
       <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
         <div className="overflow-x-auto">

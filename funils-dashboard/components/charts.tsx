@@ -52,28 +52,76 @@ export function SeriesChart({ data, currency = 'USD' }: { data: DayPoint[]; curr
   );
 }
 
-/* Funnel (barras horizontais decrescentes — VSL, Quiz, Scroll) */
-export function FunnelChart({ data, color = '#10b981' }: { data: FunnelStep[]; color?: string }) {
+/* Cor por retenção: vermelho (0%) → verde (100%) */
+function retentionColor(p: number): string {
+  const hue = Math.max(0, Math.min(1, p)) * 130; // 0 vermelho, 130 verde
+  return `hsl(${Math.round(hue)} 68% 52%)`;
+}
+const nf = new Intl.NumberFormat('pt-BR');
+
+/* Funnel (barras horizontais — VSL, Quiz, Scroll)
+ *  - dropoff: mostra a queda vs passo anterior e destaca o pior passo
+ *  - gradient: pinta a barra por retenção (verde→vermelho)
+ *  - href/slug em cada step (quiz) viram link pra página real */
+export function FunnelChart({
+  data,
+  color = '#10b981',
+  dropoff = false,
+  gradient = false
+}: { data: FunnelStep[]; color?: string; dropoff?: boolean; gradient?: boolean }) {
   if (!data.length) return <Empty label="Sem eventos no período" />;
   const max = Math.max(...data.map((d) => d.count), 1);
+  const first = data[0]?.count || 0;
+
+  // pior passo = maior queda relativa vs anterior (só onde o anterior tinha gente)
+  let worstIdx = -1;
+  let worstDrop = 0;
+  for (let i = 1; i < data.length; i++) {
+    const prev = data[i - 1].count;
+    if (prev <= 0) continue;
+    const drop = 1 - data[i].count / prev;
+    if (drop > worstDrop) { worstDrop = drop; worstIdx = i; }
+  }
+
   return (
     <div className="space-y-2">
       {data.map((d, i) => {
         const pctOfMax = (d.count / max) * 100;
-        const pctOfFirst = data[0]?.count ? d.count / data[0].count : 0;
+        const pctOfFirst = first ? d.count / first : 0;
+        const prev = i > 0 ? data[i - 1].count : 0;
+        const dropPrev = i > 0 && prev > 0 ? 1 - d.count / prev : 0;
+        const isWorst = i === worstIdx && worstDrop > 0;
+        const barColor = gradient ? retentionColor(pctOfFirst) : color;
+
         return (
           <div key={i} className="flex items-center gap-3">
-            <div className="w-16 text-sm text-zinc-500 text-right tabular-nums">{d.label}</div>
-            <div className="flex-1 relative h-10 bg-zinc-100 dark:bg-zinc-800/40 rounded-md overflow-hidden">
-              <div
-                className="h-full rounded-md transition-all"
-                style={{ width: pctOfMax + '%', background: color }}
-              />
-              <div className="absolute inset-0 flex items-center px-3 text-sm font-medium">
-                <span className="tabular-nums">{new Intl.NumberFormat('pt-BR').format(d.count)}</span>
-                {i > 0 && (
-                  <span className="ml-2 text-xs text-zinc-500 tabular-nums">
-                    {(pctOfFirst * 100).toFixed(1)}%
+            <div className="w-28 shrink-0 text-right">
+              {d.href ? (
+                <a href={d.href} target="_blank" rel="noopener noreferrer"
+                   className="text-sm text-zinc-400 hover:text-zinc-100 hover:underline inline-flex items-center gap-1 justify-end">
+                  {d.label}<span aria-hidden>↗</span>
+                </a>
+              ) : (
+                <span className="text-sm text-zinc-500 tabular-nums">{d.label}</span>
+              )}
+              {d.slug && <div className="text-[10px] text-zinc-600 truncate">{d.slug}</div>}
+            </div>
+            <div className={'flex-1 relative h-10 bg-zinc-100 dark:bg-zinc-800/40 rounded-md overflow-hidden ' +
+                            (isWorst ? 'ring-2 ring-red-500/70' : '')}>
+              <div className="h-full rounded-md transition-all" style={{ width: pctOfMax + '%', background: barColor }} />
+              <div className="absolute inset-0 flex items-center px-3 text-sm font-medium gap-2">
+                <span className="tabular-nums">{nf.format(d.count)}</span>
+                {i > 0 && !dropoff && (
+                  <span className="text-xs text-zinc-200/80 tabular-nums">{(pctOfFirst * 100).toFixed(1)}%</span>
+                )}
+                {i > 0 && dropoff && dropPrev > 0 && (
+                  <span className={'text-xs tabular-nums ' + (isWorst ? 'text-red-100 font-semibold' : 'text-zinc-200/80')}>
+                    ▼ {(dropPrev * 100).toFixed(0)}% vs anterior
+                  </span>
+                )}
+                {isWorst && (
+                  <span className="ml-auto text-[10px] uppercase tracking-wide bg-red-600 text-white px-1.5 py-0.5 rounded">
+                    pior queda
                   </span>
                 )}
               </div>

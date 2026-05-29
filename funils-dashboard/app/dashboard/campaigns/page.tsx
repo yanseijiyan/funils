@@ -1,4 +1,4 @@
-import { getCampaignBreakdown, getAdSpend, getTenants, resolveFilters, type Filters, type AdSpendRow } from '@/lib/queries';
+import { getCampaignBreakdown, getAdSpend, getTenants, getCampaigns, resolveFilters, type Filters, type AdSpendRow } from '@/lib/queries';
 import { FiltersBar } from '@/components/filters';
 import { fmtBRL, fmtInt, fmtPct } from '@/lib/format';
 import { CardSection } from '@/components/card';
@@ -28,10 +28,11 @@ function newNode(label: string, level: Level): Node {
 
 export default async function CampaignsPage(props: { searchParams: Promise<Filters> }) {
   const filters = resolveFilters(await props.searchParams);
-  const [rows, ad, tenants] = await Promise.all([
+  const [rows, ad, tenants, campaignList] = await Promise.all([
     getCampaignBreakdown(filters),
     getAdSpend(filters),
-    getTenants()
+    getTenants(),
+    getCampaigns(filters.tenant)
   ]);
 
   const root = newNode('Total', 'root');
@@ -107,7 +108,7 @@ export default async function CampaignsPage(props: { searchParams: Promise<Filte
 
   return (
     <div className="space-y-6">
-      <FiltersBar tenants={tenants} current={filters} />
+      <FiltersBar tenants={tenants} campaigns={campaignList} current={filters} />
       <CardSection title="Campanhas — performance de Ads">
         {sources.length === 0 ? (
           <p className="text-sm text-zinc-500 py-6 text-center">Nenhuma campanha no período.</p>

@@ -5,6 +5,7 @@ export type Filters = {
   tenant?: string;
   from?: string; // YYYY-MM-DD
   to?: string;
+  campaign?: string; // utm_campaign
 };
 
 /* Fuso da operação — "hoje" é o dia comercial no Brasil. */
@@ -23,20 +24,22 @@ export function tzToday(tz: string = DASHBOARD_TZ): string {
 /* Aplica o default: sem período na URL → só o dia de hoje (fuso BR).
    Se vier qualquer ponta (from ou to), respeita o que o usuário escolheu. */
 export function resolveFilters(raw: Filters): Filters {
+  const campaign = raw.campaign?.trim() || undefined;
   const from = raw.from?.trim() || '';
   const to = raw.to?.trim() || '';
   if (from || to) {
-    return { tenant: raw.tenant, from: from || undefined, to: to || undefined };
+    return { tenant: raw.tenant, campaign, from: from || undefined, to: to || undefined };
   }
   const today = tzToday();
-  return { tenant: raw.tenant, from: today, to: today };
+  return { tenant: raw.tenant, campaign, from: today, to: today };
 }
 
 function whereSales(f: Filters) {
   return {
     tenant: f.tenant || null,
     from: f.from || null,
-    to: f.to || null
+    to: f.to || null,
+    campaign: f.campaign || null
   };
 }
 
@@ -66,6 +69,7 @@ export async function getOverviewCards(f: Filters) {
         COUNT(*) FILTER (WHERE event_name = 'InitiateCheckout') AS checkouts
       FROM events
       WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.campaign}::text IS NULL OR utm_campaign = ${w.campaign})
         AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
         AND (${w.to}::date IS NULL OR ts < (${w.to}::date + INTERVAL '1 day'))
     `;
@@ -76,6 +80,7 @@ export async function getOverviewCards(f: Filters) {
         COALESCE(SUM(value) FILTER (WHERE status = 'approved'), 0) AS revenue
       FROM sales
       WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.campaign}::text IS NULL OR utm_campaign = ${w.campaign})
         AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
         AND (${w.to}::date IS NULL OR ts < (${w.to}::date + INTERVAL '1 day'))
     `;
@@ -108,6 +113,7 @@ export async function getSeriesByDay(f: Filters): Promise<DayPoint[]> {
         COUNT(*) FILTER (WHERE event_name = 'Lead') AS leads
       FROM events
       WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.campaign}::text IS NULL OR utm_campaign = ${w.campaign})
         AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
         AND (${w.to}::date IS NULL OR ts < (${w.to}::date + INTERVAL '1 day'))
       GROUP BY 1
@@ -119,6 +125,7 @@ export async function getSeriesByDay(f: Filters): Promise<DayPoint[]> {
         COALESCE(SUM(value) FILTER (WHERE status = 'approved'), 0) AS revenue
       FROM sales
       WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.campaign}::text IS NULL OR utm_campaign = ${w.campaign})
         AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
         AND (${w.to}::date IS NULL OR ts < (${w.to}::date + INTERVAL '1 day'))
       GROUP BY 1
@@ -236,25 +243,55 @@ export async function getAdSpend(f: Filters): Promise<AdSpendRow[]> {
   }
 }
 
-/* Quiz funnel: contagem de eventos QuizStep por step value */
-export type FunnelStep = { label: string; count: number };
+/* Quiz funnel: contagem de eventos QuizStep por step value.
+   href/slug: página real onde aquele passo disparou (url mais comum do passo). */
+export type FunnelStep = { label: string; count: number; href?: string; slug?: string };
 export async function getQuizFunnel(f: Filters): Promise<FunnelStep[]> {
   try {
     const w = whereSales(f);
     const rows = await sql`
-      SELECT (custom->>'step')::int AS step, COUNT(DISTINCT session_id) AS count
+      SELECT
+        (custom->>'step')::int AS step,
+        COUNT(DISTINCT session_id) AS count,
+        MODE() WITHIN GROUP (ORDER BY url) AS url
       FROM events
       WHERE event_name = 'QuizStep'
         AND (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.campaign}::text IS NULL OR utm_campaign = ${w.campaign})
         AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
         AND (${w.to}::date IS NULL OR ts < (${w.to}::date + INTERVAL '1 day'))
         AND custom->>'step' IS NOT NULL
       GROUP BY 1
       ORDER BY 1
     `;
-    return rows.map((r) => ({ label: 'Passo ' + r.step, count: Number(r.count) }));
+    return rows.map((r) => {
+      const url = r.url ? String(r.url) : undefined;
+      let slug: string | undefined;
+      if (url) {
+        try { slug = new URL(url).pathname; } catch { slug = undefined; }
+      }
+      return { label: 'Passo ' + r.step, count: Number(r.count), href: url, slug };
+    });
   } catch (e) {
     console.error('[getQuizFunnel]', e);
+    return [];
+  }
+}
+
+/* Lista de campanhas (utm_campaign) pra popular o filtro. */
+export async function getCampaigns(tenant?: string): Promise<string[]> {
+  try {
+    const t = tenant || null;
+    const rows = await sql`
+      SELECT DISTINCT utm_campaign FROM events
+      WHERE utm_campaign IS NOT NULL AND utm_campaign <> ''
+        AND (${t}::text IS NULL OR tenant = ${t})
+      ORDER BY 1
+      LIMIT 500
+    `;
+    return rows.map((r) => String(r.utm_campaign));
+  } catch (e) {
+    console.error('[getCampaigns]', e);
     return [];
   }
 }
@@ -268,6 +305,7 @@ export async function getVslRetention(f: Filters): Promise<FunnelStep[]> {
       FROM events
       WHERE event_name IN ('VSLPlay','VSL_25','VSL_50','VSL_75','VSL_100')
         AND (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.campaign}::text IS NULL OR utm_campaign = ${w.campaign})
         AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
         AND (${w.to}::date IS NULL OR ts < (${w.to}::date + INTERVAL '1 day'))
       GROUP BY 1
@@ -294,6 +332,7 @@ export async function getScrollDistribution(f: Filters): Promise<FunnelStep[]> {
       FROM events
       WHERE event_name IN ('ScrollDepth_50','ScrollDepth_75','ScrollDepth_100')
         AND (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.campaign}::text IS NULL OR utm_campaign = ${w.campaign})
         AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
         AND (${w.to}::date IS NULL OR ts < (${w.to}::date + INTERVAL '1 day'))
       GROUP BY 1
@@ -315,6 +354,7 @@ export async function getSales(f: Filters): Promise<Sale[]> {
     const rows = await sql`
       SELECT * FROM sales
       WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
+        AND (${w.campaign}::text IS NULL OR utm_campaign = ${w.campaign})
         AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
         AND (${w.to}::date IS NULL OR ts < (${w.to}::date + INTERVAL '1 day'))
       ORDER BY ts DESC

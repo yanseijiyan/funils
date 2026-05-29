@@ -1,4 +1,4 @@
-import { getOverviewCards, getSeriesByDay, getTenants, getCampaignBreakdown, resolveFilters, type Filters } from '@/lib/queries';
+import { getOverviewCards, getSeriesByDay, getTenants, getCampaignBreakdown, getCampaigns, resolveFilters, type Filters } from '@/lib/queries';
 import { FiltersBar } from '@/components/filters';
 import { fmtBRL, fmtInt, fmtPct } from '@/lib/format';
 import { Card, CardSection } from '@/components/card';
@@ -8,11 +8,12 @@ export const dynamic = 'force-dynamic';
 
 export default async function OverviewPage(props: { searchParams: Promise<Filters> }) {
   const filters = resolveFilters(await props.searchParams);
-  const [cards, series, tenants, campaigns] = await Promise.all([
+  const [cards, series, tenants, campaigns, campaignList] = await Promise.all([
     getOverviewCards(filters),
     getSeriesByDay(filters),
     getTenants(),
-    getCampaignBreakdown(filters)
+    getCampaignBreakdown(filters),
+    getCampaigns(filters.tenant)
   ]);
 
   const conversionRate = cards.visitors ? cards.sales / cards.visitors : 0;
@@ -25,7 +26,7 @@ export default async function OverviewPage(props: { searchParams: Promise<Filter
 
   return (
     <div className="space-y-6">
-      <FiltersBar tenants={tenants} current={filters} />
+      <FiltersBar tenants={tenants} campaigns={campaignList} current={filters} />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <Card label="Visitantes únicos"  value={fmtInt(cards.visitors)} />

@@ -45,7 +45,7 @@ function matchPreset(from: string, to: string, today: string): string {
   return 'custom';
 }
 
-export function FiltersBar({ tenants, current }: { tenants: string[]; current: Filters }) {
+export function FiltersBar({ tenants, campaigns = [], current }: { tenants: string[]; campaigns?: string[]; current: Filters }) {
   const today = useMemo(() => todayTZ(), []);
   const [from, setFrom] = useState(current.from || today);
   const [to, setTo] = useState(current.to || today);
@@ -82,6 +82,17 @@ export function FiltersBar({ tenants, current }: { tenants: string[]; current: F
           ))}
         </select>
       </Field>
+
+      {campaigns.length > 0 && (
+        <Field label="Campanha">
+          <select name="campaign" defaultValue={current.campaign || ''} className={inputCls + ' min-w-44 max-w-64 cursor-pointer'}>
+            <option value="">Todas</option>
+            {campaigns.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+        </Field>
+      )}
 
       <Field label="Período">
         <select value={preset} onChange={(e) => applyPreset(e.target.value)} className={inputCls + ' min-w-40 cursor-pointer'}>
