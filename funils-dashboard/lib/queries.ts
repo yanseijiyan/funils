@@ -157,6 +157,7 @@ export type CampaignRow = {
   utm_term: string | null;
   visitors: number;
   leads: number;
+  checkouts: number;
   sales: number;
   revenue: number;
 };
@@ -168,7 +169,8 @@ export async function getCampaignBreakdown(f: Filters): Promise<CampaignRow[]> {
         SELECT
           utm_source, utm_campaign, utm_content, utm_term,
           COUNT(DISTINCT session_id) FILTER (WHERE event_name = 'PageView') AS visitors,
-          COUNT(*) FILTER (WHERE event_name = 'Lead') AS leads
+          COUNT(*) FILTER (WHERE event_name = 'Lead') AS leads,
+          COUNT(DISTINCT session_id) FILTER (WHERE event_name = 'InitiateCheckout') AS checkouts
         FROM events
         WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
           AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
@@ -191,10 +193,11 @@ export async function getCampaignBreakdown(f: Filters): Promise<CampaignRow[]> {
         COALESCE(ev.utm_campaign, sl.utm_campaign) AS utm_campaign,
         COALESCE(ev.utm_content, sl.utm_content)   AS utm_content,
         COALESCE(ev.utm_term, sl.utm_term)         AS utm_term,
-        COALESCE(ev.visitors, 0) AS visitors,
-        COALESCE(ev.leads, 0)    AS leads,
-        COALESCE(sl.sales, 0)    AS sales,
-        COALESCE(sl.revenue, 0)  AS revenue
+        COALESCE(ev.visitors, 0)  AS visitors,
+        COALESCE(ev.leads, 0)     AS leads,
+        COALESCE(ev.checkouts, 0) AS checkouts,
+        COALESCE(sl.sales, 0)     AS sales,
+        COALESCE(sl.revenue, 0)   AS revenue
       FROM ev
       FULL OUTER JOIN sl USING (utm_source, utm_campaign, utm_content, utm_term)
       ORDER BY revenue DESC NULLS LAST, visitors DESC NULLS LAST
