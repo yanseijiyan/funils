@@ -27,8 +27,14 @@
       .toLowerCase();
   }
 
-  var core = document.currentScript
-    || document.querySelector('script[src*="/bridge/core.js"]');
+  /* O adapter é injetado pelo core como <script async>. Em script async
+     inserido dinamicamente, document.currentScript aponta pra TAG DO PRÓPRIO
+     ADAPTER (que não tem os data-*), não pro core.js — então buscamos a tag do
+     core explicitamente PRIMEIRO. Sem isso, data-shopify-domain era ignorado,
+     checkoutDomains ficava só ['myshopify.com'] e o InitiateCheckout nunca
+     engatava nos CTAs do funil. */
+  var core = document.querySelector('script[src*="/bridge/core.js"]')
+    || document.currentScript;
   var ds = core ? core.dataset : {};
 
   var domains = ['myshopify.com'];
