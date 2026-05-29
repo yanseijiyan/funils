@@ -1,12 +1,13 @@
-import { getOverviewCards, getSeriesByDay, getTenants, getCampaignBreakdown, type Filters } from '@/lib/queries';
-import { FiltersBar, fmtBRL, fmtInt, fmtPct } from '@/components/filters';
+import { getOverviewCards, getSeriesByDay, getTenants, getCampaignBreakdown, resolveFilters, type Filters } from '@/lib/queries';
+import { FiltersBar } from '@/components/filters';
+import { fmtBRL, fmtInt, fmtPct } from '@/lib/format';
 import { Card, CardSection } from '@/components/card';
 import { SeriesChart, BarRevenueChart } from '@/components/charts';
 
 export const dynamic = 'force-dynamic';
 
 export default async function OverviewPage(props: { searchParams: Promise<Filters> }) {
-  const filters = await props.searchParams;
+  const filters = resolveFilters(await props.searchParams);
   const [cards, series, tenants, campaigns] = await Promise.all([
     getOverviewCards(filters),
     getSeriesByDay(filters),

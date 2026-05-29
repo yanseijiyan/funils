@@ -1,4 +1,4 @@
-import { getQuizFunnel, getVslRetention, getScrollDistribution, getTenants, type Filters } from '@/lib/queries';
+import { getQuizFunnel, getVslRetention, getScrollDistribution, getTenants, resolveFilters, type Filters } from '@/lib/queries';
 import { FiltersBar } from '@/components/filters';
 import { CardSection } from '@/components/card';
 import { FunnelChart } from '@/components/charts';
@@ -6,7 +6,7 @@ import { FunnelChart } from '@/components/charts';
 export const dynamic = 'force-dynamic';
 
 export default async function FunnelsPage(props: { searchParams: Promise<Filters> }) {
-  const filters = await props.searchParams;
+  const filters = resolveFilters(await props.searchParams);
   const [quiz, vsl, scroll, tenants] = await Promise.all([
     getQuizFunnel(filters),
     getVslRetention(filters),

@@ -7,6 +7,31 @@ export type Filters = {
   to?: string;
 };
 
+/* Fuso da operação — "hoje" é o dia comercial no Brasil. */
+export const DASHBOARD_TZ = 'America/Sao_Paulo';
+
+/* Data de hoje (YYYY-MM-DD) no fuso da operação. Funciona no server (UTC). */
+export function tzToday(tz: string = DASHBOARD_TZ): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: tz,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(new Date());
+}
+
+/* Aplica o default: sem período na URL → só o dia de hoje (fuso BR).
+   Se vier qualquer ponta (from ou to), respeita o que o usuário escolheu. */
+export function resolveFilters(raw: Filters): Filters {
+  const from = raw.from?.trim() || '';
+  const to = raw.to?.trim() || '';
+  if (from || to) {
+    return { tenant: raw.tenant, from: from || undefined, to: to || undefined };
+  }
+  const today = tzToday();
+  return { tenant: raw.tenant, from: today, to: today };
+}
+
 function whereSales(f: Filters) {
   return {
     tenant: f.tenant || null,

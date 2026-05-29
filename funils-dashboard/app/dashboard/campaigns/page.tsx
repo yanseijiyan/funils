@@ -1,5 +1,6 @@
-import { getCampaignBreakdown, getAdSpend, getTenants, type Filters, type AdSpendRow } from '@/lib/queries';
-import { FiltersBar, fmtBRL, fmtInt, fmtPct } from '@/components/filters';
+import { getCampaignBreakdown, getAdSpend, getTenants, resolveFilters, type Filters, type AdSpendRow } from '@/lib/queries';
+import { FiltersBar } from '@/components/filters';
+import { fmtBRL, fmtInt, fmtPct } from '@/lib/format';
 import { CardSection } from '@/components/card';
 
 export const dynamic = 'force-dynamic';
@@ -26,7 +27,7 @@ function newNode(label: string, level: Level): Node {
 }
 
 export default async function CampaignsPage(props: { searchParams: Promise<Filters> }) {
-  const filters = await props.searchParams;
+  const filters = resolveFilters(await props.searchParams);
   const [rows, ad, tenants] = await Promise.all([
     getCampaignBreakdown(filters),
     getAdSpend(filters),

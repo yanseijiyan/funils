@@ -1,5 +1,6 @@
-import { getSales, getTenants, type Filters } from '@/lib/queries';
-import { FiltersBar, fmtBRL, fmtDateTime } from '@/components/filters';
+import { getSales, getTenants, resolveFilters, type Filters } from '@/lib/queries';
+import { FiltersBar } from '@/components/filters';
+import { fmtBRL, fmtDateTime } from '@/lib/format';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +14,7 @@ function StatusPill({ status }: { status: string }) {
 }
 
 export default async function SalesPage(props: { searchParams: Promise<Filters> }) {
-  const filters = await props.searchParams;
+  const filters = resolveFilters(await props.searchParams);
   const [sales, tenants] = await Promise.all([getSales(filters), getTenants()]);
 
   return (
