@@ -66,6 +66,7 @@ export async function getOverviewCards(f: Filters) {
         COUNT(*) FILTER (WHERE event_name = 'PageView')         AS pageviews,
         COUNT(DISTINCT session_id) FILTER (WHERE event_name = 'PageView') AS visitors,
         COUNT(*) FILTER (WHERE event_name = 'Lead')             AS leads,
+        COUNT(DISTINCT session_id) FILTER (WHERE event_name = 'ADIC') AS adic,
         COUNT(*) FILTER (WHERE event_name = 'InitiateCheckout') AS checkouts
       FROM events
       WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
@@ -90,6 +91,7 @@ export async function getOverviewCards(f: Filters) {
       pageviews: Number(e.pageviews || 0),
       visitors:  Number(e.visitors  || 0),
       leads:     Number(e.leads     || 0),
+      adic:      Number(e.adic      || 0),
       checkouts: Number(e.checkouts || 0),
       sales:     Number(s.sales     || 0),
       refunds:   Number(s.refunds   || 0),
@@ -97,7 +99,7 @@ export async function getOverviewCards(f: Filters) {
     };
   } catch (e) {
     console.error('[getOverviewCards]', e);
-    return { pageviews: 0, visitors: 0, leads: 0, checkouts: 0, sales: 0, refunds: 0, revenue: 0 };
+    return { pageviews: 0, visitors: 0, leads: 0, adic: 0, checkouts: 0, sales: 0, refunds: 0, revenue: 0 };
   }
 }
 
@@ -157,6 +159,7 @@ export type CampaignRow = {
   utm_term: string | null;
   visitors: number;
   leads: number;
+  adic: number;
   checkouts: number;
   sales: number;
   revenue: number;
@@ -170,7 +173,8 @@ export async function getCampaignBreakdown(f: Filters): Promise<CampaignRow[]> {
           utm_source, utm_campaign, utm_content, utm_term,
           COUNT(DISTINCT session_id) FILTER (WHERE event_name = 'PageView') AS visitors,
           COUNT(*) FILTER (WHERE event_name = 'Lead') AS leads,
-          COUNT(DISTINCT session_id) FILTER (WHERE event_name = 'InitiateCheckout') AS checkouts
+          COUNT(DISTINCT session_id) FILTER (WHERE event_name = 'ADIC') AS adic,
+          COUNT(*) FILTER (WHERE event_name = 'InitiateCheckout') AS checkouts
         FROM events
         WHERE (${w.tenant}::text IS NULL OR tenant = ${w.tenant})
           AND (${w.from}::date IS NULL OR ts >= ${w.from}::date)
@@ -195,6 +199,7 @@ export async function getCampaignBreakdown(f: Filters): Promise<CampaignRow[]> {
         COALESCE(ev.utm_term, sl.utm_term)         AS utm_term,
         COALESCE(ev.visitors, 0)  AS visitors,
         COALESCE(ev.leads, 0)     AS leads,
+        COALESCE(ev.adic, 0)      AS adic,
         COALESCE(ev.checkouts, 0) AS checkouts,
         COALESCE(sl.sales, 0)     AS sales,
         COALESCE(sl.revenue, 0)   AS revenue

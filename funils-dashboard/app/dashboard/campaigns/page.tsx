@@ -12,7 +12,7 @@ type Node = {
   label: string;
   display: string;
   level: Level;
-  visitors: number; leads: number; checkouts: number; sales: number; revenue: number;
+  visitors: number; leads: number; adic: number; checkouts: number; sales: number; revenue: number;
   spend: number; impressions: number; clicks: number;
   children: Map<string, Node>;
 };
@@ -20,7 +20,7 @@ type Node = {
 function newNode(label: string, level: Level): Node {
   return {
     label, display: label, level,
-    visitors: 0, leads: 0, checkouts: 0, sales: 0, revenue: 0,
+    visitors: 0, leads: 0, adic: 0, checkouts: 0, sales: 0, revenue: 0,
     spend: 0, impressions: 0, clicks: 0,
     children: new Map()
   };
@@ -53,12 +53,14 @@ export default async function CampaignsPage(props: { searchParams: Promise<Filte
       node = node.children.get(seg)!;
       node.visitors  += Number(r.visitors);
       node.leads     += Number(r.leads);
+      node.adic      += Number(r.adic);
       node.checkouts += Number(r.checkouts);
       node.sales     += Number(r.sales);
       node.revenue   += Number(r.revenue);
     }
     root.visitors  += Number(r.visitors);
     root.leads     += Number(r.leads);
+    root.adic      += Number(r.adic);
     root.checkouts += Number(r.checkouts);
     root.sales     += Number(r.sales);
     root.revenue   += Number(r.revenue);
@@ -134,10 +136,10 @@ export default async function CampaignsPage(props: { searchParams: Promise<Filte
 }
 
 const COLS =
-  'grid grid-cols-[minmax(220px,1.4fr)_repeat(12,minmax(64px,1fr))] gap-1 items-center';
+  'grid grid-cols-[minmax(220px,1.4fr)_repeat(13,minmax(60px,1fr))] gap-1 items-center';
 
 function HeaderRow() {
-  const cols = ['Gasto', 'Impr.', 'Cliques', 'CTR', 'CPC', 'CPM', 'Visitas', 'IC', 'Vendas', 'Receita', 'CPA', 'ROAS'];
+  const cols = ['Gasto', 'Impr.', 'Cliques', 'CTR', 'CPC', 'CPM', 'Visitas', 'ADIC', 'IC', 'Vendas', 'Receita', 'CPA', 'ROAS'];
   return (
     <div className={COLS + ' text-[11px] uppercase tracking-wide text-zinc-400 px-2 py-1.5 border-b border-zinc-200 dark:border-zinc-800'}>
       <div>Campanha / conjunto / anúncio</div>
@@ -188,6 +190,7 @@ function Row({ node, depth, expandable }: { node: Node; depth: number; expandabl
       {cell(node.clicks ? fmtBRL(cpc) : '—', !node.clicks)}
       {cell(node.impressions ? fmtBRL(cpm) : '—', !node.impressions)}
       {cell(fmtInt(node.visitors), !node.visitors)}
+      {cell(fmtInt(node.adic), !node.adic)}
       {cell(fmtInt(node.checkouts), !node.checkouts)}
       {cell(fmtInt(node.sales), !node.sales)}
       {cell(node.revenue ? fmtBRL(node.revenue) : '—', !node.revenue)}

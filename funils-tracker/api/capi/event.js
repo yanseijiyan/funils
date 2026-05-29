@@ -38,6 +38,7 @@ module.exports = async function handler(req, res) {
 
   const nowSec = Math.floor(Date.now() / 1000);
   const eventName = payload.event_name || 'PageView';
+  const dashboardOnly = !!payload.dashboard_only; // ex: ADIC — grava no dashboard, não vai pro Meta/TikTok
   const eventId   = payload.event_id;
   const eventTime = payload.event_time || nowSec;
   const url       = payload.event_source_url || null;
@@ -123,15 +124,16 @@ module.exports = async function handler(req, res) {
     }
   };
 
-  /* Dispara em paralelo: Meta CAPI + TikTok Events + INSERT events */
+  /* Dispara em paralelo: Meta CAPI + TikTok Events + INSERT events.
+     dashboard_only (ex: ADIC) só grava no Postgres — não vai pro Meta/TikTok. */
   const [meta, tiktok, db] = await Promise.all([
-    sendMetaCapi({
+    dashboardOnly ? Promise.resolve({ skipped: 'dashboard_only' }) : sendMetaCapi({
       pixelId: tenant.meta_pixel_id,
       token: tenant.capi_token,
       event: metaEvent,
       testCode: tenant.capi_test_code
     }),
-    sendTikTokEvents({
+    dashboardOnly ? Promise.resolve({ skipped: 'dashboard_only' }) : sendTikTokEvents({
       pixelId: tenant.tiktok_pixel_id,
       token: tenant.tiktok_access_token,
       event: ttEvent,

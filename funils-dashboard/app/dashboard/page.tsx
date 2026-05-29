@@ -35,9 +35,10 @@ export default async function OverviewPage(props: { searchParams: Promise<Filter
         <Card label="Receita bruta"      value={fmtBRL(cards.revenue)}   sub={aov > 0 ? `ticket: ${fmtBRL(aov)}` : undefined} />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-        <Card label="Page views"       value={fmtInt(cards.pageviews)} />
-        <Card label="Initiate Checkouts" value={fmtInt(cards.checkouts)} sub={cards.leads ? `${fmtPct(cards.checkouts / Math.max(cards.leads, 1))} dos leads` : undefined} />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <Card label="Page views"        value={fmtInt(cards.pageviews)} />
+        <Card label="ADIC (CTA advertorial)" value={fmtInt(cards.adic)} sub={cards.visitors ? `${fmtPct(cards.adic / cards.visitors)} dos visitantes` : undefined} />
+        <Card label="IC (checkout)"     value={fmtInt(cards.checkouts)} sub={cards.adic ? `${fmtPct(cards.checkouts / cards.adic)} dos ADIC` : undefined} />
         <Card label="Reembolsos"        value={fmtInt(cards.refunds)} sub={cards.sales ? `${fmtPct(cards.refunds / cards.sales)} das vendas` : undefined} />
       </div>
 

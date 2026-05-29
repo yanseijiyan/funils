@@ -44,6 +44,11 @@
     content_category: DS.contentCategory || null,
     auto_view_content:    DS.autoViewContent !== 'false',
     auto_initiate_checkout: DS.autoInitiateCheckout !== 'false',
+    /* Nome do evento disparado no clique do CTA pro checkout (default InitiateCheckout).
+       Advertorial pode setar data-cta-event="ADIC" + data-cta-dashboard-only="true"
+       pra registrar só no dashboard (sem mandar pro Meta/TikTok). */
+    cta_event:            DS.ctaEvent || 'InitiateCheckout',
+    cta_dashboard_only:   DS.ctaDashboardOnly === 'true',
     auto_meta_pixel:      DS.autoMetaPixel !== 'false',
     auto_tiktok_pixel:    DS.autoTiktokPixel !== 'false'
   };
@@ -198,7 +203,7 @@
     try { if (window.ttq && window.ttq.track) window.ttq.track(eventName, params || {}, { event_id: eventId }); } catch (e) {}
   }
 
-  function fireServer(eventName, params, eventId, extras) {
+  function fireServer(eventName, params, eventId, extras, dashboardOnly) {
     var values = getValues();
     var pii = Object.assign({}, IDENTITY, extras || {});
     var payload = {
@@ -206,6 +211,7 @@
       session_id: getSessionId(),
       event_name: eventName,
       event_id: eventId,
+      dashboard_only: dashboardOnly || undefined,
       event_time: Math.floor(Date.now() / 1000),
       event_source_url: location.href,
       referrer_url: document.referrer || null,
@@ -249,16 +255,18 @@
     } catch (e) {}
   }
 
-  function trackEvent(eventName, params, extras) {
+  function trackEvent(eventName, params, extras, opts) {
     params = params || {};
+    var dashboardOnly = !!(opts && opts.dashboardOnly);
     /* Comissão automática pro Purchase */
     if (eventName === 'Purchase' && params.gross_price && !params.value) {
       params.value = +(params.gross_price * CFG.commission_rate).toFixed(2);
       if (!params.currency) params.currency = 'BRL';
     }
     var eventId = (eventName === 'PageView') ? getEventId() : uuid();
-    fireClient(eventName, params, eventId);
-    fireServer(eventName, params, eventId, extras);
+    /* dashboard-only: não dispara pixel client (fbq/ttq); só grava server-side */
+    if (!dashboardOnly) fireClient(eventName, params, eventId);
+    fireServer(eventName, params, eventId, extras, dashboardOnly);
     return eventId;
   }
 
@@ -293,7 +301,7 @@
         if (!href || !isCheckoutUrl(adapter, href)) return;
         if (CFG.auto_initiate_checkout && !a.dataset.fnlIcHooked) {
           a.addEventListener('click', function () {
-            trackEvent('InitiateCheckout', { content_type: 'product' });
+            trackEvent(CFG.cta_event, { content_type: 'product' }, null, { dashboardOnly: CFG.cta_dashboard_only });
           }, { capture: true });
           a.dataset.fnlIcHooked = '1';
         }
