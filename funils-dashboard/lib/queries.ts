@@ -30,8 +30,11 @@ export function resolveFilters(raw: Filters): Filters {
   if (from || to) {
     return { tenant: raw.tenant, campaign, from: from || undefined, to: to || undefined };
   }
+  // Default: últimos 7 dias (nunca parece vazio no começo do dia)
   const today = tzToday();
-  return { tenant: raw.tenant, campaign, from: today, to: today };
+  const d = new Date(today + 'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate() - 6);
+  return { tenant: raw.tenant, campaign, from: d.toISOString().slice(0, 10), to: today };
 }
 
 function whereSales(f: Filters) {
